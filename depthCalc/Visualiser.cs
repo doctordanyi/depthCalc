@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Drawing;
@@ -13,6 +9,8 @@ namespace depthCalc
     {
         public Image<Gray, Int32> source;
         public Image<Bgr, Byte> outImage;
+
+        int matchResultWindowHeight = 40;
 
         static double interpolate(double val, double y0, double x0, double y1, double x1)
         {
@@ -73,7 +71,7 @@ namespace depthCalc
             {
                 for(int y = 0; y < source.Height; y++)
                 {
-                    RGB = RGBFromValue(source.Data[y, x, 0], -2.5*sdv.V0, 2.5*sdv.V0);
+                    RGB = RGBFromValue(source.Data[y, x, 0],-50, 50);
                     outImage.Data[y, x, 0] = (Byte)RGB;
                     outImage.Data[y, x, 1] = (Byte)(RGB >> 8);
                     outImage.Data[y, x, 2] = (Byte)(RGB >> 16);
@@ -81,9 +79,9 @@ namespace depthCalc
             }
         }
 
-        public Image<Rgb, byte> visualiseMatchMap(Image<Gray, float> matchResult)
+        public Image<Rgb, byte> visualiseMatchMap(Image<Gray, float> matchResult, bool min = false)
         {
-            Image<Rgb, byte> outImage = new Image<Rgb, byte>(matchResult.Width, 10);
+            Image<Rgb, byte> outImage = new Image<Rgb, byte>(matchResult.Width, matchResultWindowHeight);
             outImage.SetValue(new Rgb(255, 255, 255));
 
             Point[] minLoc = new Point[1];
@@ -92,24 +90,33 @@ namespace depthCalc
             double[] maxValue = new double[1];
 
             matchResult.MinMax(out minValue, out maxValue, out minLoc, out maxLoc);
-            float step = (float) (maxValue[0]) / 10;
+            float step = (float) (maxValue[0]) / matchResultWindowHeight;
 
             for (int x=0; x < outImage.Width; x++)
             {
                 int y = (int)(matchResult.Data[0, x, 0] / step);
                 for( ; y > 0; y--)
                 {
-                    outImage.Data[(10 - y), x, 0] = 255;
-                    outImage.Data[(10 - y), x, 1] = 0;
-                    outImage.Data[(10 - y), x, 2] = 0;
+                    outImage.Data[(matchResultWindowHeight - y), x, 0] = 255;
+                    outImage.Data[(matchResultWindowHeight - y), x, 1] = 0;
+                    outImage.Data[(matchResultWindowHeight - y), x, 2] = 0;
                 }
             }
-            for(int i=0;i<10;i++)
+            Point top, bottom;
+            if (min)
             {
-                outImage.Data[0, maxLoc[0].X, 0] = 0;
-                outImage.Data[0, maxLoc[0].X, 1] = 255;
-                outImage.Data[0, maxLoc[0].X, 2] = 0;
+                top = new Point(minLoc[0].X, 0);
+                bottom = new Point(minLoc[0].X, matchResultWindowHeight - 1);
             }
+            else
+            {
+                top = new Point(maxLoc[0].X, 0);
+                bottom = new Point(maxLoc[0].X, matchResultWindowHeight - 1);
+            }
+
+            outImage.Draw(new LineSegment2D(top, bottom), new Rgb(0, 0, 255), 1);
+
+            outImage = outImage.Resize(200, 40, Emgu.CV.CvEnum.Inter.Nearest);
 
             return outImage;
         }
