@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace depthCalc
 {
-    class depthProcessor
+    class DepthProcessor
     {
         public Image<Gray,Byte> reference;
         public Image<Gray, Byte> data;
@@ -29,7 +29,7 @@ namespace depthCalc
         private UInt16 WindowCols = 100;
 
 
-        public depthProcessor(Image<Gray,Byte> reference, Image<Gray,Byte> data)
+        public DepthProcessor(Image<Gray,Byte> reference, Image<Gray,Byte> data)
         {
             this.reference = reference;
             this.data = data;

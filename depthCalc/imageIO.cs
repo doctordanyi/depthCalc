@@ -6,23 +6,16 @@ namespace depthCalc
 {
     class ImageIO
     {
-        public Image<Gray,Byte> actBuffer;
-        public Image<Bgr, Byte> outBuffer;
-
         // Write actBuffer to file
-        public void write(String path)
+        public void write(String path, Mat writeBuffer)
         {
-            outBuffer.Save(path.ToString());
-            return;
+            writeBuffer.Save(path.ToString());
         }
 
         // Load image from file to actBuffer
-        public void read(String path)
+        public void read(String path, out Mat readBuffer)
         {
-            actBuffer = new Image<Gray, Byte>(path.ToString());
-            return;
+            readBuffer = CvInvoke.Imread(path, Emgu.CV.CvEnum.LoadImageType.Grayscale);
         }
-
-
     }
 }

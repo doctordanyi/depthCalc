@@ -64,6 +64,14 @@
             this.normedCCORRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cCOEFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.normedCCOEFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.referenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rawToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preprocessedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rawToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.preprocessedToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.resultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.group_matchResult_NormedSQDIFF = new System.Windows.Forms.GroupBox();
             this.pictureBox65 = new System.Windows.Forms.PictureBox();
             this.pictureBox64 = new System.Windows.Forms.PictureBox();
@@ -138,6 +146,7 @@
             this.group_selectedRegion = new System.Windows.Forms.GroupBox();
             this.picture_selectedRegion = new System.Windows.Forms.PictureBox();
             this.saveResultImage = new System.Windows.Forms.SaveFileDialog();
+            this.openReferenceImageDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataImage)).BeginInit();
             this.group_matchResult_SQDIFF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox60)).BeginInit();
@@ -414,7 +423,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.preprocessingToolStripMenuItem,
-            this.matchMethodToolStripMenuItem});
+            this.matchMethodToolStripMenuItem,
+            this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1764, 24);
@@ -435,14 +445,15 @@
             // 
             this.openReferenceToolStripMenuItem.Name = "openReferenceToolStripMenuItem";
             this.openReferenceToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.openReferenceToolStripMenuItem.Text = "Open Data";
+            this.openReferenceToolStripMenuItem.Text = "Open Reference";
             this.openReferenceToolStripMenuItem.Click += new System.EventHandler(this.openReferenceToolStripMenuItem_Click);
             // 
             // openDataToolStripMenuItem
             // 
             this.openDataToolStripMenuItem.Name = "openDataToolStripMenuItem";
             this.openDataToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.openDataToolStripMenuItem.Text = "Open Reference";
+            this.openDataToolStripMenuItem.Text = "Open Data";
+            this.openDataToolStripMenuItem.Click += new System.EventHandler(this.openDataToolStripMenuItem_Click);
             // 
             // saveOutputToolStripMenuItem
             // 
@@ -464,7 +475,7 @@
             // noneToolStripMenuItem
             // 
             this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.noneToolStripMenuItem.Text = "None";
             // 
             // doGToolStripMenuItem
@@ -472,13 +483,13 @@
             this.doGToolStripMenuItem.Checked = true;
             this.doGToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.doGToolStripMenuItem.Name = "doGToolStripMenuItem";
-            this.doGToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.doGToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.doGToolStripMenuItem.Text = "DoG";
             // 
             // highpassToolStripMenuItem
             // 
             this.highpassToolStripMenuItem.Name = "highpassToolStripMenuItem";
-            this.highpassToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.highpassToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.highpassToolStripMenuItem.Text = "Highpass";
             // 
             // matchMethodToolStripMenuItem
@@ -543,6 +554,64 @@
             this.normedCCOEFFToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.normedCCOEFFToolStripMenuItem.Text = "CCOEFF_NORMED";
             this.normedCCOEFFToolStripMenuItem.Click += new System.EventHandler(this.handle_normedCCOEFFToolStripMenuItem_Click);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.referenceToolStripMenuItem,
+            this.dataToolStripMenuItem,
+            this.resultToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // referenceToolStripMenuItem
+            // 
+            this.referenceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rawToolStripMenuItem,
+            this.preprocessedToolStripMenuItem});
+            this.referenceToolStripMenuItem.Name = "referenceToolStripMenuItem";
+            this.referenceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.referenceToolStripMenuItem.Text = "Reference";
+            // 
+            // rawToolStripMenuItem
+            // 
+            this.rawToolStripMenuItem.Name = "rawToolStripMenuItem";
+            this.rawToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.rawToolStripMenuItem.Text = "Raw";
+            // 
+            // preprocessedToolStripMenuItem
+            // 
+            this.preprocessedToolStripMenuItem.Name = "preprocessedToolStripMenuItem";
+            this.preprocessedToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.preprocessedToolStripMenuItem.Text = "Preprocessed";
+            // 
+            // dataToolStripMenuItem
+            // 
+            this.dataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rawToolStripMenuItem1,
+            this.preprocessedToolStripMenuItem1});
+            this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dataToolStripMenuItem.Text = "Data";
+            // 
+            // rawToolStripMenuItem1
+            // 
+            this.rawToolStripMenuItem1.Name = "rawToolStripMenuItem1";
+            this.rawToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
+            this.rawToolStripMenuItem1.Text = "Raw";
+            // 
+            // preprocessedToolStripMenuItem1
+            // 
+            this.preprocessedToolStripMenuItem1.Name = "preprocessedToolStripMenuItem1";
+            this.preprocessedToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
+            this.preprocessedToolStripMenuItem1.Text = "Preprocessed";
+            // 
+            // resultToolStripMenuItem
+            // 
+            this.resultToolStripMenuItem.Name = "resultToolStripMenuItem";
+            this.resultToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resultToolStripMenuItem.Text = "Result";
             // 
             // group_matchResult_NormedSQDIFF
             // 
@@ -1213,6 +1282,13 @@
             this.saveResultImage.InitialDirectory = "D:\\onlab_kinect\\images\\out";
             this.saveResultImage.FileOk += new System.ComponentModel.CancelEventHandler(this.saveResultImage_FileOk);
             // 
+            // openReferenceImageDialog
+            // 
+            this.openReferenceImageDialog.InitialDirectory = "D:\\onlab_kinect\\images";
+            this.openReferenceImageDialog.Filter = "Image files|*.bmp;*.jpg;*.jpeg;*.png";
+            this.openReferenceImageDialog.Title = "Open Reference Image";
+            this.openReferenceImageDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openReferenceImageDialog_FileOk);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1441,5 +1517,14 @@
         private System.Windows.Forms.GroupBox group_selectedRegion;
         private System.Windows.Forms.PictureBox picture_selectedRegion;
         private System.Windows.Forms.SaveFileDialog saveResultImage;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem referenceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rawToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem preprocessedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rawToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem preprocessedToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem resultToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openReferenceImageDialog;
     }
 }
