@@ -14,23 +14,16 @@ namespace depthCalc
     {
         void handle_openDataImage_FileOk(object sender, CancelEventArgs e)
         {
-            Mat displayBuffer = new Mat();
-
+            paramContainer.pathData = openDataImageDialog.FileName;
             imageIO.read(openDataImageDialog.FileName, out rawData);
-            CvInvoke.Resize(rawData, displayBuffer, new Size(640, 512), 0, 0, Inter.Nearest);
-
-            dataImage.Image = displayBuffer.ToImage<Rgb, Byte>().ToBitmap();
-
+            updateImageView(SupportedBuffers.rawData);
         }
 
         private void openReferenceImageDialog_FileOk(object sender, CancelEventArgs e)
         {
-            Mat displayBuffer = new Mat();
-
+            paramContainer.pathReference = openReferenceImageDialog.FileName;
             imageIO.read(openReferenceImageDialog.FileName, out rawReference);
-            CvInvoke.Resize(rawReference, displayBuffer, new Size(640, 512), 0, 0, Inter.Nearest);
-
-            dataImage.Image = displayBuffer.ToImage<Rgb, Byte>().ToBitmap();
+            updateImageView(SupportedBuffers.rawReference);
         }
 
         private void saveOutputToolStripMenuItem_Click(object sender, EventArgs e)

@@ -14,6 +14,9 @@ namespace depthCalc
         private ImageIO imageIO;
         private Visualiser visualiser;
 
+        // Container for user defined parameters
+        private ParamContainer paramContainer;
+
         // Classes responsible for processing
         private PreDepthProcessor preprocessor;
         private DepthProcessor depthProcessor;
@@ -32,15 +35,31 @@ namespace depthCalc
         // Visualised disparity map
         private Mat visualDisparity;
 
+        enum SupportedBuffers
+        {
+            rawData,
+            rawReference,
+            preprocessedData,
+            preprocessedReference,
+            Disparity,
+            visalisedDispartiy,
+            postprocessedDisparity
+        }
+
 
         private bool resultReady;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            preprocessor = new PreDepthProcessor();
+
             visualiser = new Visualiser();
             imageIO = new ImageIO();
-            // Raw input images
+
+            paramContainer = new ParamContainer();
+
             rawReference = new Mat();
             rawData = new Mat();
             preprocReference = new Mat();
@@ -48,11 +67,42 @@ namespace depthCalc
             rawDisparity = new Mat();
             postprocDisparity = new Mat();
             visualDisparity = new Mat();
+
             resultReady = false;
         }
         
 
-
+        private void updateImageView(SupportedBuffers buffer)
+        {
+            Mat displayBuffer = new Mat();
+            switch (buffer)
+            {
+                case SupportedBuffers.rawData:
+                    CvInvoke.Resize(rawData, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    break;
+                case SupportedBuffers.rawReference:
+                    CvInvoke.Resize(rawReference, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    break;
+                case SupportedBuffers.preprocessedData:
+                    CvInvoke.Resize(preprocData, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    break;
+                case SupportedBuffers.preprocessedReference:
+                    CvInvoke.Resize(preprocReference, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    break;
+                case SupportedBuffers.Disparity:
+                    CvInvoke.Resize(rawDisparity, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    break;
+                case SupportedBuffers.visalisedDispartiy:
+                    CvInvoke.Resize(visualDisparity, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    break;
+                case SupportedBuffers.postprocessedDisparity:
+                    CvInvoke.Resize(postprocDisparity, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    break;
+                default:
+                    break;
+            }
+            dataImage.Image = displayBuffer.ToImage<Rgb, Byte>().ToBitmap();
+        }
 
 
         private void visualizeMatchResult(Point coordinates)
@@ -252,12 +302,9 @@ namespace depthCalc
             depthProcessor.matchMethod = TemplateMatchingType.CcoeffNormed;
         }
 
-
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void rawToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
-
-
     }
 }
