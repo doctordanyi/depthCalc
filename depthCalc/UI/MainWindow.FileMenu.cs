@@ -14,10 +14,9 @@ namespace depthCalc
     {
         void handle_openDataImage_FileOk(object sender, CancelEventArgs e)
         {
-            imageIO.read(openDataImageDialog.FileName, out rawData);
-
             Mat displayBuffer = new Mat();
 
+            imageIO.read(openDataImageDialog.FileName, out rawData);
             CvInvoke.Resize(rawData, displayBuffer, new Size(640, 512), 0, 0, Inter.Nearest);
 
             dataImage.Image = displayBuffer.ToImage<Rgb, Byte>().ToBitmap();
@@ -26,10 +25,9 @@ namespace depthCalc
 
         private void openReferenceImageDialog_FileOk(object sender, CancelEventArgs e)
         {
-            imageIO.read(openReferenceImageDialog.FileName, out rawReference);
-
             Mat displayBuffer = new Mat();
 
+            imageIO.read(openReferenceImageDialog.FileName, out rawReference);
             CvInvoke.Resize(rawReference, displayBuffer, new Size(640, 512), 0, 0, Inter.Nearest);
 
             dataImage.Image = displayBuffer.ToImage<Rgb, Byte>().ToBitmap();

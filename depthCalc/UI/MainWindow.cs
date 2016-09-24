@@ -263,20 +263,10 @@ namespace depthCalc
             depthProcessor.matchMethod = TemplateMatchingType.CcoeffNormed;
         }
 
-        private void radio_half_CheckedChanged(object sender, EventArgs e)
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
-            if(radio_full.Checked == true)
-            {
-                depthProcessor.Scale(1);
-            }
-            if (radio_half.Checked == true)
-            {
-                depthProcessor.Scale(0.5);
-            }
+
         }
-
-
-
-
     }
 }
