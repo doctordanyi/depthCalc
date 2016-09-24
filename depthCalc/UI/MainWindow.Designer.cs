@@ -72,7 +72,7 @@
             this.normedCCORRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cCOEFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.normedCCOEFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.referenceViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rawReferenceViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preprocessedReferenceViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -433,7 +433,7 @@
             this.fileToolStripMenuItem,
             this.preprocessingToolStripMenuItem,
             this.matchMethodToolStripMenuItem,
-            this.viewToolStripMenuItem});
+            this.viewMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1764, 24);
@@ -499,42 +499,42 @@
             // scale2PreprocMenuItem
             // 
             this.scale2PreprocMenuItem.Name = "scale2PreprocMenuItem";
-            this.scale2PreprocMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.scale2PreprocMenuItem.Size = new System.Drawing.Size(152, 22);
             this.scale2PreprocMenuItem.Text = "1/2";
             this.scale2PreprocMenuItem.Click += new System.EventHandler(this.scale2PreprocMenuItem_Click);
             // 
             // scale4PreprocMenuItem
             // 
             this.scale4PreprocMenuItem.Name = "scale4PreprocMenuItem";
-            this.scale4PreprocMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.scale4PreprocMenuItem.Size = new System.Drawing.Size(152, 22);
             this.scale4PreprocMenuItem.Text = "1/4";
             this.scale4PreprocMenuItem.Click += new System.EventHandler(this.scale4PreprocMenuItem_Click);
             // 
             // scale8PreprocMenuItem
             // 
             this.scale8PreprocMenuItem.Name = "scale8PreprocMenuItem";
-            this.scale8PreprocMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.scale8PreprocMenuItem.Size = new System.Drawing.Size(152, 22);
             this.scale8PreprocMenuItem.Text = "1/8";
             this.scale8PreprocMenuItem.Click += new System.EventHandler(this.scale8PreprocMenuItem_Click);
             // 
             // scale16PreprocMenuItem
             // 
             this.scale16PreprocMenuItem.Name = "scale16PreprocMenuItem";
-            this.scale16PreprocMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.scale16PreprocMenuItem.Size = new System.Drawing.Size(152, 22);
             this.scale16PreprocMenuItem.Text = "1/16";
             this.scale16PreprocMenuItem.Click += new System.EventHandler(this.scale16PreprocMenuItem_Click);
             // 
             // scale32PreprocMenuItem
             // 
             this.scale32PreprocMenuItem.Name = "scale32PreprocMenuItem";
-            this.scale32PreprocMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.scale32PreprocMenuItem.Size = new System.Drawing.Size(152, 22);
             this.scale32PreprocMenuItem.Text = "1/32";
             this.scale32PreprocMenuItem.Click += new System.EventHandler(this.scale32PreprocMenuItem_Click);
             // 
             // otherToolStripMenuItem
             // 
             this.otherToolStripMenuItem.Name = "otherToolStripMenuItem";
-            this.otherToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.otherToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.otherToolStripMenuItem.Text = "Other";
             // 
             // gaussPreprocMenuItem
@@ -625,15 +625,15 @@
             this.normedCCOEFFToolStripMenuItem.Text = "CCOEFF_NORMED";
             this.normedCCOEFFToolStripMenuItem.Click += new System.EventHandler(this.handle_normedCCOEFFToolStripMenuItem_Click);
             // 
-            // viewToolStripMenuItem
+            // viewMenuItem
             // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.referenceViewMenuItem,
             this.dataViewMenuItem,
             this.resultViewMenuItem});
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.viewToolStripMenuItem.Text = "View";
+            this.viewMenuItem.Name = "viewMenuItem";
+            this.viewMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewMenuItem.Text = "View";
             // 
             // referenceViewMenuItem
             // 
@@ -1596,7 +1596,7 @@
         private System.Windows.Forms.GroupBox group_selectedRegion;
         private System.Windows.Forms.PictureBox picture_selectedRegion;
         private System.Windows.Forms.SaveFileDialog saveResultImage;
-        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewMenuItem;
         private System.Windows.Forms.ToolStripMenuItem referenceViewMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rawReferenceViewMenuItem;
         private System.Windows.Forms.ToolStripMenuItem preprocessedReferenceViewMenuItem;
