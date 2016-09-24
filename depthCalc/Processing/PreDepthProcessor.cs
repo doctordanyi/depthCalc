@@ -10,7 +10,7 @@ namespace depthCalc
     class PreDepthProcessor
     {
 
-        private Mat input, processedImage;
+        private Mat processedImage;
 
         // Supported preprocessing steps
         public enum SupportedSteps
@@ -20,30 +20,21 @@ namespace depthCalc
             DifferenceOfGaussians
         };
 
-        public void run(Mat RawImage, out Mat PreprocessedImage, List<SupportedSteps> preProcessingSteps)
+        public void run(Mat RawImage, out Mat PreprocessedImage, List<PreProcessorStep> preProcessingSteps)
         {
             processedImage = RawImage;
             foreach (var step in preProcessingSteps)
             {
-                switch (step)
-                {
-                    case SupportedSteps.Scale:
-
-                        break;
-                    case SupportedSteps.GaussianBlur:
-                        break;
-                    case SupportedSteps.DifferenceOfGaussians:
-                        break;
-                    default:
-                        break;
-                }
+                processedImage = step.doYourJob(processedImage, this);
             }
             PreprocessedImage = processedImage;
         }
 
-        private void Scale(int scaleDownFactorm)
+        public Mat Scale(int scaleDownFactor, Mat inputImage)
         {
-            
+            Mat destImage = new Mat();
+            CvInvoke.Resize(inputImage, destImage, new System.Drawing.Size(0,0) ,(1 / (double)scaleDownFactor), (1 / (double)scaleDownFactor));
+            return destImage;
         }
 
         private void GaussianBlur(int kernelSize, float sigma)

@@ -14,7 +14,8 @@ namespace depthCalc
     {
         private void button_runPreprocessor_Click(object sender, EventArgs e)
         {
-
+            preprocessor.run(rawData, out preprocData, paramContainer.preProcessorSteps);
+            preprocessor.run(rawReference, out preprocReference, paramContainer.preProcessorSteps);
         }
 
         // UI event handlers

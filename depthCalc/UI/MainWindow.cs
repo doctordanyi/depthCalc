@@ -302,9 +302,6 @@ namespace depthCalc
             depthProcessor.matchMethod = TemplateMatchingType.CcoeffNormed;
         }
 
-        private void rawToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }
