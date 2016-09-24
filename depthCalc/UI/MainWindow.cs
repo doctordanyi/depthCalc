@@ -52,18 +52,7 @@ namespace depthCalc
         }
         
 
-        // UI event handlers
-        private void handle_calculateDisparity_Click(object sender, EventArgs e)
-        {
-            depthProcessor.calculate_displacement();
-            visualiser.source = depthProcessor.result;
-            visualiser.drawOutputImage();
 
-    //        displayBuffer = visualiser.outImage.Resize(640,512, Emgu.CV.CvEnum.Inter.Nearest).ToBitmap();
-     //       dataImage.Image = displayBuffer;
-
-            resultReady = true;
-        }
 
 
         private void visualizeMatchResult(Point coordinates)
@@ -268,5 +257,7 @@ namespace depthCalc
         {
 
         }
+
+
     }
 }

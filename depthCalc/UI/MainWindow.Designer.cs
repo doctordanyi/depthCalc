@@ -30,7 +30,7 @@
         {
             this.dataImage = new System.Windows.Forms.PictureBox();
             this.openDataImageDialog = new System.Windows.Forms.OpenFileDialog();
-            this.button_calculateDisparity = new System.Windows.Forms.Button();
+            this.button_runDepthprocessor = new System.Windows.Forms.Button();
             this.group_matchResult_SQDIFF = new System.Windows.Forms.GroupBox();
             this.pictureBox60 = new System.Windows.Forms.PictureBox();
             this.pictureBox59 = new System.Windows.Forms.PictureBox();
@@ -140,13 +140,14 @@
             this.pictureBox53 = new System.Windows.Forms.PictureBox();
             this.pictureBox54 = new System.Windows.Forms.PictureBox();
             this.pictureBox55 = new System.Windows.Forms.PictureBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radio_half = new System.Windows.Forms.RadioButton();
-            this.radio_full = new System.Windows.Forms.RadioButton();
             this.group_selectedRegion = new System.Windows.Forms.GroupBox();
             this.picture_selectedRegion = new System.Windows.Forms.PictureBox();
             this.saveResultImage = new System.Windows.Forms.SaveFileDialog();
             this.openReferenceImageDialog = new System.Windows.Forms.OpenFileDialog();
+            this.group_Run = new System.Windows.Forms.GroupBox();
+            this.button_runAll = new System.Windows.Forms.Button();
+            this.button_runPostprocessor = new System.Windows.Forms.Button();
+            this.button_runPreprocessor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataImage)).BeginInit();
             this.group_matchResult_SQDIFF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox60)).BeginInit();
@@ -234,9 +235,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox53)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox54)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox55)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.group_selectedRegion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picture_selectedRegion)).BeginInit();
+            this.group_Run.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataImage
@@ -255,15 +256,15 @@
             this.openDataImageDialog.Title = "Open Data Image";
             this.openDataImageDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.handle_openDataImage_FileOk);
             // 
-            // button_calculateDisparity
+            // button_runDepthprocessor
             // 
-            this.button_calculateDisparity.Location = new System.Drawing.Point(20, 661);
-            this.button_calculateDisparity.Name = "button_calculateDisparity";
-            this.button_calculateDisparity.Size = new System.Drawing.Size(170, 25);
-            this.button_calculateDisparity.TabIndex = 2;
-            this.button_calculateDisparity.Text = "Calculate";
-            this.button_calculateDisparity.UseVisualStyleBackColor = true;
-            this.button_calculateDisparity.Click += new System.EventHandler(this.handle_calculateDisparity_Click);
+            this.button_runDepthprocessor.Location = new System.Drawing.Point(6, 53);
+            this.button_runDepthprocessor.Name = "button_runDepthprocessor";
+            this.button_runDepthprocessor.Size = new System.Drawing.Size(158, 25);
+            this.button_runDepthprocessor.TabIndex = 2;
+            this.button_runDepthprocessor.Text = "Disparity calculator";
+            this.button_runDepthprocessor.UseVisualStyleBackColor = true;
+            this.button_runDepthprocessor.Click += new System.EventHandler(this.button_runDepthprocessor_Click);
             // 
             // group_matchResult_SQDIFF
             // 
@@ -475,7 +476,7 @@
             // noneToolStripMenuItem
             // 
             this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.noneToolStripMenuItem.Text = "None";
             // 
             // doGToolStripMenuItem
@@ -483,13 +484,13 @@
             this.doGToolStripMenuItem.Checked = true;
             this.doGToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.doGToolStripMenuItem.Name = "doGToolStripMenuItem";
-            this.doGToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.doGToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.doGToolStripMenuItem.Text = "DoG";
             // 
             // highpassToolStripMenuItem
             // 
             this.highpassToolStripMenuItem.Name = "highpassToolStripMenuItem";
-            this.highpassToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.highpassToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.highpassToolStripMenuItem.Text = "Highpass";
             // 
             // matchMethodToolStripMenuItem
@@ -571,7 +572,7 @@
             this.rawToolStripMenuItem,
             this.preprocessedToolStripMenuItem});
             this.referenceToolStripMenuItem.Name = "referenceToolStripMenuItem";
-            this.referenceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.referenceToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.referenceToolStripMenuItem.Text = "Reference";
             // 
             // rawToolStripMenuItem
@@ -592,7 +593,7 @@
             this.rawToolStripMenuItem1,
             this.preprocessedToolStripMenuItem1});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.dataToolStripMenuItem.Text = "Data";
             // 
             // rawToolStripMenuItem1
@@ -610,7 +611,7 @@
             // resultToolStripMenuItem
             // 
             this.resultToolStripMenuItem.Name = "resultToolStripMenuItem";
-            this.resultToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resultToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.resultToolStripMenuItem.Text = "Result";
             // 
             // group_matchResult_NormedSQDIFF
@@ -1225,40 +1226,6 @@
             this.pictureBox55.TabIndex = 0;
             this.pictureBox55.TabStop = false;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.radio_half);
-            this.groupBox1.Controls.Add(this.radio_full);
-            this.groupBox1.Location = new System.Drawing.Point(20, 578);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(170, 77);
-            this.groupBox1.TabIndex = 14;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Scale";
-            // 
-            // radio_half
-            // 
-            this.radio_half.AutoSize = true;
-            this.radio_half.Location = new System.Drawing.Point(12, 51);
-            this.radio_half.Name = "radio_half";
-            this.radio_half.Size = new System.Drawing.Size(44, 17);
-            this.radio_half.TabIndex = 1;
-            this.radio_half.Text = "Half";
-            this.radio_half.UseVisualStyleBackColor = true;
-            this.radio_half.CheckedChanged += new System.EventHandler(this.radio_half_CheckedChanged);
-            // 
-            // radio_full
-            // 
-            this.radio_full.AutoSize = true;
-            this.radio_full.Checked = true;
-            this.radio_full.Location = new System.Drawing.Point(12, 28);
-            this.radio_full.Name = "radio_full";
-            this.radio_full.Size = new System.Drawing.Size(41, 17);
-            this.radio_full.TabIndex = 0;
-            this.radio_full.TabStop = true;
-            this.radio_full.Text = "Full";
-            this.radio_full.UseVisualStyleBackColor = true;
-            // 
             // group_selectedRegion
             // 
             this.group_selectedRegion.Controls.Add(this.picture_selectedRegion);
@@ -1284,24 +1251,68 @@
             // 
             // openReferenceImageDialog
             // 
-            this.openReferenceImageDialog.InitialDirectory = "D:\\onlab_kinect\\images";
             this.openReferenceImageDialog.Filter = "Image files|*.bmp;*.jpg;*.jpeg;*.png";
+            this.openReferenceImageDialog.InitialDirectory = "D:\\onlab_kinect\\images";
             this.openReferenceImageDialog.Title = "Open Reference Image";
             this.openReferenceImageDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openReferenceImageDialog_FileOk);
+            // 
+            // group_Run
+            // 
+            this.group_Run.Controls.Add(this.button_runAll);
+            this.group_Run.Controls.Add(this.button_runPostprocessor);
+            this.group_Run.Controls.Add(this.button_runPreprocessor);
+            this.group_Run.Controls.Add(this.button_runDepthprocessor);
+            this.group_Run.Location = new System.Drawing.Point(20, 578);
+            this.group_Run.Name = "group_Run";
+            this.group_Run.Size = new System.Drawing.Size(170, 154);
+            this.group_Run.TabIndex = 16;
+            this.group_Run.TabStop = false;
+            this.group_Run.Text = "Run";
+            this.group_Run.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // button_runAll
+            // 
+            this.button_runAll.Location = new System.Drawing.Point(6, 115);
+            this.button_runAll.Name = "button_runAll";
+            this.button_runAll.Size = new System.Drawing.Size(158, 25);
+            this.button_runAll.TabIndex = 5;
+            this.button_runAll.Text = "All";
+            this.button_runAll.UseVisualStyleBackColor = true;
+            this.button_runAll.Click += new System.EventHandler(this.button_runAll_Click);
+            // 
+            // button_runPostprocessor
+            // 
+            this.button_runPostprocessor.Enabled = false;
+            this.button_runPostprocessor.Location = new System.Drawing.Point(6, 84);
+            this.button_runPostprocessor.Name = "button_runPostprocessor";
+            this.button_runPostprocessor.Size = new System.Drawing.Size(158, 25);
+            this.button_runPostprocessor.TabIndex = 4;
+            this.button_runPostprocessor.Text = "Postprocessor";
+            this.button_runPostprocessor.UseVisualStyleBackColor = true;
+            this.button_runPostprocessor.Click += new System.EventHandler(this.button_runPostprocessor_Click);
+            // 
+            // button_runPreprocessor
+            // 
+            this.button_runPreprocessor.Location = new System.Drawing.Point(6, 22);
+            this.button_runPreprocessor.Name = "button_runPreprocessor";
+            this.button_runPreprocessor.Size = new System.Drawing.Size(158, 25);
+            this.button_runPreprocessor.TabIndex = 3;
+            this.button_runPreprocessor.Text = "Preprocessor";
+            this.button_runPreprocessor.UseVisualStyleBackColor = true;
+            this.button_runPreprocessor.Click += new System.EventHandler(this.button_runPreprocessor_Click);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1764, 811);
+            this.Controls.Add(this.group_Run);
             this.Controls.Add(this.group_selectedRegion);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.group_matchResult_NormedCCOEFF);
             this.Controls.Add(this.group_matchResult_CCOEFF);
             this.Controls.Add(this.group_matchResult_NormedCCORR);
             this.Controls.Add(this.group_matchResult_NormedSQDIFF);
             this.Controls.Add(this.group_matchResult_SQDIFF);
-            this.Controls.Add(this.button_calculateDisparity);
             this.Controls.Add(this.dataImage);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1396,10 +1407,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox53)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox54)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox55)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.group_selectedRegion.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picture_selectedRegion)).EndInit();
+            this.group_Run.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1409,7 +1419,7 @@
 
         private System.Windows.Forms.PictureBox dataImage;
         private System.Windows.Forms.OpenFileDialog openDataImageDialog;
-        private System.Windows.Forms.Button button_calculateDisparity;
+        private System.Windows.Forms.Button button_runDepthprocessor;
         private System.Windows.Forms.GroupBox group_matchResult_SQDIFF;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -1511,9 +1521,6 @@
         private System.Windows.Forms.PictureBox pictureBox78;
         private System.Windows.Forms.PictureBox pictureBox77;
         private System.Windows.Forms.PictureBox pictureBox76;
-        private System.Windows.Forms.RadioButton radio_half;
-        private System.Windows.Forms.RadioButton radio_full;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox group_selectedRegion;
         private System.Windows.Forms.PictureBox picture_selectedRegion;
         private System.Windows.Forms.SaveFileDialog saveResultImage;
@@ -1526,5 +1533,9 @@
         private System.Windows.Forms.ToolStripMenuItem preprocessedToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem resultToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openReferenceImageDialog;
+        private System.Windows.Forms.GroupBox group_Run;
+        private System.Windows.Forms.Button button_runPreprocessor;
+        private System.Windows.Forms.Button button_runPostprocessor;
+        private System.Windows.Forms.Button button_runAll;
     }
 }
