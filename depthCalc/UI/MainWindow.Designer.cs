@@ -74,6 +74,7 @@
             this.normedCCOEFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.referenceViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rawReferenceViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preprocessedReferenceViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rawDataViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,7 +156,6 @@
             this.button_runAll = new System.Windows.Forms.Button();
             this.button_runPostprocessor = new System.Windows.Forms.Button();
             this.button_runPreprocessor = new System.Windows.Forms.Button();
-            this.rawReferenceViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataImage)).BeginInit();
             this.group_matchResult_SQDIFF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox60)).BeginInit();
@@ -647,6 +647,14 @@
             this.referenceViewMenuItem.Name = "referenceViewMenuItem";
             this.referenceViewMenuItem.Size = new System.Drawing.Size(152, 22);
             this.referenceViewMenuItem.Text = "Reference";
+            // 
+            // rawReferenceViewMenuItem
+            // 
+            this.rawReferenceViewMenuItem.Enabled = false;
+            this.rawReferenceViewMenuItem.Name = "rawReferenceViewMenuItem";
+            this.rawReferenceViewMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rawReferenceViewMenuItem.Text = "Raw";
+            this.rawReferenceViewMenuItem.Click += new System.EventHandler(this.rawReferenceViewMenuItem_Click);
             // 
             // preprocessedReferenceViewMenuItem
             // 
@@ -1376,14 +1384,6 @@
             this.button_runPreprocessor.Text = "Preprocessor";
             this.button_runPreprocessor.UseVisualStyleBackColor = true;
             this.button_runPreprocessor.Click += new System.EventHandler(this.button_runPreprocessor_Click);
-            // 
-            // rawReferenceViewMenuItem
-            // 
-            this.rawReferenceViewMenuItem.Enabled = false;
-            this.rawReferenceViewMenuItem.Name = "rawReferenceViewMenuItem";
-            this.rawReferenceViewMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rawReferenceViewMenuItem.Text = "Raw";
-            this.rawReferenceViewMenuItem.Click += new System.EventHandler(this.rawReferenceViewMenuItem_Click);
             // 
             // MainWindow
             // 

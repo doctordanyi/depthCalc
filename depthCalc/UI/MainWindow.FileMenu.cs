@@ -20,6 +20,15 @@ namespace depthCalc
             paramContainer.rawDataAvailable = true;
             dataViewMenuItem.Enabled = true;
             rawDataViewMenuItem.Enabled = true;
+            // Both source images are loaded
+            if (paramContainer.rawReferenceAvailable)
+            {
+                button_runPreprocessor.Enabled = true;
+                button_runDepthprocessor.Enabled = true;
+                button_runAll.Enabled = true;
+
+                dataImage.Enabled = true;
+            }
         }
 
         private void openReferenceImageDialog_FileOk(object sender, CancelEventArgs e)
@@ -30,6 +39,15 @@ namespace depthCalc
             paramContainer.rawReferenceAvailable = true;
             referenceViewMenuItem.Enabled = true;
             rawReferenceViewMenuItem.Enabled = true;
+            // Both source images are loaded
+            if(paramContainer.rawDataAvailable)
+            {
+                button_runPreprocessor.Enabled = true;
+                button_runDepthprocessor.Enabled = true;
+                button_runAll.Enabled = true;
+
+                dataImage.Enabled = true;
+            }
         }
 
         private void saveOutputToolStripMenuItem_Click(object sender, EventArgs e)
@@ -63,14 +81,14 @@ namespace depthCalc
             fileName += "_Raw";
 
             // Add scale
-            if (depthProcessor.imageScale == 1)
+ /*           if (depthProcessor.imageScale == 1)
             {
                 fileName += "_full";
             }
             else
             {
                 fileName += "_half";
-            }
+            }*/
 
             // Add extension
             fileName += ".bmp";

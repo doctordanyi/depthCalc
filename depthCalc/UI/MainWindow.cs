@@ -35,6 +35,8 @@ namespace depthCalc
         // Visualised disparity map
         private Mat visualDisparity;
 
+        private Mat displayBuffer;
+
         enum SupportedBuffers
         {
             rawData,
@@ -54,6 +56,7 @@ namespace depthCalc
             InitializeComponent();
 
             preprocessor = new PreDepthProcessor();
+            depthProcessor = new DepthProcessor();
 
             visualiser = new Visualiser();
             imageIO = new ImageIO();
@@ -67,6 +70,7 @@ namespace depthCalc
             rawDisparity = new Mat();
             postprocDisparity = new Mat();
             visualDisparity = new Mat();
+            displayBuffer = new Mat();
 
             resultReady = false;
         }
@@ -74,7 +78,6 @@ namespace depthCalc
 
         private void updateImageView(SupportedBuffers buffer)
         {
-            Mat displayBuffer = new Mat();
             switch (buffer)
             {
                 case SupportedBuffers.rawData:
@@ -115,7 +118,7 @@ namespace depthCalc
             depthProcessor.matchMethod = TemplateMatchingType.Sqdiff;
             foreach (PictureBox res in group_matchResult_SQDIFF.Controls)
             {
-                using (Image<Gray, float> matchResul = depthProcessor.blockMatch(x, y))
+                using (Mat matchResul = depthProcessor.blockMatch(x, y))
                 {
                     res.Image = visualiser.visualiseMatchMap(matchResul, true).ToBitmap();
                 }
@@ -127,7 +130,7 @@ namespace depthCalc
             depthProcessor.matchMethod = TemplateMatchingType.SqdiffNormed;
             foreach (PictureBox res in group_matchResult_NormedSQDIFF.Controls)
             {
-                using (Image<Gray, float> matchResul = depthProcessor.blockMatch(x, y))
+                using (Mat matchResul = depthProcessor.blockMatch(x, y))
                 {
                     res.Image = visualiser.visualiseMatchMap(matchResul, true).ToBitmap();
                 }
@@ -139,7 +142,7 @@ namespace depthCalc
             depthProcessor.matchMethod = TemplateMatchingType.CcorrNormed;
             foreach (PictureBox res in group_matchResult_NormedCCORR.Controls)
             {
-                using (Image<Gray, float> matchResul = depthProcessor.blockMatch(x, y))
+                using (Mat matchResul = depthProcessor.blockMatch(x, y))
                 {
                     res.Image = visualiser.visualiseMatchMap(matchResul).ToBitmap();
                 }
@@ -151,7 +154,7 @@ namespace depthCalc
             depthProcessor.matchMethod = TemplateMatchingType.Ccoeff;
             foreach (PictureBox res in group_matchResult_CCOEFF.Controls)
             {
-                using (Image<Gray, float> matchResul = depthProcessor.blockMatch(x, y))
+                using (Mat matchResul = depthProcessor.blockMatch(x, y))
                 {
                     res.Image = visualiser.visualiseMatchMap(matchResul).ToBitmap();
                 }
@@ -163,7 +166,7 @@ namespace depthCalc
             depthProcessor.matchMethod = TemplateMatchingType.CcoeffNormed;
             foreach (PictureBox res in group_matchResult_NormedCCOEFF.Controls)
             {
-                using (Image<Gray, float> matchResul = depthProcessor.blockMatch(x, y))
+                using (Mat matchResul = depthProcessor.blockMatch(x, y))
                 {
                     res.Image = visualiser.visualiseMatchMap(matchResul).ToBitmap();
                 }
@@ -177,32 +180,21 @@ namespace depthCalc
         {
             int minCols, minRows;
             minCols = (coordinates.X <= 55) ? 0 : coordinates.X - 55;
-            minCols = (minCols >= (depthProcessor.scaledData.Cols - 110)) ? depthProcessor.scaledData.Cols - 110 : minCols;
+            minCols = (minCols >= (displayBuffer.Cols - 110)) ? displayBuffer.Cols - 110 : minCols;
             minRows = (coordinates.Y <= 25) ? 0 : coordinates.Y - 25;
-            minRows = (minRows >= (depthProcessor.scaledData.Rows - 50)) ? depthProcessor.scaledData.Rows - 50 : minRows;
+            minRows = (minRows >= (displayBuffer.Rows - 50)) ? displayBuffer.Rows - 50 : minRows;
 
             Rectangle region = new Rectangle(4*(sampleRegionLocation.X - minCols), 4*(sampleRegionLocation.Y - minRows), 64, 8);
             Rectangle window = new Rectangle(minCols, minRows, 110, 50);
 
-            if (resultReady)
-            {
-                using (Image<Bgr, Byte> dataROI = new Image<Bgr, Byte>(visualiser.outImage.GetSubRect(window).Resize(4, Inter.Nearest).ToBitmap()))
-                {
-                    dataROI.Draw(region, new Bgr(0, 0, 0), 3);
-                    dataROI.Draw(region, new Bgr(255, 255, 255), 1);
-                    picture_selectedRegion.Image = dataROI.ToBitmap();
-                }
-            }
-            else
-            {
-                using (Image<Gray, Byte> dataROI = new Image<Gray, Byte>(depthProcessor.data.GetSubRect(window).Resize(4, Inter.Nearest).ToBitmap()))
-                {
-                    dataROI.Draw(region, new Gray(0), 3);
-                    dataROI.Draw(region, new Gray(255), 1);
 
-                    picture_selectedRegion.Image = dataROI.ToBitmap();
-                }
+            using (Image<Bgr, Byte> dataROI = new Image<Bgr, Byte>(visualiser.outImage.GetSubRect(window).Resize(4, Inter.Nearest).ToBitmap()))
+            {
+                dataROI.Draw(region, new Bgr(0, 0, 0), 3);
+                dataROI.Draw(region, new Bgr(255, 255, 255), 1);
+                picture_selectedRegion.Image = dataROI.ToBitmap();
             }
+            
 
         }
 
@@ -211,13 +203,13 @@ namespace depthCalc
             MouseEventArgs me = (MouseEventArgs)e;
             Point coordinates = me.Location;
 
-            coordinates.X = coordinates.X * depthProcessor.scaledData.Width / 640;
-            coordinates.Y = coordinates.Y * depthProcessor.scaledData.Width / 640;
+            coordinates.X = coordinates.X * displayBuffer.Width;
+            coordinates.Y = coordinates.Y * displayBuffer.Height;
 
             // show the match result of the clicked coordinates +/- 8 px
             int minCols;
             minCols = (coordinates.X <= 8) ? 0 : coordinates.X - 8;
-            minCols = (minCols >= (depthProcessor.scaledData.Cols - 16)) ? depthProcessor.scaledData.Cols - 16 : minCols;
+            minCols = (minCols >= (displayBuffer.Cols - 16)) ? displayBuffer.Cols - 16 : minCols;
 
             Point sampleRegionLocation = new Point(minCols, coordinates.Y);
             visualizeMatchResult(sampleRegionLocation);

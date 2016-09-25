@@ -16,17 +16,19 @@ namespace depthCalc
         {
             preprocessor.run(rawData, out preprocData, paramContainer.preProcessorSteps);
             preprocessor.run(rawReference, out preprocReference, paramContainer.preProcessorSteps);
+            preprocessedDataViewMenuItem.Enabled = true;
+            preprocessedReferenceViewMenuItem.Enabled = true;
+            updateImageView(SupportedBuffers.preprocessedData);
         }
 
         // UI event handlers
         private void button_runDepthprocessor_Click(object sender, EventArgs e)
         {
-            depthProcessor.calculate_displacement();
-            visualiser.source = depthProcessor.result;
+            depthProcessor.run(preprocData, preprocReference, out rawDisparity);
+            visualiser.source = rawDisparity.ToImage<Gray, int>();
             visualiser.drawOutputImage();
 
-            //        displayBuffer = visualiser.outImage.Resize(640,512, Emgu.CV.CvEnum.Inter.Nearest).ToBitmap();
-            //       dataImage.Image = displayBuffer;
+            updateImageView(SupportedBuffers.Disparity);
 
             resultReady = true;
         }
@@ -38,7 +40,11 @@ namespace depthCalc
 
         private void button_runAll_Click(object sender, EventArgs e)
         {
-
+            preprocessor.run(rawData, out preprocData, paramContainer.preProcessorSteps);
+            preprocessor.run(rawReference, out preprocReference, paramContainer.preProcessorSteps);
+            depthProcessor.run(preprocData, preprocReference, out rawDisparity);
+            preprocessedDataViewMenuItem.Enabled = true;
+            preprocessedReferenceViewMenuItem.Enabled = true;
         }
     }
 }
