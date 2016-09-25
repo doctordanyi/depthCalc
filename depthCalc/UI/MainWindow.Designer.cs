@@ -52,7 +52,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openReferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveOutputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preprocessingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scalePreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scale2PreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,7 +74,6 @@
             this.normedCCOEFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.referenceViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rawReferenceViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preprocessedReferenceViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rawDataViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,6 +155,7 @@
             this.button_runAll = new System.Windows.Forms.Button();
             this.button_runPostprocessor = new System.Windows.Forms.Button();
             this.button_runPreprocessor = new System.Windows.Forms.Button();
+            this.rawReferenceViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataImage)).BeginInit();
             this.group_matchResult_SQDIFF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox60)).BeginInit();
@@ -250,6 +250,7 @@
             // 
             // dataImage
             // 
+            this.dataImage.Enabled = false;
             this.dataImage.Location = new System.Drawing.Point(20, 51);
             this.dataImage.Name = "dataImage";
             this.dataImage.Size = new System.Drawing.Size(640, 512);
@@ -266,6 +267,7 @@
             // 
             // button_runDepthprocessor
             // 
+            this.button_runDepthprocessor.Enabled = false;
             this.button_runDepthprocessor.Location = new System.Drawing.Point(6, 53);
             this.button_runDepthprocessor.Name = "button_runDepthprocessor";
             this.button_runDepthprocessor.Size = new System.Drawing.Size(158, 25);
@@ -445,7 +447,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openReferenceToolStripMenuItem,
             this.openDataToolStripMenuItem,
-            this.saveOutputToolStripMenuItem});
+            this.saveFileMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -464,12 +466,13 @@
             this.openDataToolStripMenuItem.Text = "Open Data";
             this.openDataToolStripMenuItem.Click += new System.EventHandler(this.openDataToolStripMenuItem_Click);
             // 
-            // saveOutputToolStripMenuItem
+            // saveFileMenuItem
             // 
-            this.saveOutputToolStripMenuItem.Name = "saveOutputToolStripMenuItem";
-            this.saveOutputToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.saveOutputToolStripMenuItem.Text = "Save Output";
-            this.saveOutputToolStripMenuItem.Click += new System.EventHandler(this.saveOutputToolStripMenuItem_Click);
+            this.saveFileMenuItem.Enabled = false;
+            this.saveFileMenuItem.Name = "saveFileMenuItem";
+            this.saveFileMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.saveFileMenuItem.Text = "Save Output";
+            this.saveFileMenuItem.Click += new System.EventHandler(this.saveOutputToolStripMenuItem_Click);
             // 
             // preprocessingToolStripMenuItem
             // 
@@ -493,72 +496,72 @@
             this.scale32PreprocMenuItem,
             this.otherToolStripMenuItem});
             this.scalePreprocMenuItem.Name = "scalePreprocMenuItem";
-            this.scalePreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.scalePreprocMenuItem.Size = new System.Drawing.Size(145, 22);
             this.scalePreprocMenuItem.Text = "Scale";
             // 
             // scale2PreprocMenuItem
             // 
             this.scale2PreprocMenuItem.Name = "scale2PreprocMenuItem";
-            this.scale2PreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.scale2PreprocMenuItem.Size = new System.Drawing.Size(104, 22);
             this.scale2PreprocMenuItem.Text = "1/2";
             this.scale2PreprocMenuItem.Click += new System.EventHandler(this.scale2PreprocMenuItem_Click);
             // 
             // scale4PreprocMenuItem
             // 
             this.scale4PreprocMenuItem.Name = "scale4PreprocMenuItem";
-            this.scale4PreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.scale4PreprocMenuItem.Size = new System.Drawing.Size(104, 22);
             this.scale4PreprocMenuItem.Text = "1/4";
             this.scale4PreprocMenuItem.Click += new System.EventHandler(this.scale4PreprocMenuItem_Click);
             // 
             // scale8PreprocMenuItem
             // 
             this.scale8PreprocMenuItem.Name = "scale8PreprocMenuItem";
-            this.scale8PreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.scale8PreprocMenuItem.Size = new System.Drawing.Size(104, 22);
             this.scale8PreprocMenuItem.Text = "1/8";
             this.scale8PreprocMenuItem.Click += new System.EventHandler(this.scale8PreprocMenuItem_Click);
             // 
             // scale16PreprocMenuItem
             // 
             this.scale16PreprocMenuItem.Name = "scale16PreprocMenuItem";
-            this.scale16PreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.scale16PreprocMenuItem.Size = new System.Drawing.Size(104, 22);
             this.scale16PreprocMenuItem.Text = "1/16";
             this.scale16PreprocMenuItem.Click += new System.EventHandler(this.scale16PreprocMenuItem_Click);
             // 
             // scale32PreprocMenuItem
             // 
             this.scale32PreprocMenuItem.Name = "scale32PreprocMenuItem";
-            this.scale32PreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.scale32PreprocMenuItem.Size = new System.Drawing.Size(104, 22);
             this.scale32PreprocMenuItem.Text = "1/32";
             this.scale32PreprocMenuItem.Click += new System.EventHandler(this.scale32PreprocMenuItem_Click);
             // 
             // otherToolStripMenuItem
             // 
             this.otherToolStripMenuItem.Name = "otherToolStripMenuItem";
-            this.otherToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.otherToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
             this.otherToolStripMenuItem.Text = "Other";
             // 
             // gaussPreprocMenuItem
             // 
             this.gaussPreprocMenuItem.CheckOnClick = true;
             this.gaussPreprocMenuItem.Name = "gaussPreprocMenuItem";
-            this.gaussPreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gaussPreprocMenuItem.Size = new System.Drawing.Size(145, 22);
             this.gaussPreprocMenuItem.Text = "Gaussian Blur";
             // 
             // dogPreprocMenuItem
             // 
             this.dogPreprocMenuItem.Name = "dogPreprocMenuItem";
-            this.dogPreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dogPreprocMenuItem.Size = new System.Drawing.Size(145, 22);
             this.dogPreprocMenuItem.Text = "DoG";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(142, 6);
             // 
             // clearPreprocMenuItem
             // 
             this.clearPreprocMenuItem.Name = "clearPreprocMenuItem";
-            this.clearPreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearPreprocMenuItem.Size = new System.Drawing.Size(145, 22);
             this.clearPreprocMenuItem.Text = "Clear";
             this.clearPreprocMenuItem.Click += new System.EventHandler(this.clearPreprocMenuItem_Click);
             // 
@@ -640,19 +643,14 @@
             this.referenceViewMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rawReferenceViewMenuItem,
             this.preprocessedReferenceViewMenuItem});
+            this.referenceViewMenuItem.Enabled = false;
             this.referenceViewMenuItem.Name = "referenceViewMenuItem";
             this.referenceViewMenuItem.Size = new System.Drawing.Size(152, 22);
             this.referenceViewMenuItem.Text = "Reference";
             // 
-            // rawReferenceViewMenuItem
-            // 
-            this.rawReferenceViewMenuItem.Name = "rawReferenceViewMenuItem";
-            this.rawReferenceViewMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rawReferenceViewMenuItem.Text = "Raw";
-            this.rawReferenceViewMenuItem.Click += new System.EventHandler(this.rawReferenceViewMenuItem_Click);
-            // 
             // preprocessedReferenceViewMenuItem
             // 
+            this.preprocessedReferenceViewMenuItem.Enabled = false;
             this.preprocessedReferenceViewMenuItem.Name = "preprocessedReferenceViewMenuItem";
             this.preprocessedReferenceViewMenuItem.Size = new System.Drawing.Size(152, 22);
             this.preprocessedReferenceViewMenuItem.Text = "Preprocessed";
@@ -663,12 +661,14 @@
             this.dataViewMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rawDataViewMenuItem,
             this.preprocessedDataViewMenuItem});
+            this.dataViewMenuItem.Enabled = false;
             this.dataViewMenuItem.Name = "dataViewMenuItem";
             this.dataViewMenuItem.Size = new System.Drawing.Size(152, 22);
             this.dataViewMenuItem.Text = "Data";
             // 
             // rawDataViewMenuItem
             // 
+            this.rawDataViewMenuItem.Enabled = false;
             this.rawDataViewMenuItem.Name = "rawDataViewMenuItem";
             this.rawDataViewMenuItem.Size = new System.Drawing.Size(144, 22);
             this.rawDataViewMenuItem.Text = "Raw";
@@ -676,6 +676,7 @@
             // 
             // preprocessedDataViewMenuItem
             // 
+            this.preprocessedDataViewMenuItem.Enabled = false;
             this.preprocessedDataViewMenuItem.Name = "preprocessedDataViewMenuItem";
             this.preprocessedDataViewMenuItem.Size = new System.Drawing.Size(144, 22);
             this.preprocessedDataViewMenuItem.Text = "Preprocessed";
@@ -683,6 +684,7 @@
             // 
             // resultViewMenuItem
             // 
+            this.resultViewMenuItem.Enabled = false;
             this.resultViewMenuItem.Name = "resultViewMenuItem";
             this.resultViewMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resultViewMenuItem.Text = "Result";
@@ -1344,6 +1346,7 @@
             // 
             // button_runAll
             // 
+            this.button_runAll.Enabled = false;
             this.button_runAll.Location = new System.Drawing.Point(6, 115);
             this.button_runAll.Name = "button_runAll";
             this.button_runAll.Size = new System.Drawing.Size(158, 25);
@@ -1365,6 +1368,7 @@
             // 
             // button_runPreprocessor
             // 
+            this.button_runPreprocessor.Enabled = false;
             this.button_runPreprocessor.Location = new System.Drawing.Point(6, 22);
             this.button_runPreprocessor.Name = "button_runPreprocessor";
             this.button_runPreprocessor.Size = new System.Drawing.Size(158, 25);
@@ -1372,6 +1376,14 @@
             this.button_runPreprocessor.Text = "Preprocessor";
             this.button_runPreprocessor.UseVisualStyleBackColor = true;
             this.button_runPreprocessor.Click += new System.EventHandler(this.button_runPreprocessor_Click);
+            // 
+            // rawReferenceViewMenuItem
+            // 
+            this.rawReferenceViewMenuItem.Enabled = false;
+            this.rawReferenceViewMenuItem.Name = "rawReferenceViewMenuItem";
+            this.rawReferenceViewMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rawReferenceViewMenuItem.Text = "Raw";
+            this.rawReferenceViewMenuItem.Click += new System.EventHandler(this.rawReferenceViewMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -1497,7 +1509,7 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openReferenceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveOutputToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveFileMenuItem;
         private System.Windows.Forms.ToolStripMenuItem preprocessingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scalePreprocMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gaussPreprocMenuItem;

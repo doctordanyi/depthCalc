@@ -17,6 +17,9 @@ namespace depthCalc
             paramContainer.pathData = openDataImageDialog.FileName;
             imageIO.read(openDataImageDialog.FileName, out rawData);
             updateImageView(SupportedBuffers.rawData);
+            paramContainer.rawDataAvailable = true;
+            dataViewMenuItem.Enabled = true;
+            rawDataViewMenuItem.Enabled = true;
         }
 
         private void openReferenceImageDialog_FileOk(object sender, CancelEventArgs e)
@@ -24,6 +27,9 @@ namespace depthCalc
             paramContainer.pathReference = openReferenceImageDialog.FileName;
             imageIO.read(openReferenceImageDialog.FileName, out rawReference);
             updateImageView(SupportedBuffers.rawReference);
+            paramContainer.rawReferenceAvailable = true;
+            referenceViewMenuItem.Enabled = true;
+            rawReferenceViewMenuItem.Enabled = true;
         }
 
         private void saveOutputToolStripMenuItem_Click(object sender, EventArgs e)
