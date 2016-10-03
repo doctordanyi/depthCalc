@@ -26,9 +26,9 @@ namespace depthCalc
         {
             depthProcessor.run(preprocData, preprocReference, out rawDisparity);
             visualiser.source = rawDisparity.ToImage<Gray, int>();
-            visualiser.drawOutputImage();
+            visualiser.drawOutputImage(out visualDisparity);
 
-            updateImageView(SupportedBuffers.Disparity);
+            updateImageView(SupportedBuffers.visalisedDispartiy);
 
             resultReady = true;
         }

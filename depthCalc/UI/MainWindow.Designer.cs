@@ -62,6 +62,8 @@
             this.scale32PreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gaussPreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.defaultGaussPreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dogPreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.clearPreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -496,7 +498,7 @@
             this.scale32PreprocMenuItem,
             this.otherToolStripMenuItem});
             this.scalePreprocMenuItem.Name = "scalePreprocMenuItem";
-            this.scalePreprocMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.scalePreprocMenuItem.Size = new System.Drawing.Size(152, 22);
             this.scalePreprocMenuItem.Text = "Scale";
             // 
             // scale2PreprocMenuItem
@@ -543,25 +545,41 @@
             // gaussPreprocMenuItem
             // 
             this.gaussPreprocMenuItem.CheckOnClick = true;
+            this.gaussPreprocMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.defaultGaussPreprocMenuItem,
+            this.customToolStripMenuItem});
             this.gaussPreprocMenuItem.Name = "gaussPreprocMenuItem";
-            this.gaussPreprocMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.gaussPreprocMenuItem.Size = new System.Drawing.Size(152, 22);
             this.gaussPreprocMenuItem.Text = "Gaussian Blur";
+            // 
+            // defaultGaussPreprocMenuItem
+            // 
+            this.defaultGaussPreprocMenuItem.Name = "defaultGaussPreprocMenuItem";
+            this.defaultGaussPreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.defaultGaussPreprocMenuItem.Text = "Default";
+            this.defaultGaussPreprocMenuItem.Click += new System.EventHandler(this.defaultGaussPreprocMenuItem_Click);
+            // 
+            // customToolStripMenuItem
+            // 
+            this.customToolStripMenuItem.Name = "customToolStripMenuItem";
+            this.customToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.customToolStripMenuItem.Text = "Custom";
             // 
             // dogPreprocMenuItem
             // 
             this.dogPreprocMenuItem.Name = "dogPreprocMenuItem";
-            this.dogPreprocMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.dogPreprocMenuItem.Size = new System.Drawing.Size(152, 22);
             this.dogPreprocMenuItem.Text = "DoG";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(142, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // clearPreprocMenuItem
             // 
             this.clearPreprocMenuItem.Name = "clearPreprocMenuItem";
-            this.clearPreprocMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.clearPreprocMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearPreprocMenuItem.Text = "Clear";
             this.clearPreprocMenuItem.Click += new System.EventHandler(this.clearPreprocMenuItem_Click);
             // 
@@ -645,14 +663,14 @@
             this.preprocessedReferenceViewMenuItem});
             this.referenceViewMenuItem.Enabled = false;
             this.referenceViewMenuItem.Name = "referenceViewMenuItem";
-            this.referenceViewMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.referenceViewMenuItem.Size = new System.Drawing.Size(126, 22);
             this.referenceViewMenuItem.Text = "Reference";
             // 
             // rawReferenceViewMenuItem
             // 
             this.rawReferenceViewMenuItem.Enabled = false;
             this.rawReferenceViewMenuItem.Name = "rawReferenceViewMenuItem";
-            this.rawReferenceViewMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rawReferenceViewMenuItem.Size = new System.Drawing.Size(144, 22);
             this.rawReferenceViewMenuItem.Text = "Raw";
             this.rawReferenceViewMenuItem.Click += new System.EventHandler(this.rawReferenceViewMenuItem_Click);
             // 
@@ -660,7 +678,7 @@
             // 
             this.preprocessedReferenceViewMenuItem.Enabled = false;
             this.preprocessedReferenceViewMenuItem.Name = "preprocessedReferenceViewMenuItem";
-            this.preprocessedReferenceViewMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.preprocessedReferenceViewMenuItem.Size = new System.Drawing.Size(144, 22);
             this.preprocessedReferenceViewMenuItem.Text = "Preprocessed";
             this.preprocessedReferenceViewMenuItem.Click += new System.EventHandler(this.preprocessedReferenceViewMenuItem_Click);
             // 
@@ -671,7 +689,7 @@
             this.preprocessedDataViewMenuItem});
             this.dataViewMenuItem.Enabled = false;
             this.dataViewMenuItem.Name = "dataViewMenuItem";
-            this.dataViewMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dataViewMenuItem.Size = new System.Drawing.Size(126, 22);
             this.dataViewMenuItem.Text = "Data";
             // 
             // rawDataViewMenuItem
@@ -694,7 +712,7 @@
             // 
             this.resultViewMenuItem.Enabled = false;
             this.resultViewMenuItem.Name = "resultViewMenuItem";
-            this.resultViewMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resultViewMenuItem.Size = new System.Drawing.Size(126, 22);
             this.resultViewMenuItem.Text = "Result";
             // 
             // group_matchResult_NormedSQDIFF
@@ -1629,5 +1647,7 @@
         private System.Windows.Forms.ToolStripMenuItem otherToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem clearPreprocMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem defaultGaussPreprocMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem customToolStripMenuItem;
     }
 }

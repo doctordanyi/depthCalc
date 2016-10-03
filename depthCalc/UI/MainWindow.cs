@@ -81,30 +81,30 @@ namespace depthCalc
             switch (buffer)
             {
                 case SupportedBuffers.rawData:
-                    CvInvoke.Resize(rawData, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    displayBuffer = rawData;
                     break;
                 case SupportedBuffers.rawReference:
-                    CvInvoke.Resize(rawReference, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    displayBuffer = rawReference;
                     break;
                 case SupportedBuffers.preprocessedData:
-                    CvInvoke.Resize(preprocData, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    displayBuffer = preprocData;
                     break;
                 case SupportedBuffers.preprocessedReference:
-                    CvInvoke.Resize(preprocReference, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    displayBuffer = preprocReference;
                     break;
                 case SupportedBuffers.Disparity:
-                    CvInvoke.Resize(rawDisparity, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    displayBuffer = rawDisparity;
                     break;
                 case SupportedBuffers.visalisedDispartiy:
-                    CvInvoke.Resize(visualDisparity, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    displayBuffer = visualDisparity;
                     break;
                 case SupportedBuffers.postprocessedDisparity:
-                    CvInvoke.Resize(postprocDisparity, displayBuffer, dataImage.Size, 0, 0, Inter.Nearest);
+                    displayBuffer = postprocDisparity;
                     break;
                 default:
                     break;
             }
-            dataImage.Image = displayBuffer.ToImage<Rgb, Byte>().ToBitmap();
+            dataImage.Image = displayBuffer.ToImage<Rgb, Byte>().Resize(dataImage.Width,dataImage.Height, Inter.Nearest).ToBitmap();
         }
 
 
@@ -188,11 +188,12 @@ namespace depthCalc
             Rectangle window = new Rectangle(minCols, minRows, 110, 50);
 
 
-            using (Image<Bgr, Byte> dataROI = new Image<Bgr, Byte>(visualiser.outImage.GetSubRect(window).Resize(4, Inter.Nearest).ToBitmap()))
+            using (Mat dataROI = new Mat(displayBuffer, window))
             {
-                dataROI.Draw(region, new Bgr(0, 0, 0), 3);
-                dataROI.Draw(region, new Bgr(255, 255, 255), 1);
-                picture_selectedRegion.Image = dataROI.ToBitmap();
+                CvInvoke.Rectangle(dataROI, region, new MCvScalar(0,0,0), 3);
+                CvInvoke.Rectangle(dataROI, region, new MCvScalar(255, 255, 255), 3);
+
+                picture_selectedRegion.Image = dataROI.ToImage<Rgb, byte>().Resize(picture_selectedRegion.Width,picture_selectedRegion.Height, Inter.Nearest).ToBitmap();
             }
             
 
@@ -203,8 +204,8 @@ namespace depthCalc
             MouseEventArgs me = (MouseEventArgs)e;
             Point coordinates = me.Location;
 
-            coordinates.X = coordinates.X * displayBuffer.Width;
-            coordinates.Y = coordinates.Y * displayBuffer.Height;
+            coordinates.X = coordinates.X * (preprocData.Width / dataImage.Width);
+            coordinates.Y = coordinates.Y * (preprocData.Height / dataImage.Height);
 
             // show the match result of the clicked coordinates +/- 8 px
             int minCols;
@@ -293,5 +294,7 @@ namespace depthCalc
 
             depthProcessor.matchMethod = TemplateMatchingType.CcoeffNormed;
         }
+
+
     }
 }

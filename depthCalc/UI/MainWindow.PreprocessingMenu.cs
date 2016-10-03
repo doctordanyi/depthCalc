@@ -47,5 +47,11 @@ namespace depthCalc
         {
             paramContainer.preProcessorSteps.Clear();
         }
+
+        private void defaultGaussPreprocMenuItem_Click(object sender, EventArgs e)
+        {
+            PreProcessorGaussianBlur gaussianBlur = new PreProcessorGaussianBlur(5, 1.5);
+            paramContainer.preProcessorSteps.Add(gaussianBlur);
+        }
     }
 }

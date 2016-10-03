@@ -101,7 +101,6 @@ namespace depthCalc
               });
             Mat retval = new Mat(data.Size, DepthType.Cv16S, 1);
             retval.SetTo<short>(result);
-//            Mat retval = new Mat(data.Size, DepthType.Cv16S, 1, new IntPtr((void*) result), data.Width * sizeof(short));
             return retval;
         }
     }

@@ -60,7 +60,7 @@ namespace depthCalc
             outImage = outImage.Dilate(1);
         }
 
-        public void drawOutputImage()
+        public void drawOutputImage(out Mat outMat)
         {
             outImage = new Image<Bgr, byte>(source.Width, source.Height);
             Gray avg;
@@ -77,9 +77,10 @@ namespace depthCalc
                     outImage.Data[y, x, 2] = (Byte)(RGB >> 16);
                 }
             }
+            outMat = outImage.Mat;
         }
 
-        public Image<Rgb, byte> visualiseMatchMap(Image<Gray, float> matchResult, bool min = false)
+        public Image<Rgb, byte> visualiseMatchMap(Mat matchResult, bool min = false)
         {
             Image<Rgb, byte> outImage = new Image<Rgb, byte>(matchResult.Width, matchResultWindowHeight);
             outImage.SetValue(new Rgb(255, 255, 255));
@@ -94,7 +95,7 @@ namespace depthCalc
 
             for (int x=0; x < outImage.Width; x++)
             {
-                int y = (int)(matchResult.Data[0, x, 0] / step);
+                int y = (int)((float)matchResult.ToImage<Gray, float>().Data[0, x, 0] / step);
                 for( ; y > 0; y--)
                 {
                     outImage.Data[(matchResultWindowHeight - y), x, 0] = 255;

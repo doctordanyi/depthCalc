@@ -37,9 +37,11 @@ namespace depthCalc
             return destImage;
         }
 
-        private void GaussianBlur(int kernelSize, float sigma)
+        public Mat GaussianBlur(int kernelSize, double sigma, Mat inputImage)
         {
-            
+            Mat destImage = new Mat();
+            CvInvoke.GaussianBlur(inputImage, destImage, new System.Drawing.Size(kernelSize, kernelSize), sigma);
+            return destImage;
         }
 
         private void DifferenceOfGaussians(int kernelSize1, int kernelSize2)
@@ -76,9 +78,9 @@ namespace depthCalc
     class PreProcessorGaussianBlur : PreProcessorStep
     {
         public int kernelSize;
-        public float sigma;
+        public double sigma;
 
-        public PreProcessorGaussianBlur(int kernelSize, float sigma)
+        public PreProcessorGaussianBlur(int kernelSize, double sigma)
         {
             stepType = PreDepthProcessor.SupportedSteps.GaussianBlur;
             this.kernelSize = kernelSize;
@@ -87,7 +89,7 @@ namespace depthCalc
 
         public override Mat doYourJob(Mat inputImage, PreDepthProcessor preprocessor)
         {
-            throw new NotImplementedException();
+            return preprocessor.GaussianBlur(kernelSize, sigma, inputImage);
         }
 
     }
