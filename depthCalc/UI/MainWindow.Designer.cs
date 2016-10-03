@@ -158,6 +158,8 @@
             this.button_runAll = new System.Windows.Forms.Button();
             this.button_runPostprocessor = new System.Windows.Forms.Button();
             this.button_runPreprocessor = new System.Windows.Forms.Button();
+            this.defaultDoGPreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customDoGPreprocMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataImage)).BeginInit();
             this.group_matchResult_SQDIFF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox60)).BeginInit();
@@ -567,6 +569,9 @@
             // 
             // dogPreprocMenuItem
             // 
+            this.dogPreprocMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.defaultDoGPreprocMenuItem,
+            this.customDoGPreprocMenuItem1});
             this.dogPreprocMenuItem.Name = "dogPreprocMenuItem";
             this.dogPreprocMenuItem.Size = new System.Drawing.Size(152, 22);
             this.dogPreprocMenuItem.Text = "DoG";
@@ -1403,6 +1408,19 @@
             this.button_runPreprocessor.UseVisualStyleBackColor = true;
             this.button_runPreprocessor.Click += new System.EventHandler(this.button_runPreprocessor_Click);
             // 
+            // defaultDoGPreprocMenuItem
+            // 
+            this.defaultDoGPreprocMenuItem.Name = "defaultDoGPreprocMenuItem";
+            this.defaultDoGPreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.defaultDoGPreprocMenuItem.Text = "Default";
+            this.defaultDoGPreprocMenuItem.Click += new System.EventHandler(this.defaultDoGPreprocMenuItem_Click);
+            // 
+            // customDoGPreprocMenuItem1
+            // 
+            this.customDoGPreprocMenuItem1.Name = "customDoGPreprocMenuItem1";
+            this.customDoGPreprocMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.customDoGPreprocMenuItem1.Text = "Custom";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1649,5 +1667,7 @@
         private System.Windows.Forms.ToolStripMenuItem clearPreprocMenuItem;
         private System.Windows.Forms.ToolStripMenuItem defaultGaussPreprocMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem defaultDoGPreprocMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem customDoGPreprocMenuItem1;
     }
 }

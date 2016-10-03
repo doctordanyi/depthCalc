@@ -53,5 +53,11 @@ namespace depthCalc
             PreProcessorGaussianBlur gaussianBlur = new PreProcessorGaussianBlur(5, 1.5);
             paramContainer.preProcessorSteps.Add(gaussianBlur);
         }
+
+        private void defaultDoGPreprocMenuItem_Click(object sender, EventArgs e)
+        {
+            PreProcessorDoG doG = new PreProcessorDoG(7, 3, 1.5);
+            paramContainer.preProcessorSteps.Add(doG);
+        }
     }
 }

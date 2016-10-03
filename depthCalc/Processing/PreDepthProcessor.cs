@@ -44,9 +44,18 @@ namespace depthCalc
             return destImage;
         }
 
-        private void DifferenceOfGaussians(int kernelSize1, int kernelSize2)
+        public Mat DifferenceOfGaussians(int kernelSize1, int kernelSize2, double sigma, Mat inputImage)
         {
-           
+            Mat destImage1 = new Mat();
+            Mat destImage2 = new Mat();
+            Mat result = new Mat();
+
+            CvInvoke.GaussianBlur(inputImage, destImage1, new System.Drawing.Size(kernelSize1, kernelSize1), sigma);
+            CvInvoke.GaussianBlur(inputImage, destImage2, new System.Drawing.Size(kernelSize2, kernelSize2), sigma);
+
+            CvInvoke.AbsDiff(destImage1, destImage2, result);
+
+            return result;
         }
 
     }
@@ -98,17 +107,19 @@ namespace depthCalc
     {
         public int kernelSize1;
         public int kernelSize2;
+        public double sigma;
 
-        public PreProcessorDoG(int kernelSize1, int kernelSize2)
+        public PreProcessorDoG(int kernelSize1, int kernelSize2, double sigma)
         {
             stepType = PreDepthProcessor.SupportedSteps.DifferenceOfGaussians;
             this.kernelSize1 = kernelSize1;
             this.kernelSize2 = kernelSize2;
+            this.sigma = sigma;
         }
 
         public override Mat doYourJob(Mat inputImage, PreDepthProcessor preprocessor)
         {
-            throw new NotImplementedException();
+            return preprocessor.DifferenceOfGaussians(kernelSize1, kernelSize2, sigma, inputImage);
         }
     }
 }
