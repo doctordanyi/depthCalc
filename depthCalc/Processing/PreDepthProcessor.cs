@@ -1,4 +1,5 @@
 ﻿using Emgu.CV;
+using Emgu.CV.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace depthCalc
         {
             Scale,
             GaussianBlur,
-            DifferenceOfGaussians
+            DifferenceOfGaussians,
+            Normalize
         };
 
         public void run(Mat RawImage, out Mat PreprocessedImage, List<PreProcessorStep> preProcessingSteps)
@@ -54,8 +56,14 @@ namespace depthCalc
             CvInvoke.GaussianBlur(inputImage, destImage2, new System.Drawing.Size(kernelSize2, kernelSize2), sigma);
 
             CvInvoke.AbsDiff(destImage1, destImage2, result);
+            CvInvoke.Normalize(result, result, 0, 255, Emgu.CV.CvEnum.NormType.MinMax);
 
             return result;
+        }
+
+        public void NormalizeIntensity()
+        {
+            
         }
 
     }
@@ -120,6 +128,34 @@ namespace depthCalc
         public override Mat doYourJob(Mat inputImage, PreDepthProcessor preprocessor)
         {
             return preprocessor.DifferenceOfGaussians(kernelSize1, kernelSize2, sigma, inputImage);
+        }
+    }
+
+    class PreProcessorNormalize : PreProcessorStep
+    {
+        private const int windowSize = 80;
+
+        public PreProcessorNormalize()
+        {
+            stepType = PreDepthProcessor.SupportedSteps.DifferenceOfGaussians;
+        }
+
+        public override Mat doYourJob(Mat inputImage, PreDepthProcessor preprocessor)
+        {
+            Mat result = new Mat();
+            inputImage.CopyTo(result);
+
+            MCvScalar avg = CvInvoke.Mean(inputImage);
+            for (int y = 0; y < (inputImage.Height - windowSize); y++)
+            {
+                for (int x = 0; x < (inputImage.Width - windowSize); x++)
+                {
+                    System.Drawing.Rectangle ROI = new System.Drawing.Rectangle(x, y, windowSize, windowSize);
+                    Mat subimage = new Mat(result, ROI);
+                    CvInvoke.Normalize(subimage, subimage, 0, 255, Emgu.CV.CvEnum.NormType.MinMax);
+                }
+            }
+            return result;
         }
     }
 }

@@ -65,6 +65,8 @@
             this.defaultGaussPreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dogPreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.defaultDoGPreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customDoGPreprocMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.clearPreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.matchMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -158,8 +160,7 @@
             this.button_runAll = new System.Windows.Forms.Button();
             this.button_runPostprocessor = new System.Windows.Forms.Button();
             this.button_runPreprocessor = new System.Windows.Forms.Button();
-            this.defaultDoGPreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customDoGPreprocMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.normalizePreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataImage)).BeginInit();
             this.group_matchResult_SQDIFF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox60)).BeginInit();
@@ -484,6 +485,7 @@
             this.scalePreprocMenuItem,
             this.gaussPreprocMenuItem,
             this.dogPreprocMenuItem,
+            this.normalizePreprocMenuItem,
             this.toolStripSeparator1,
             this.clearPreprocMenuItem});
             this.preprocessingToolStripMenuItem.Name = "preprocessingToolStripMenuItem";
@@ -557,14 +559,14 @@
             // defaultGaussPreprocMenuItem
             // 
             this.defaultGaussPreprocMenuItem.Name = "defaultGaussPreprocMenuItem";
-            this.defaultGaussPreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.defaultGaussPreprocMenuItem.Size = new System.Drawing.Size(116, 22);
             this.defaultGaussPreprocMenuItem.Text = "Default";
             this.defaultGaussPreprocMenuItem.Click += new System.EventHandler(this.defaultGaussPreprocMenuItem_Click);
             // 
             // customToolStripMenuItem
             // 
             this.customToolStripMenuItem.Name = "customToolStripMenuItem";
-            this.customToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.customToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.customToolStripMenuItem.Text = "Custom";
             // 
             // dogPreprocMenuItem
@@ -575,6 +577,19 @@
             this.dogPreprocMenuItem.Name = "dogPreprocMenuItem";
             this.dogPreprocMenuItem.Size = new System.Drawing.Size(152, 22);
             this.dogPreprocMenuItem.Text = "DoG";
+            // 
+            // defaultDoGPreprocMenuItem
+            // 
+            this.defaultDoGPreprocMenuItem.Name = "defaultDoGPreprocMenuItem";
+            this.defaultDoGPreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.defaultDoGPreprocMenuItem.Text = "Default";
+            this.defaultDoGPreprocMenuItem.Click += new System.EventHandler(this.defaultDoGPreprocMenuItem_Click);
+            // 
+            // customDoGPreprocMenuItem1
+            // 
+            this.customDoGPreprocMenuItem1.Name = "customDoGPreprocMenuItem1";
+            this.customDoGPreprocMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.customDoGPreprocMenuItem1.Text = "Custom";
             // 
             // toolStripSeparator1
             // 
@@ -1408,18 +1423,12 @@
             this.button_runPreprocessor.UseVisualStyleBackColor = true;
             this.button_runPreprocessor.Click += new System.EventHandler(this.button_runPreprocessor_Click);
             // 
-            // defaultDoGPreprocMenuItem
+            // normalizePreprocMenuItem
             // 
-            this.defaultDoGPreprocMenuItem.Name = "defaultDoGPreprocMenuItem";
-            this.defaultDoGPreprocMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.defaultDoGPreprocMenuItem.Text = "Default";
-            this.defaultDoGPreprocMenuItem.Click += new System.EventHandler(this.defaultDoGPreprocMenuItem_Click);
-            // 
-            // customDoGPreprocMenuItem1
-            // 
-            this.customDoGPreprocMenuItem1.Name = "customDoGPreprocMenuItem1";
-            this.customDoGPreprocMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.customDoGPreprocMenuItem1.Text = "Custom";
+            this.normalizePreprocMenuItem.Name = "normalizePreprocMenuItem";
+            this.normalizePreprocMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.normalizePreprocMenuItem.Text = "Normalize";
+            this.normalizePreprocMenuItem.Click += new System.EventHandler(this.normalizePreprocMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -1669,5 +1678,6 @@
         private System.Windows.Forms.ToolStripMenuItem customToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem defaultDoGPreprocMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customDoGPreprocMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem normalizePreprocMenuItem;
     }
 }

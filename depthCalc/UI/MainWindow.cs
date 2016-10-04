@@ -294,6 +294,5 @@ namespace depthCalc
 
             depthProcessor.matchMethod = TemplateMatchingType.CcoeffNormed;
         }
-
     }
 }

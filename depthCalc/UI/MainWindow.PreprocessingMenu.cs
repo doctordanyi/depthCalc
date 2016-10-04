@@ -59,5 +59,11 @@ namespace depthCalc
             PreProcessorDoG doG = new PreProcessorDoG(7, 3, 1.5);
             paramContainer.preProcessorSteps.Add(doG);
         }
+
+        private void normalizePreprocMenuItem_Click(object sender, EventArgs e)
+        {
+            PreProcessorNormalize normalize = new PreProcessorNormalize();
+            paramContainer.preProcessorSteps.Add(normalize);
+        }
     }
 }
