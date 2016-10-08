@@ -70,6 +70,7 @@ namespace depthCalc
                   {
                       endRow = (submat + 1) * (data.Rows / threads);
                   }
+
                   for (int y = startRow; y < endRow; y++)
                   {
                       for (int x = 0; x < (data.Cols - SampleCols); x++)
