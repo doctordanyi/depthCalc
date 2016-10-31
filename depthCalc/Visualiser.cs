@@ -2,6 +2,7 @@
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace depthCalc
 {
@@ -71,7 +72,7 @@ namespace depthCalc
             {
                 for(int y = 0; y < source.Height; y++)
                 {
-                    RGB = RGBFromValue(source.Data[y, x, 0],-50, 50);
+                    RGB = RGBFromValue(source.Data[y, x, 0],-40, 40);
                     outImage.Data[y, x, 0] = (Byte)RGB;
                     outImage.Data[y, x, 1] = (Byte)(RGB >> 8);
                     outImage.Data[y, x, 2] = (Byte)(RGB >> 16);
@@ -80,7 +81,7 @@ namespace depthCalc
             outMat = outImage.Mat;
         }
 
-        public Image<Rgb, byte> visualiseMatchMap(Mat matchResult, bool min = false)
+        public Image<Rgb, byte> visualiseMatchMap(Mat matchResult, List<MaxElement> maxLocs, bool min = false)
         {
             Image<Rgb, byte> outImage = new Image<Rgb, byte>(matchResult.Width, matchResultWindowHeight);
             outImage.SetValue(new Rgb(255, 255, 255));
@@ -91,6 +92,7 @@ namespace depthCalc
             double[] maxValue = new double[1];
 
             matchResult.MinMax(out minValue, out maxValue, out minLoc, out maxLoc);
+
             float step = (float) (maxValue[0]) / matchResultWindowHeight;
 
             for (int x=0; x < outImage.Width; x++)
@@ -104,18 +106,24 @@ namespace depthCalc
                 }
             }
             Point top, bottom;
-            if (min)
+            for (int i = 0; i < maxLocs.Count; i++)
             {
-                top = new Point(minLoc[0].X, 0);
-                bottom = new Point(minLoc[0].X, matchResultWindowHeight - 1);
-            }
-            else
-            {
-                top = new Point(maxLoc[0].X, 0);
-                bottom = new Point(maxLoc[0].X, matchResultWindowHeight - 1);
-            }
+                top = new Point(maxLocs[i].location, 0);
+                bottom = new Point(maxLocs[i].location, matchResultWindowHeight - 1);
 
-            outImage.Draw(new LineSegment2D(top, bottom), new Rgb(0, 0, 255), 1);
+                if (i == 0)
+                {
+                    outImage.Draw(new LineSegment2D(top, bottom), new Rgb(0, 0, 255), 1);
+                }
+                else if (i == (maxLocs.Count - 1))
+                {
+                    outImage.Draw(new LineSegment2D(top, bottom), new Rgb(0, 128, 0), 1);
+                }
+                else
+                {
+                    outImage.Draw(new LineSegment2D(top, bottom), new Rgb(0, 0, 0), 1);
+                }
+            }
 
             outImage = outImage.Resize(200, 40, Emgu.CV.CvEnum.Inter.Nearest);
 

@@ -17,6 +17,14 @@
             {
                 components.Dispose();
             }
+            rawData.Dispose();
+            rawDisparity.Dispose();
+            rawReference.Dispose();
+            displayBuffer.Dispose();
+            postprocDisparity.Dispose();
+            preprocData.Dispose();
+            preprocReference.Dispose();
+            visualDisparity.Dispose();
             base.Dispose(disposing);
         }
 

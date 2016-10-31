@@ -46,26 +46,26 @@ namespace depthCalc
             {
                 if (BlockWidth > Width)
                     throw new Exception("Block width greater than image width");
-                blockWidth = BlockWidth;
+                blockWidth = value;
             }
         }
 
-        public MatchResultContainer(int width, int height)
+        public MatchResultContainer(int height, int width)
         {
-            data = new List<MaxElement>[width, height];
+            data = new List<MaxElement>[height, width];
             this.height = height;
             this.width = width;
         }
 
-        public List<MaxElement> this[int x, int y]
+        public List<MaxElement> this[int row, int col]
         {
             get
             {
-                return data[x, y];
+                return data[row, col];
             }
             set
             {
-                data[x, y] = value;
+                data[row, col] = value;
             }
         }
 

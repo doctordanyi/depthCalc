@@ -5,6 +5,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace depthCalc
 {
@@ -120,7 +121,8 @@ namespace depthCalc
             {
                 using (Mat matchResul = depthProcessor.blockMatch(x, y))
                 {
-                    res.Image = visualiser.visualiseMatchMap(matchResul, true).ToBitmap();
+                    List<MaxElement> maxLocs = depthProcessor.getStrongMaximums(matchResul);
+                    res.Image = visualiser.visualiseMatchMap(matchResul, maxLocs, true).ToBitmap();
                 }
                 x++;
             }
@@ -132,7 +134,8 @@ namespace depthCalc
             {
                 using (Mat matchResul = depthProcessor.blockMatch(x, y))
                 {
-                    res.Image = visualiser.visualiseMatchMap(matchResul, true).ToBitmap();
+                    List<MaxElement> maxLocs = depthProcessor.getStrongMaximums(matchResul);
+                    res.Image = visualiser.visualiseMatchMap(matchResul, maxLocs, true).ToBitmap();
                 }
                 x++;
             }
@@ -144,7 +147,8 @@ namespace depthCalc
             {
                 using (Mat matchResul = depthProcessor.blockMatch(x, y))
                 {
-                    res.Image = visualiser.visualiseMatchMap(matchResul).ToBitmap();
+                    List<MaxElement> maxLocs = depthProcessor.getStrongMaximums(matchResul);
+                    res.Image = visualiser.visualiseMatchMap(matchResul, maxLocs, false).ToBitmap();
                 }
                 x++;
             }
@@ -156,7 +160,8 @@ namespace depthCalc
             {
                 using (Mat matchResul = depthProcessor.blockMatch(x, y))
                 {
-                    res.Image = visualiser.visualiseMatchMap(matchResul).ToBitmap();
+                    List<MaxElement> maxLocs = depthProcessor.getStrongMaximums(matchResul);
+                    res.Image = visualiser.visualiseMatchMap(matchResul, maxLocs, false).ToBitmap();
                 }
                 x++;
             }
@@ -164,16 +169,22 @@ namespace depthCalc
             x = coordinates.X;
             y = coordinates.Y;
             depthProcessor.matchMethod = TemplateMatchingType.CcoeffNormed;
+            int[] disp = depthProcessor.improveMatchQuality(y, x);
+            Mat asd = new Mat();
             foreach (PictureBox res in group_matchResult_NormedCCOEFF.Controls)
             {
                 using (Mat matchResul = depthProcessor.blockMatch(x, y))
                 {
-                    res.Image = visualiser.visualiseMatchMap(matchResul).ToBitmap();
+                    List<MaxElement> maxLocs = depthProcessor.getStrongMaximums(matchResul);
+                    maxLocs.Add(new MaxElement(disp[x-coordinates.X], 0));
+                    res.Image = visualiser.visualiseMatchMap(matchResul, maxLocs, false).ToBitmap();
+                    asd.PushBack(matchResul);
                 }
                 x++;
             }
 
             depthProcessor.matchMethod = matchMethod;
+            asd.ToImage<Gray, float>().ToBitmap().Save("asd.bmp");
         }
 
         private void visualizeSelectedRegion(Point coordinates, Point sampleRegionLocation)
