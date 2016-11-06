@@ -69,24 +69,24 @@ namespace depthCalc
             }
         }
 
-        public int getBlockBaseIndex(int y, BlockPinType blockPinType = BlockPinType.PinToLeftEdge)
+        public int getBlockBaseIndex(int col, BlockPinType blockPinType = BlockPinType.PinToLeftEdge)
         {
             switch (blockPinType)
             {
                 case BlockPinType.PinToLeftEdge:
-                    if ((y + blockWidth) > Width)
+                    if ((col + blockWidth) > Width)
                         return Width - blockWidth;
-                    return y;
+                    return col;
                 case BlockPinType.PinToCenter:
-                    if (y < (blockWidth / 2))
+                    if (col < (blockWidth / 2))
                         return 0;
-                    if ((y + blockWidth / 2) > Width)
+                    if ((col + blockWidth / 2) > Width)
                         return Width - blockWidth;
-                    return y - blockWidth / 2;
+                    return col - blockWidth / 2;
                 case BlockPinType.PinToRightEdge:
-                    if (y < blockWidth)
+                    if (col < blockWidth)
                         return 0;
-                    return y - blockWidth;
+                    return col - blockWidth;
                 default:
                     throw new Exception("Invalid block pin type");
             }
@@ -96,12 +96,14 @@ namespace depthCalc
     class MaxElement
     {
         public int location;
+        public int disparity;
         public float value;
 
         public MaxElement(int location, float value)
         {
             this.location = location;
             this.value = value;
+            disparity = 0;
         }
 
         public static int sortByValue(MaxElement a, MaxElement b)

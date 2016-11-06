@@ -21,7 +21,7 @@ namespace depthCalc
         public bool preprocessedDataAvailable;
 
         // Preprocessing parameters
-        public List<PreProcessorStep> preProcessorSteps;
+        public List<Processing.ProcessingStep> preProcessorSteps;
 
         // Processing parameters
         TemplateMatchingType matchMethod;
@@ -30,7 +30,7 @@ namespace depthCalc
 
         public ParamContainer()
         {
-            preProcessorSteps = new List<PreProcessorStep>();
+            preProcessorSteps = new List<Processing.ProcessingStep>();
         }
     };
 

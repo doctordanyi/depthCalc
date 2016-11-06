@@ -90,6 +90,11 @@
   <ItemGroup>
     <Compile Include="Processing\DepthProcessor.cs" />
     <Compile Include="Processing\MatchResultContainer.cs" />
+    <Compile Include="Processing\Preprocessing\DoG.cs" />
+    <Compile Include="Processing\Preprocessing\GaussianBlur.cs" />
+    <Compile Include="Processing\Preprocessing\Normalize.cs" />
+    <Compile Include="Processing\Preprocessing\Scale.cs" />
+    <Compile Include="Processing\ProcessingStep.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -163,6 +168,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Processing\Postprocessing\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

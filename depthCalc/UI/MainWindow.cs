@@ -178,13 +178,19 @@ namespace depthCalc
                     List<MaxElement> maxLocs = depthProcessor.getStrongMaximums(matchResul);
                     maxLocs.Add(new MaxElement(disp[x-coordinates.X], 0));
                     res.Image = visualiser.visualiseMatchMap(matchResul, maxLocs, false).ToBitmap();
-                    asd.PushBack(matchResul);
                 }
                 x++;
             }
 
-            depthProcessor.matchMethod = matchMethod;
-            asd.ToImage<Gray, float>().ToBitmap().Save("asd.bmp");
+            for (x = 0; x < (preprocData.Width - 7); x++)
+            {
+               using (Mat matchResult = depthProcessor.blockMatch(x, y))
+                 {
+                     asd.PushBack(matchResult);
+                 }
+             }
+             depthProcessor.matchMethod = matchMethod;
+             asd.ToImage<Gray, float>().ToBitmap().Save("asd.png");
         }
 
         private void visualizeSelectedRegion(Point coordinates, Point sampleRegionLocation)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
@@ -54,47 +55,39 @@ namespace depthCalc
             return matchResult;
         }
 
-        public int[] improveMatchQuality(int y, int x)
+        public int[] improveMatchQuality(int y, int x, MatchResultContainer.BlockPinType blockPinType = MatchResultContainer.BlockPinType.PinToLeftEdge)
         {
             int[] disparities = new int[matchResultContainer.BlockWidth];
-            int blockBase = matchResultContainer.getBlockBaseIndex(x);
+            int blockBase = matchResultContainer.getBlockBaseIndex(x, blockPinType);
             for (int i = 0; i < matchResultContainer.BlockWidth; i++)
-            {
-                disparities[i] = matchResultContainer[y, blockBase + i][0].location;
-            }
+                disparities[i] = matchResultContainer[y, blockBase + i][0].disparity;
+            double avg = disparities.Average();
 
-            MCvScalar mean = new MCvScalar();
-            MCvScalar stdDev = new MCvScalar();
-            using (Mat disp = new Mat(1, matchResultContainer.BlockWidth, DepthType.Cv32S, 1)) 
-            {
-                disp.SetTo<int>(disparities);
-                CvInvoke.MeanStdDev(disp, ref mean, ref stdDev);
-            }
-            
-            int[] modedDisparities = new int[matchResultContainer.BlockWidth];
-            MCvScalar modMean = new MCvScalar();
-            MCvScalar modStdDev = new MCvScalar();
-            disparities.CopyTo(modedDisparities, 0);
+            double[] error = new double[matchResultContainer.BlockWidth];
             for (int i = 0; i < matchResultContainer.BlockWidth; i++)
+                error[i] = (disparities[i]-avg) * (disparities[i]-avg);
+
+            for(int iterations = 3; iterations > 0; iterations--)
             {
-                foreach (MaxElement maximums in matchResultContainer[y, blockBase + i])
+                double maxError = error.Max();
+                double avgError = error.Average();
+                for (int i = 0; i < matchResultContainer.BlockWidth; i++)
                 {
-                    modedDisparities[i] = maximums.location;
-                    using (Mat disp = new Mat(1, matchResultContainer.BlockWidth, DepthType.Cv32S, 1))
+                    if( (maxError > avgError*2) && (error[i] == maxError))
                     {
-                        disp.SetTo<int>(modedDisparities);
-                        CvInvoke.MeanStdDev(disp, ref modMean, ref modStdDev);
-                    }
-                    if (modStdDev.V0 < stdDev.V0)
-                    {
-                        disparities[i] = maximums.location;
-                        using (Mat disp = new Mat(1, matchResultContainer.BlockWidth, DepthType.Cv32S, 1))
+                        foreach (MaxElement item in matchResultContainer[y, blockBase+i])
                         {
-                            disp.SetTo<int>(disparities);
-                            CvInvoke.MeanStdDev(disp, ref mean, ref stdDev);
+                            if( ((item.disparity-avg) * (item.disparity-avg)) < error[i])
+                            {
+                                error[i] = ((item.disparity - avg) * (item.disparity - avg));
+                                disparities[i] = item.disparity;
+                                avg = disparities.Average();
+                            }
                         }
                     }
                 }
+                for (int j = 0; j < matchResultContainer.BlockWidth; j++)
+                    error[j] = (disparities[j] - avg) * (disparities[j] - avg);
             }
 
             return disparities;
@@ -207,20 +200,20 @@ namespace depthCalc
                                   matchResultContainer[y, x] = getStrongMaximums(matchResult);
                                   foreach (MaxElement item in matchResultContainer[y,x])
                                   {
-                                      item.location -= (x - windowX);
+                                      item.disparity = item.location - (x - windowX);
                                   }
-                                  result[y * data.Width + x] = matchResultContainer[y,x][0].location;
+                                  result[y * data.Width + x] = matchResultContainer[y,x][0].disparity;
                               }
                           }
                       }
                   }
               });
-            for (int y = 0; y < matchResultContainer.Height; y++)
+            for(int y = 0; y < matchResultContainer.Height; y++)
             {
-                for (int x = 0; x < matchResultContainer.Width; x+=16)
+                for(int x = 0; x < matchResultContainer.Width; x += 16)
                 {
-                    int[] opt = improveMatchQuality(y, x);
-                    opt.CopyTo(result, y * data.Width + x);
+                    int[] disp = improveMatchQuality(y, x);
+                    disp.CopyTo(result, y * data.Width + x);
                 }
             }
             Mat retval = new Mat(data.Size, DepthType.Cv32S, 1);
