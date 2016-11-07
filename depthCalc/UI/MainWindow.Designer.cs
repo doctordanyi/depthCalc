@@ -264,7 +264,7 @@
             // dataImage
             // 
             this.dataImage.Enabled = false;
-            this.dataImage.Location = new System.Drawing.Point(20, 51);
+            this.dataImage.Location = new System.Drawing.Point(18, 82);
             this.dataImage.Name = "dataImage";
             this.dataImage.Size = new System.Drawing.Size(640, 512);
             this.dataImage.TabIndex = 0;
@@ -281,9 +281,9 @@
             // button_runDepthprocessor
             // 
             this.button_runDepthprocessor.Enabled = false;
-            this.button_runDepthprocessor.Location = new System.Drawing.Point(6, 53);
+            this.button_runDepthprocessor.Location = new System.Drawing.Point(110, 19);
             this.button_runDepthprocessor.Name = "button_runDepthprocessor";
-            this.button_runDepthprocessor.Size = new System.Drawing.Size(158, 25);
+            this.button_runDepthprocessor.Size = new System.Drawing.Size(109, 25);
             this.button_runDepthprocessor.TabIndex = 2;
             this.button_runDepthprocessor.Text = "Disparity calculator";
             this.button_runDepthprocessor.UseVisualStyleBackColor = true;
@@ -307,7 +307,7 @@
             this.group_matchResult_SQDIFF.Controls.Add(this.pictureBox3);
             this.group_matchResult_SQDIFF.Controls.Add(this.pictureBox2);
             this.group_matchResult_SQDIFF.Controls.Add(this.pictureBox1);
-            this.group_matchResult_SQDIFF.Location = new System.Drawing.Point(668, 44);
+            this.group_matchResult_SQDIFF.Location = new System.Drawing.Point(666, 75);
             this.group_matchResult_SQDIFF.Name = "group_matchResult_SQDIFF";
             this.group_matchResult_SQDIFF.Size = new System.Drawing.Size(212, 760);
             this.group_matchResult_SQDIFF.TabIndex = 3;
@@ -767,7 +767,7 @@
             this.group_matchResult_NormedSQDIFF.Controls.Add(this.pictureBox20);
             this.group_matchResult_NormedSQDIFF.Controls.Add(this.pictureBox21);
             this.group_matchResult_NormedSQDIFF.Controls.Add(this.pictureBox22);
-            this.group_matchResult_NormedSQDIFF.Location = new System.Drawing.Point(886, 44);
+            this.group_matchResult_NormedSQDIFF.Location = new System.Drawing.Point(884, 75);
             this.group_matchResult_NormedSQDIFF.Name = "group_matchResult_NormedSQDIFF";
             this.group_matchResult_NormedSQDIFF.Size = new System.Drawing.Size(212, 760);
             this.group_matchResult_NormedSQDIFF.TabIndex = 11;
@@ -920,7 +920,7 @@
             this.group_matchResult_NormedCCORR.Controls.Add(this.pictureBox31);
             this.group_matchResult_NormedCCORR.Controls.Add(this.pictureBox32);
             this.group_matchResult_NormedCCORR.Controls.Add(this.pictureBox33);
-            this.group_matchResult_NormedCCORR.Location = new System.Drawing.Point(1104, 44);
+            this.group_matchResult_NormedCCORR.Location = new System.Drawing.Point(1102, 75);
             this.group_matchResult_NormedCCORR.Name = "group_matchResult_NormedCCORR";
             this.group_matchResult_NormedCCORR.Size = new System.Drawing.Size(212, 760);
             this.group_matchResult_NormedCCORR.TabIndex = 12;
@@ -1073,7 +1073,7 @@
             this.group_matchResult_CCOEFF.Controls.Add(this.pictureBox42);
             this.group_matchResult_CCOEFF.Controls.Add(this.pictureBox43);
             this.group_matchResult_CCOEFF.Controls.Add(this.pictureBox44);
-            this.group_matchResult_CCOEFF.Location = new System.Drawing.Point(1322, 44);
+            this.group_matchResult_CCOEFF.Location = new System.Drawing.Point(1320, 75);
             this.group_matchResult_CCOEFF.Name = "group_matchResult_CCOEFF";
             this.group_matchResult_CCOEFF.Size = new System.Drawing.Size(212, 760);
             this.group_matchResult_CCOEFF.TabIndex = 11;
@@ -1226,7 +1226,7 @@
             this.group_matchResult_NormedCCOEFF.Controls.Add(this.pictureBox53);
             this.group_matchResult_NormedCCOEFF.Controls.Add(this.pictureBox54);
             this.group_matchResult_NormedCCOEFF.Controls.Add(this.pictureBox55);
-            this.group_matchResult_NormedCCOEFF.Location = new System.Drawing.Point(1540, 44);
+            this.group_matchResult_NormedCCOEFF.Location = new System.Drawing.Point(1538, 75);
             this.group_matchResult_NormedCCOEFF.Name = "group_matchResult_NormedCCOEFF";
             this.group_matchResult_NormedCCOEFF.Size = new System.Drawing.Size(212, 760);
             this.group_matchResult_NormedCCOEFF.TabIndex = 13;
@@ -1364,7 +1364,7 @@
             // group_selectedRegion
             // 
             this.group_selectedRegion.Controls.Add(this.picture_selectedRegion);
-            this.group_selectedRegion.Location = new System.Drawing.Point(208, 578);
+            this.group_selectedRegion.Location = new System.Drawing.Point(206, 609);
             this.group_selectedRegion.Name = "group_selectedRegion";
             this.group_selectedRegion.Size = new System.Drawing.Size(452, 226);
             this.group_selectedRegion.TabIndex = 15;
@@ -1397,9 +1397,9 @@
             this.group_Run.Controls.Add(this.button_runPostprocessor);
             this.group_Run.Controls.Add(this.button_runPreprocessor);
             this.group_Run.Controls.Add(this.button_runDepthprocessor);
-            this.group_Run.Location = new System.Drawing.Point(20, 578);
+            this.group_Run.Location = new System.Drawing.Point(12, 29);
             this.group_Run.Name = "group_Run";
-            this.group_Run.Size = new System.Drawing.Size(170, 154);
+            this.group_Run.Size = new System.Drawing.Size(362, 47);
             this.group_Run.TabIndex = 16;
             this.group_Run.TabStop = false;
             this.group_Run.Text = "Run";
@@ -1407,9 +1407,9 @@
             // button_runAll
             // 
             this.button_runAll.Enabled = false;
-            this.button_runAll.Location = new System.Drawing.Point(6, 115);
+            this.button_runAll.Location = new System.Drawing.Point(321, 19);
             this.button_runAll.Name = "button_runAll";
-            this.button_runAll.Size = new System.Drawing.Size(158, 25);
+            this.button_runAll.Size = new System.Drawing.Size(33, 25);
             this.button_runAll.TabIndex = 5;
             this.button_runAll.Text = "All";
             this.button_runAll.UseVisualStyleBackColor = true;
@@ -1418,9 +1418,9 @@
             // button_runPostprocessor
             // 
             this.button_runPostprocessor.Enabled = false;
-            this.button_runPostprocessor.Location = new System.Drawing.Point(6, 84);
+            this.button_runPostprocessor.Location = new System.Drawing.Point(225, 19);
             this.button_runPostprocessor.Name = "button_runPostprocessor";
-            this.button_runPostprocessor.Size = new System.Drawing.Size(158, 25);
+            this.button_runPostprocessor.Size = new System.Drawing.Size(90, 25);
             this.button_runPostprocessor.TabIndex = 4;
             this.button_runPostprocessor.Text = "Postprocessor";
             this.button_runPostprocessor.UseVisualStyleBackColor = true;
@@ -1429,9 +1429,9 @@
             // button_runPreprocessor
             // 
             this.button_runPreprocessor.Enabled = false;
-            this.button_runPreprocessor.Location = new System.Drawing.Point(6, 22);
+            this.button_runPreprocessor.Location = new System.Drawing.Point(6, 19);
             this.button_runPreprocessor.Name = "button_runPreprocessor";
-            this.button_runPreprocessor.Size = new System.Drawing.Size(158, 25);
+            this.button_runPreprocessor.Size = new System.Drawing.Size(98, 25);
             this.button_runPreprocessor.TabIndex = 3;
             this.button_runPreprocessor.Text = "Preprocessor";
             this.button_runPreprocessor.UseVisualStyleBackColor = true;
@@ -1441,7 +1441,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1764, 811);
+            this.ClientSize = new System.Drawing.Size(1764, 859);
             this.Controls.Add(this.group_Run);
             this.Controls.Add(this.group_selectedRegion);
             this.Controls.Add(this.group_matchResult_NormedCCOEFF);

@@ -6,8 +6,9 @@ using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using depthCalc.Processing;
 
-namespace depthCalc
+namespace depthCalc.UI
 {
     partial class MainWindow
     {
@@ -236,15 +237,6 @@ namespace depthCalc
 
         }
 
-        private void openReferenceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            openReferenceImageDialog.ShowDialog();
-        }
-
-        private void openDataToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            openDataImageDialog.ShowDialog();
-        }
 
         private void handle_sQDIFFToolStripMenuItem_Click(object sender, EventArgs e)
         {

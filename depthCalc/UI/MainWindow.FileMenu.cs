@@ -7,11 +7,21 @@ using System.Drawing;
 
 using System.Windows.Forms;
 
-namespace depthCalc
+namespace depthCalc.UI
 {
     // Handling the file menu operations on the UI
     public partial class MainWindow : Form
     {
+        private void openReferenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openReferenceImageDialog.ShowDialog();
+        }
+
+        private void openDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openDataImageDialog.ShowDialog();
+        }
+
         void handle_openDataImage_FileOk(object sender, CancelEventArgs e)
         {
             paramContainer.pathData = openDataImageDialog.FileName;

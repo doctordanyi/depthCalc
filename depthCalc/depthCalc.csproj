@@ -88,8 +88,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Processing\DepthProcessor.cs" />
-    <Compile Include="Processing\MatchResultContainer.cs" />
+    <Compile Include="Processing\DepthCalc.cs" />
+    <Compile Include="Processing\Depthprocessing\DepthProcessor.cs" />
+    <Compile Include="Processing\ProcessingQueue.cs" />
+    <Compile Include="Util\MatchResultContainer.cs" />
     <Compile Include="Processing\Preprocessing\DoG.cs" />
     <Compile Include="Processing\Preprocessing\GaussianBlur.cs" />
     <Compile Include="Processing\Preprocessing\Normalize.cs" />
@@ -106,13 +108,13 @@
     <Compile Include="UI\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="imageIO.cs" />
+    <Compile Include="Util\imageIO.cs" />
     <Compile Include="UI\MainWindow.FileMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ParamContainer.cs" />
-    <Compile Include="Processing\PostDepthProcessor.cs" />
-    <Compile Include="Processing\PreDepthProcessor.cs" />
+    <Compile Include="Util\MaxElement.cs" />
+    <Compile Include="Util\ParamContainer.cs" />
+    <Compile Include="Processing\Postprocessing\PostDepthProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -129,7 +131,7 @@
     <Compile Include="UI\MainWindow.ViewMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Visualiser.cs" />
+    <Compile Include="Processing\Postprocessing\Visualiser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -169,9 +171,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Processing\Postprocessing\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

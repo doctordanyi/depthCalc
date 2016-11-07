@@ -7,9 +7,9 @@ using System.Drawing;
 
 using System.Windows.Forms;
 
-namespace depthCalc
+namespace depthCalc.UI
 {
-    // Handling the file menu operations on the UI
+    // Handling the run group events on the UI
     public partial class MainWindow : Form
     {
         private void button_runPreprocessor_Click(object sender, EventArgs e)

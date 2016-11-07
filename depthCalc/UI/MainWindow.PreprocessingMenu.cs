@@ -1,4 +1,5 @@
-﻿using Emgu.CV;
+﻿using depthCalc.Processing.Preprocessing;
+using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using System;
@@ -7,7 +8,7 @@ using System.Drawing;
 
 using System.Windows.Forms;
 
-namespace depthCalc
+namespace depthCalc.UI
 {
     // Handling the file menu operations on the UI
     public partial class MainWindow : Form
@@ -15,7 +16,7 @@ namespace depthCalc
         
         private void scale2PreprocMenuItem_Click(object sender, EventArgs e)
         {
-            PreProcessorScale scaleDown = new PreProcessorScale(2);
+            Scale scaleDown = new Scale(2);
             paramContainer.preProcessorSteps.Add(scaleDown);
         }
 

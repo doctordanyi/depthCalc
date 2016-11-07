@@ -3,7 +3,7 @@ using Emgu.CV.CvEnum;
 using System;
 using System.Collections.Generic;
 
-namespace depthCalc
+namespace depthCalc.Util
 {
     class ParamContainer
     {
