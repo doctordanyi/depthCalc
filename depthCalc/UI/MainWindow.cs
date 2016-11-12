@@ -7,113 +7,41 @@ using Emgu.CV.CvEnum;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using depthCalc.Processing;
+using depthCalc.Util;
 
 namespace depthCalc.UI
 {
     partial class MainWindow
     {
-        // Read/write/visualise images
-        private ImageIO imageIO;
-        private Visualiser visualiser;
-
         // Container for user defined parameters
         private ParamContainer paramContainer;
 
-        // Classes responsible for processing
-        private PreDepthProcessor preprocessor;
-        private DepthProcessor depthProcessor;
-        private PostDepthProcessor postprocessor;
-
-        // Raw input images
-        private Mat rawReference;
-        private Mat rawData;
-        // Preprocessed images
-        private Mat preprocReference;
-        private Mat preprocData;
-        // Disparity map
-        private Mat rawDisparity;
-        // Postprocessed disparity map
-        private Mat postprocDisparity;
-        // Visualised disparity map
-        private Mat visualDisparity;
+        // Main processing block
+        private DepthCalc depthCalc;
 
         private Mat displayBuffer;
 
-        enum SupportedBuffers
-        {
-            rawData,
-            rawReference,
-            preprocessedData,
-            preprocessedReference,
-            Disparity,
-            visalisedDispartiy,
-            postprocessedDisparity
-        }
-
-
-        private bool resultReady;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            preprocessor = new PreDepthProcessor();
-            depthProcessor = new DepthProcessor();
-
-            visualiser = new Visualiser();
-            imageIO = new ImageIO();
-
+            depthCalc = new DepthCalc();
             paramContainer = new ParamContainer();
-
-            rawReference = new Mat();
-            rawData = new Mat();
-            preprocReference = new Mat();
-            preprocData = new Mat();
-            rawDisparity = new Mat();
-            postprocDisparity = new Mat();
-            visualDisparity = new Mat();
             displayBuffer = new Mat();
 
-            resultReady = false;
         }
         
 
-        private void updateImageView(SupportedBuffers buffer)
+        private void updateImageView(DepthCalc.SupportedBuffers buffer)
         {
-            switch (buffer)
-            {
-                case SupportedBuffers.rawData:
-                    displayBuffer = rawData;
-                    break;
-                case SupportedBuffers.rawReference:
-                    displayBuffer = rawReference;
-                    break;
-                case SupportedBuffers.preprocessedData:
-                    displayBuffer = preprocData;
-                    break;
-                case SupportedBuffers.preprocessedReference:
-                    displayBuffer = preprocReference;
-                    break;
-                case SupportedBuffers.Disparity:
-                    displayBuffer = rawDisparity;
-                    break;
-                case SupportedBuffers.visalisedDispartiy:
-                    displayBuffer = visualDisparity;
-                    break;
-                case SupportedBuffers.postprocessedDisparity:
-                    displayBuffer = postprocDisparity;
-                    break;
-                default:
-                    break;
-            }
-            dataImage.Image = displayBuffer.ToImage<Rgb, Byte>().Resize(dataImage.Width,dataImage.Height, Inter.Nearest).ToBitmap();
+            dataImage.Image = depthCalc.ui_image_renderBuffer(dataImage.Size, buffer);
         }
 
 
         private void visualizeMatchResult(Point coordinates)
         {
-
-            TemplateMatchingType matchMethod = depthProcessor.matchMethod;
+ /*           TemplateMatchingType matchMethod = depthProcessor.matchMethod;
 
             // SQDIFF
             int x = coordinates.X, y = coordinates.Y;
@@ -192,6 +120,7 @@ namespace depthCalc.UI
              }
              depthProcessor.matchMethod = matchMethod;
              asd.ToImage<Gray, float>().ToBitmap().Save("asd.png");
+             */
         }
 
         private void visualizeSelectedRegion(Point coordinates, Point sampleRegionLocation)

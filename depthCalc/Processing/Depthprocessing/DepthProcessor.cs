@@ -6,6 +6,7 @@ using Emgu.CV.CvEnum;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using depthCalc.Util;
 
 namespace depthCalc
 {
@@ -55,7 +56,7 @@ namespace depthCalc
             return matchResult;
         }
 
-        public int[] improveMatchQuality(int y, int x, MatchResultContainer.BlockPinType blockPinType = MatchResultContainer.BlockPinType.PinToLeftEdge)
+        public int[] improveMatchQuality(int y, int x, Util.MatchResultContainer.BlockPinType blockPinType = Util.MatchResultContainer.BlockPinType.PinToLeftEdge)
         {
             int[] disparities = new int[matchResultContainer.BlockWidth];
             int blockBase = matchResultContainer.getBlockBaseIndex(x, blockPinType);

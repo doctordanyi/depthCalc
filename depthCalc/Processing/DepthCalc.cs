@@ -1,4 +1,5 @@
 ﻿using Emgu.CV;
+using Emgu.CV.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,30 +22,41 @@ namespace depthCalc.Processing
         private ProcessingQueue depthprocessingQueue;
         private ProcessingQueue postprocessingQueue;
 
-        // Raw input images
+        // Image buffers
         private Mat rawReference;
         private Mat rawData;
-        // Preprocessed images
         private Mat preprocReference;
         private Mat preprocData;
-        // Disparity map
         private Mat rawDisparity;
-        // Postprocessed disparity map
         private Mat postprocDisparity;
-        // Visualised disparity map
         private Mat visualDisparity;
 
+        public enum SupportedBuffers
+        {
+            rawData,
+            rawReference,
+            preprocessedData,
+            preprocessedReference,
+            Disparity,
+            visalisedDispartiy,
+            postprocessedDisparity
+        }
+
+        private Util.BufferStates bufferStates;
+        private Util.SourceFilePaths sourceFilePaths;
 
         // Constructor begin
         public DepthCalc()
         {
             imageIO = new Util.ImageIO();
+            bufferStates = new Util.BufferStates();
+            sourceFilePaths = new Util.SourceFilePaths();
         }
         // Constructor end
 
         // UI interface functions begin
 
-        int ui_file_openDataImage(string path)
+        public int ui_file_openDataImage(string path)
         {
             if (rawData != null)
             {
@@ -52,10 +64,12 @@ namespace depthCalc.Processing
             }
             rawData = new Mat();
             imageIO.read(path, out rawData);
+            bufferStates.rawDataReady = true;
+            sourceFilePaths.data = path;
             return 0;
         }
 
-        int ui_file_openReferenceImage(string path)
+        public int ui_file_openReferenceImage(string path)
         {
             if (rawReference != null)
             {
@@ -63,7 +77,80 @@ namespace depthCalc.Processing
             }
             rawReference = new Mat();
             imageIO.read(path, out rawReference);
+            bufferStates.rawReferenceReady = true;
+            sourceFilePaths.reference = path;
             return 0;
+        }
+
+        public System.Drawing.Bitmap ui_image_renderBuffer(System.Drawing.Size size, SupportedBuffers buffer)
+        {
+            Image<Rgb, Byte> renderedImage;
+            double scale;
+            switch (buffer)
+            {
+                case SupportedBuffers.rawData:
+                    if (!bufferStates.rawDataReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    renderedImage = rawData.ToImage<Rgb, Byte>();
+                    scale = size.Width / rawData.Width;
+                    break;
+                case SupportedBuffers.rawReference:
+                    if (!bufferStates.rawReferenceReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    renderedImage = rawReference.ToImage<Rgb, Byte>();
+                    scale = size.Width / rawReference.Width;
+                    break;
+                case SupportedBuffers.preprocessedData:
+                    if (!bufferStates.preprocDataReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    renderedImage = preprocData.ToImage<Rgb, Byte>();
+                    scale = size.Width / preprocData.Width;
+                    break;
+                case SupportedBuffers.preprocessedReference:
+                    if (!bufferStates.preprocReferenceReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    renderedImage = preprocReference.ToImage<Rgb, Byte>();
+                    scale = size.Width / preprocReference.Width;
+                    break;
+                case SupportedBuffers.Disparity:
+                    if (!bufferStates.rawDisparityReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    renderedImage = rawDisparity.ToImage<Rgb, Byte>();
+                    scale = size.Width / rawDisparity.Width;
+                    break;
+                case SupportedBuffers.visalisedDispartiy:
+                    if (!bufferStates.visualDisparityReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    renderedImage = visualDisparity.ToImage<Rgb, Byte>();
+                    scale = size.Width / visualDisparity.Width;
+                    break;
+                case SupportedBuffers.postprocessedDisparity:
+                    if (!bufferStates.postprocDisparityReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    renderedImage = postprocDisparity.ToImage<Rgb, Byte>();
+                    scale = size.Width / postprocDisparity.Width;
+                    break;
+                default:
+                    throw new Exception("Unsupported buffer type");
+            }
+
+            renderedImage.Resize(scale, Emgu.CV.CvEnum.Inter.Linear);
+
+            return renderedImage.ToBitmap();
         }
 
         // UI interface functions end

@@ -22,12 +22,13 @@ namespace depthCalc.UI
             openDataImageDialog.ShowDialog();
         }
 
-        void handle_openDataImage_FileOk(object sender, CancelEventArgs e)
+        private void handle_openDataImage_FileOk(object sender, CancelEventArgs e)
         {
-            paramContainer.pathData = openDataImageDialog.FileName;
-            imageIO.read(openDataImageDialog.FileName, out rawData);
+            // Pass action to core
+            depthCalc.ui_file_openDataImage(openDataImageDialog.FileName);
+
+            // UI administartion
             updateImageView(SupportedBuffers.rawData);
-            paramContainer.rawDataAvailable = true;
             dataViewMenuItem.Enabled = true;
             rawDataViewMenuItem.Enabled = true;
             // Both source images are loaded
@@ -43,10 +44,10 @@ namespace depthCalc.UI
 
         private void openReferenceImageDialog_FileOk(object sender, CancelEventArgs e)
         {
-            paramContainer.pathReference = openReferenceImageDialog.FileName;
-            imageIO.read(openReferenceImageDialog.FileName, out rawReference);
+            // Pass action to core
+            depthCalc.ui_file_openReferenceImage(openReferenceImageDialog.FileName);
+            // UI administartion
             updateImageView(SupportedBuffers.rawReference);
-            paramContainer.rawReferenceAvailable = true;
             referenceViewMenuItem.Enabled = true;
             rawReferenceViewMenuItem.Enabled = true;
             // Both source images are loaded
@@ -87,21 +88,7 @@ namespace depthCalc.UI
                     break;
             }
 
-            // Add preprocessing
-            fileName += "_Raw";
-
-            // Add scale
- /*           if (depthProcessor.imageScale == 1)
-            {
-                fileName += "_full";
-            }
-            else
-            {
-                fileName += "_half";
-            }*/
-
-            // Add extension
-            fileName += ".bmp";
+            fileName += ".png";
 
             saveResultImage.FileName = fileName;
 

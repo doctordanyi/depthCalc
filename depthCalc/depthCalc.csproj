@@ -113,7 +113,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Util\MaxElement.cs" />
-    <Compile Include="Util\ParamContainer.cs" />
+    <Compile Include="Util\ParamContainers.cs" />
     <Compile Include="Processing\Postprocessing\PostDepthProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

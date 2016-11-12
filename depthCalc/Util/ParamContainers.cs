@@ -10,15 +10,8 @@ namespace depthCalc.Util
         // Store parameters selected by the user
 
         // File paths
-        public string pathReference;
-        public string pathData;
         public string pathResult;
 
-        // Data availability flags
-        public bool rawReferenceAvailable;
-        public bool rawDataAvailable;
-        public bool preprocessedReferenceAvailable;
-        public bool preprocessedDataAvailable;
 
         // Preprocessing parameters
         public List<Processing.ProcessingStep> preProcessorSteps;
@@ -34,6 +27,22 @@ namespace depthCalc.Util
         }
     };
 
+    class BufferStates
+    {
+        public bool rawDataReady = false;
+        public bool rawReferenceReady = false;
+        public bool preprocDataReady = false;
+        public bool preprocReferenceReady = false;
+        public bool rawDisparityReady = false;
+        public bool postprocDisparityReady = false;
+        public bool visualDisparityReady = false;
+    }
+
+    class SourceFilePaths
+    {
+        public string reference;
+        public string data;
+    }
 }
 
 

@@ -169,6 +169,9 @@
             this.button_runAll = new System.Windows.Forms.Button();
             this.button_runPostprocessor = new System.Windows.Forms.Button();
             this.button_runPreprocessor = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.dataImage)).BeginInit();
             this.group_matchResult_SQDIFF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox60)).BeginInit();
@@ -259,6 +262,8 @@
             this.group_selectedRegion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picture_selectedRegion)).BeginInit();
             this.group_Run.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataImage
@@ -307,7 +312,7 @@
             this.group_matchResult_SQDIFF.Controls.Add(this.pictureBox3);
             this.group_matchResult_SQDIFF.Controls.Add(this.pictureBox2);
             this.group_matchResult_SQDIFF.Controls.Add(this.pictureBox1);
-            this.group_matchResult_SQDIFF.Location = new System.Drawing.Point(666, 75);
+            this.group_matchResult_SQDIFF.Location = new System.Drawing.Point(6, 6);
             this.group_matchResult_SQDIFF.Name = "group_matchResult_SQDIFF";
             this.group_matchResult_SQDIFF.Size = new System.Drawing.Size(212, 760);
             this.group_matchResult_SQDIFF.TabIndex = 3;
@@ -767,7 +772,7 @@
             this.group_matchResult_NormedSQDIFF.Controls.Add(this.pictureBox20);
             this.group_matchResult_NormedSQDIFF.Controls.Add(this.pictureBox21);
             this.group_matchResult_NormedSQDIFF.Controls.Add(this.pictureBox22);
-            this.group_matchResult_NormedSQDIFF.Location = new System.Drawing.Point(884, 75);
+            this.group_matchResult_NormedSQDIFF.Location = new System.Drawing.Point(224, 6);
             this.group_matchResult_NormedSQDIFF.Name = "group_matchResult_NormedSQDIFF";
             this.group_matchResult_NormedSQDIFF.Size = new System.Drawing.Size(212, 760);
             this.group_matchResult_NormedSQDIFF.TabIndex = 11;
@@ -920,7 +925,7 @@
             this.group_matchResult_NormedCCORR.Controls.Add(this.pictureBox31);
             this.group_matchResult_NormedCCORR.Controls.Add(this.pictureBox32);
             this.group_matchResult_NormedCCORR.Controls.Add(this.pictureBox33);
-            this.group_matchResult_NormedCCORR.Location = new System.Drawing.Point(1102, 75);
+            this.group_matchResult_NormedCCORR.Location = new System.Drawing.Point(442, 6);
             this.group_matchResult_NormedCCORR.Name = "group_matchResult_NormedCCORR";
             this.group_matchResult_NormedCCORR.Size = new System.Drawing.Size(212, 760);
             this.group_matchResult_NormedCCORR.TabIndex = 12;
@@ -1073,7 +1078,7 @@
             this.group_matchResult_CCOEFF.Controls.Add(this.pictureBox42);
             this.group_matchResult_CCOEFF.Controls.Add(this.pictureBox43);
             this.group_matchResult_CCOEFF.Controls.Add(this.pictureBox44);
-            this.group_matchResult_CCOEFF.Location = new System.Drawing.Point(1320, 75);
+            this.group_matchResult_CCOEFF.Location = new System.Drawing.Point(660, 6);
             this.group_matchResult_CCOEFF.Name = "group_matchResult_CCOEFF";
             this.group_matchResult_CCOEFF.Size = new System.Drawing.Size(212, 760);
             this.group_matchResult_CCOEFF.TabIndex = 11;
@@ -1226,7 +1231,7 @@
             this.group_matchResult_NormedCCOEFF.Controls.Add(this.pictureBox53);
             this.group_matchResult_NormedCCOEFF.Controls.Add(this.pictureBox54);
             this.group_matchResult_NormedCCOEFF.Controls.Add(this.pictureBox55);
-            this.group_matchResult_NormedCCOEFF.Location = new System.Drawing.Point(1538, 75);
+            this.group_matchResult_NormedCCOEFF.Location = new System.Drawing.Point(878, 6);
             this.group_matchResult_NormedCCOEFF.Name = "group_matchResult_NormedCCOEFF";
             this.group_matchResult_NormedCCOEFF.Size = new System.Drawing.Size(212, 760);
             this.group_matchResult_NormedCCOEFF.TabIndex = 13;
@@ -1437,18 +1442,49 @@
             this.button_runPreprocessor.UseVisualStyleBackColor = true;
             this.button_runPreprocessor.Click += new System.EventHandler(this.button_runPreprocessor_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(666, 29);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1098, 806);
+            this.tabControl1.TabIndex = 17;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1090, 780);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Settings";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.group_matchResult_SQDIFF);
+            this.tabPage2.Controls.Add(this.group_matchResult_NormedSQDIFF);
+            this.tabPage2.Controls.Add(this.group_matchResult_NormedCCORR);
+            this.tabPage2.Controls.Add(this.group_matchResult_NormedCCOEFF);
+            this.tabPage2.Controls.Add(this.group_matchResult_CCOEFF);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1090, 780);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Match visaulization";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1764, 859);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.group_Run);
             this.Controls.Add(this.group_selectedRegion);
-            this.Controls.Add(this.group_matchResult_NormedCCOEFF);
-            this.Controls.Add(this.group_matchResult_CCOEFF);
-            this.Controls.Add(this.group_matchResult_NormedCCORR);
-            this.Controls.Add(this.group_matchResult_NormedSQDIFF);
-            this.Controls.Add(this.group_matchResult_SQDIFF);
             this.Controls.Add(this.dataImage);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1546,6 +1582,8 @@
             this.group_selectedRegion.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picture_selectedRegion)).EndInit();
             this.group_Run.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1686,5 +1724,8 @@
         private System.Windows.Forms.ToolStripMenuItem defaultDoGPreprocMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customDoGPreprocMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem normalizePreprocMenuItem;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
