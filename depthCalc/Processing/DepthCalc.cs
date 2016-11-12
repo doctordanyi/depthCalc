@@ -82,6 +82,19 @@ namespace depthCalc.Processing
             return 0;
         }
 
+        public int ui_file_saveVisualResult(string path)
+        {
+            if (bufferStates.visualDisparityReady)
+            {
+                imageIO.write(path, visualDisparity);
+            }
+            else
+            {
+                throw new Exception("Requested buffer not available");
+            }
+            return 0;
+        }
+
         public System.Drawing.Bitmap ui_image_renderBuffer(System.Drawing.Size size, SupportedBuffers buffer)
         {
             Image<Rgb, Byte> renderedImage;
@@ -151,6 +164,11 @@ namespace depthCalc.Processing
             renderedImage.Resize(scale, Emgu.CV.CvEnum.Inter.Linear);
 
             return renderedImage.ToBitmap();
+        }
+
+        public Util.BufferStates ui_state_getBufferStates()
+        {
+            return bufferStates;
         }
 
         // UI interface functions end

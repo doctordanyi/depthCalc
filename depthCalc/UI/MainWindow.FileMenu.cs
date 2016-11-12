@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Drawing;
 
 using System.Windows.Forms;
+using static depthCalc.Processing.DepthCalc;
 
 namespace depthCalc.UI
 {
@@ -32,7 +33,7 @@ namespace depthCalc.UI
             dataViewMenuItem.Enabled = true;
             rawDataViewMenuItem.Enabled = true;
             // Both source images are loaded
-            if (paramContainer.rawReferenceAvailable)
+            if (depthCalc.ui_state_getBufferStates().rawReferenceReady)
             {
                 button_runPreprocessor.Enabled = true;
                 button_runDepthprocessor.Enabled = true;
@@ -51,7 +52,7 @@ namespace depthCalc.UI
             referenceViewMenuItem.Enabled = true;
             rawReferenceViewMenuItem.Enabled = true;
             // Both source images are loaded
-            if(paramContainer.rawDataAvailable)
+            if (depthCalc.ui_state_getBufferStates().rawDataReady)
             {
                 button_runPreprocessor.Enabled = true;
                 button_runDepthprocessor.Enabled = true;
@@ -63,41 +64,14 @@ namespace depthCalc.UI
 
         private void saveOutputToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            String fileName = "result";
-
-            // Add matching algorithm
-            switch (depthProcessor.matchMethod)
-            {
-                case TemplateMatchingType.Sqdiff:
-                    fileName += "_SQDIFF";
-                    break;
-                case TemplateMatchingType.SqdiffNormed:
-                    fileName += "_NormedSQDIFF";
-                    break;
-                case TemplateMatchingType.Ccorr:
-                    fileName += "_CCORR";
-                    break;
-                case TemplateMatchingType.CcorrNormed:
-                    fileName += "_NormedCCORR";
-                    break;
-                case TemplateMatchingType.Ccoeff:
-                    fileName += "_CCOEFF";
-                    break;
-                case TemplateMatchingType.CcoeffNormed:
-                    fileName += "_NormedCCOEFF";
-                    break;
-            }
-
-            fileName += ".png";
-
+            String fileName = "result.png";
             saveResultImage.FileName = fileName;
-
             saveResultImage.ShowDialog();
         }
 
         private void saveResultImage_FileOk(object sender, CancelEventArgs e)
         {
-            visualiser.outImage.Save(saveResultImage.FileName);
+            depthCalc.ui_file_saveVisualResult(saveResultImage.FileName);
         }
     }
 }
