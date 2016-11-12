@@ -34,5 +34,39 @@ namespace depthCalc.Processing
         // Visualised disparity map
         private Mat visualDisparity;
 
+
+        // Constructor begin
+        public DepthCalc()
+        {
+            imageIO = new Util.ImageIO();
+        }
+        // Constructor end
+
+        // UI interface functions begin
+
+        int ui_file_openDataImage(string path)
+        {
+            if (rawData != null)
+            {
+                rawData.Dispose();
+            }
+            rawData = new Mat();
+            imageIO.read(path, out rawData);
+            return 0;
+        }
+
+        int ui_file_openReferenceImage(string path)
+        {
+            if (rawReference != null)
+            {
+                rawReference.Dispose();
+            }
+            rawReference = new Mat();
+            imageIO.read(path, out rawReference);
+            return 0;
+        }
+
+        // UI interface functions end
+
     }
 }

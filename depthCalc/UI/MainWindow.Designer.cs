@@ -1,4 +1,4 @@
-﻿namespace depthCalc
+﻿namespace depthCalc.UI
 {
     partial class MainWindow
     {
