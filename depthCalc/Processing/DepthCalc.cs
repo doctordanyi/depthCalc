@@ -1,4 +1,5 @@
 ﻿using Emgu.CV;
+using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using System;
 using System.Collections.Generic;
@@ -171,6 +172,28 @@ namespace depthCalc.Processing
             return bufferStates;
         }
 
+        public int ui_conf_setMatchMethod(TemplateMatchingType matchMethod)
+        {
+            return 0;
+        }
+
+        public int ui_run_preProcessingQueue()
+        {
+            return 0;
+        }
+
+        public int ui_run_depthProcessingQueue()
+        {
+            return 0;
+        }
+
+        public int ui_run_postProcessingQueue() {
+            return 0;
+        }
+
+        public int ui_run_allQueues() {
+            return 0;
+        }
         // UI interface functions end
 
     }

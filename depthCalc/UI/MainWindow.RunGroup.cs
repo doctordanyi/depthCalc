@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Drawing;
 
 using System.Windows.Forms;
+using static depthCalc.Processing.DepthCalc;
 
 namespace depthCalc.UI
 {
@@ -14,8 +15,7 @@ namespace depthCalc.UI
     {
         private void button_runPreprocessor_Click(object sender, EventArgs e)
         {
-            preprocessor.run(rawData, out preprocData, paramContainer.preProcessorSteps);
-            preprocessor.run(rawReference, out preprocReference, paramContainer.preProcessorSteps);
+            depthCalc.ui_run_preProcessingQueue();
             preprocessedDataViewMenuItem.Enabled = true;
             preprocessedReferenceViewMenuItem.Enabled = true;
             updateImageView(SupportedBuffers.preprocessedData);
@@ -24,13 +24,8 @@ namespace depthCalc.UI
         // UI event handlers
         private void button_runDepthprocessor_Click(object sender, EventArgs e)
         {
-            depthProcessor.run(preprocData, preprocReference, out rawDisparity);
-            visualiser.source = rawDisparity.ToImage<Gray, int>();
-            visualiser.drawOutputImage(out visualDisparity);
-
+            depthCalc.ui_run_depthProcessingQueue();
             updateImageView(SupportedBuffers.visalisedDispartiy);
-
-            resultReady = true;
         }
 
         private void button_runPostprocessor_Click(object sender, EventArgs e)
@@ -40,9 +35,7 @@ namespace depthCalc.UI
 
         private void button_runAll_Click(object sender, EventArgs e)
         {
-            preprocessor.run(rawData, out preprocData, paramContainer.preProcessorSteps);
-            preprocessor.run(rawReference, out preprocReference, paramContainer.preProcessorSteps);
-            depthProcessor.run(preprocData, preprocReference, out rawDisparity);
+            depthCalc.ui_run_allQueues();
             preprocessedDataViewMenuItem.Enabled = true;
             preprocessedReferenceViewMenuItem.Enabled = true;
         }

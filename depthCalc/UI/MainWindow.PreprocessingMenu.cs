@@ -1,7 +1,4 @@
 ﻿using depthCalc.Processing.Preprocessing;
-using Emgu.CV;
-using Emgu.CV.CvEnum;
-using Emgu.CV.Structure;
 using System;
 using System.ComponentModel;
 using System.Drawing;

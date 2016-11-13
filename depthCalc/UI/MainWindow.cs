@@ -151,8 +151,8 @@ namespace depthCalc.UI
             MouseEventArgs me = (MouseEventArgs)e;
             Point coordinates = me.Location;
 
-            coordinates.X = coordinates.X * (preprocData.Width / dataImage.Width);
-            coordinates.Y = coordinates.Y * (preprocData.Height / dataImage.Height);
+            // coordinates.X = coordinates.X * (preprocData.Width / dataImage.Width);
+            // coordinates.Y = coordinates.Y * (preprocData.Height / dataImage.Height);
 
             // show the match result of the clicked coordinates +/- 8 px
             int minCols;
@@ -175,7 +175,7 @@ namespace depthCalc.UI
                     item.Checked = false;
             }
 
-            depthProcessor.matchMethod = TemplateMatchingType.Sqdiff;
+            depthCalc.ui_conf_setMatchMethod(TemplateMatchingType.Sqdiff);
         }
 
         private void handle_normedSQDIFFToolStripMenuItem_Click(object sender, EventArgs e)
@@ -186,7 +186,7 @@ namespace depthCalc.UI
                     item.Checked = false;
             }
 
-            depthProcessor.matchMethod = TemplateMatchingType.SqdiffNormed;
+            depthCalc.ui_conf_setMatchMethod(TemplateMatchingType.SqdiffNormed);
         }
 
         private void handle_cCORRToolStripMenuItem_Click(object sender, EventArgs e)
@@ -197,7 +197,7 @@ namespace depthCalc.UI
                     item.Checked = false;
             }
 
-            depthProcessor.matchMethod = TemplateMatchingType.Ccorr;
+            depthCalc.ui_conf_setMatchMethod(TemplateMatchingType.Ccorr);
         }
 
         private void handle_normedCCORRToolStripMenuItem_Click(object sender, EventArgs e)
@@ -208,7 +208,7 @@ namespace depthCalc.UI
                     item.Checked = false;
             }
 
-            depthProcessor.matchMethod = TemplateMatchingType.CcorrNormed;
+            depthCalc.ui_conf_setMatchMethod(TemplateMatchingType.CcorrNormed);
         }
 
         private void handle_cCOEFFToolStripMenuItem_Click(object sender, EventArgs e)
@@ -219,7 +219,7 @@ namespace depthCalc.UI
                     item.Checked = false;
             }
 
-            depthProcessor.matchMethod = TemplateMatchingType.Ccoeff;
+            depthCalc.ui_conf_setMatchMethod(TemplateMatchingType.Ccoeff);
         }
 
         private void handle_normedCCOEFFToolStripMenuItem_Click(object sender, EventArgs e)
@@ -230,7 +230,7 @@ namespace depthCalc.UI
                     item.Checked = false;
             }
 
-            depthProcessor.matchMethod = TemplateMatchingType.CcoeffNormed;
+            depthCalc.ui_conf_setMatchMethod(TemplateMatchingType.CcoeffNormed);
         }
     }
 }
