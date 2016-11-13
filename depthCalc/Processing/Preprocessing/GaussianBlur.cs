@@ -9,16 +9,12 @@ namespace depthCalc.Processing.Preprocessing
 {
     class GaussianBlur : ProcessingStep
     {
-        private Mat inputImage;
-
         public int kernelSize;
         public double sigma;
 
-        public GaussianBlur(ref Mat image, int kernelSize, double sigma)
+        public GaussianBlur(int kernelSize, double sigma)
         {
             stepType = SupportedSteps.GaussianBlur;
-
-            inputImage = image;
 
             this.kernelSize = kernelSize;
             this.sigma = sigma;

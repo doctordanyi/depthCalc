@@ -9,14 +9,11 @@ namespace depthCalc.Processing.Preprocessing
 {
     class Normalize : ProcessingStep
     {
-        private Mat inputImage;
         private const int windowSize = 80;
 
-        public Normalize(ref Mat image)
+        public Normalize()
         {
             stepType = SupportedSteps.DifferenceOfGaussians;
-
-            inputImage = image;
         }
 
         public override Mat doYourJob()

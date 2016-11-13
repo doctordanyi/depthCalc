@@ -9,15 +9,12 @@ namespace depthCalc.Processing.Preprocessing
 {
     class Scale : ProcessingStep
     {
-
-        private Mat inputImage;
         public int scaleDownFactor;
 
-        public Scale(ref Mat image, int scaleDownFactor)
+        public Scale(int scaleDownFactor)
         {
             stepType = SupportedSteps.Scale;
             this.scaleDownFactor = scaleDownFactor;
-            inputImage = image;
         }
 
         public override Mat doYourJob()

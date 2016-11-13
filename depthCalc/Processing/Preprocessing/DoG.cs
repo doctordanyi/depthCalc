@@ -9,17 +9,13 @@ namespace depthCalc.Processing.Preprocessing
 {
     class DoG : ProcessingStep
     {
-        private Mat inputImage;
-
         public int kernelSize1;
         public int kernelSize2;
         public double sigma;
 
-        public DoG(ref Mat image, int kernelSize1, int kernelSize2, double sigma)
+        public DoG(int kernelSize1, int kernelSize2, double sigma)
         {
             stepType = SupportedSteps.DifferenceOfGaussians;
-
-            inputImage = image;
 
             this.kernelSize1 = kernelSize1;
             this.kernelSize2 = kernelSize2;

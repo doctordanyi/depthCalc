@@ -18,6 +18,17 @@ namespace depthCalc.Processing
         };
 
         public SupportedSteps stepType;
+        protected Mat inputImage;
+
+        public int setInputImage(ref Mat inputImage)
+        {
+            if (inputImage != null)
+            {
+                this.inputImage = inputImage;
+                return 0;
+            }
+            throw new Exception("Empty input image");
+        }
 
         abstract public Mat doYourJob();
     };

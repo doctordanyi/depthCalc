@@ -1,7 +1,4 @@
-﻿using Emgu.CV;
-using Emgu.CV.CvEnum;
-using Emgu.CV.Structure;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 
@@ -64,7 +61,7 @@ namespace depthCalc.UI
 
         private void saveOutputToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            String fileName = "result.png";
+            string fileName = "result.png";
             saveResultImage.FileName = fileName;
             saveResultImage.ShowDialog();
         }

@@ -22,25 +22,25 @@ namespace depthCalc.UI
 
         private void scale4PreprocMenuItem_Click(object sender, EventArgs e)
         {
-            PreProcessorScale scaleDown = new PreProcessorScale(4);
+            Scale scaleDown = new Scale(4);
             paramContainer.preProcessorSteps.Add(scaleDown);
         }
 
         private void scale8PreprocMenuItem_Click(object sender, EventArgs e)
         {
-            PreProcessorScale scaleDown = new PreProcessorScale(8);
+            Scale scaleDown = new Scale(8);
             paramContainer.preProcessorSteps.Add(scaleDown);
         }
 
         private void scale16PreprocMenuItem_Click(object sender, EventArgs e)
         {
-            PreProcessorScale scaleDown = new PreProcessorScale(16);
+            Scale scaleDown = new Scale(16);
             paramContainer.preProcessorSteps.Add(scaleDown);
         }
 
         private void scale32PreprocMenuItem_Click(object sender, EventArgs e)
         {
-            PreProcessorScale scaleDown = new PreProcessorScale(32);
+            Scale scaleDown = new Scale(32);
             paramContainer.preProcessorSteps.Add(scaleDown);
         }
 
@@ -51,19 +51,19 @@ namespace depthCalc.UI
 
         private void defaultGaussPreprocMenuItem_Click(object sender, EventArgs e)
         {
-            PreProcessorGaussianBlur gaussianBlur = new PreProcessorGaussianBlur(5, 1.5);
+            GaussianBlur gaussianBlur = new GaussianBlur(5, 1.5);
             paramContainer.preProcessorSteps.Add(gaussianBlur);
         }
 
         private void defaultDoGPreprocMenuItem_Click(object sender, EventArgs e)
         {
-            PreProcessorDoG doG = new PreProcessorDoG(7, 3, 1.5);
+            DoG doG = new DoG(7, 3, 1.5);
             paramContainer.preProcessorSteps.Add(doG);
         }
 
         private void normalizePreprocMenuItem_Click(object sender, EventArgs e)
         {
-            PreProcessorNormalize normalize = new PreProcessorNormalize();
+            Normalize normalize = new Normalize();
             paramContainer.preProcessorSteps.Add(normalize);
         }
     }
