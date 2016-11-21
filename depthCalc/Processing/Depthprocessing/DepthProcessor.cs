@@ -6,9 +6,9 @@ using Emgu.CV.CvEnum;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using depthCalc.Util;
+using DepthCalc.Util;
 
-namespace depthCalc
+namespace DepthCalc
 {
     class DepthProcessor
     {

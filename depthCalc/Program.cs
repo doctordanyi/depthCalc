@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 
-namespace depthCalc
+namespace DepthCalc
 {
     class Program
     {
@@ -14,7 +14,6 @@ namespace depthCalc
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new UI.MainWindow());
-            System.Console.ReadKey();
         }
     }
 }

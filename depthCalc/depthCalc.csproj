@@ -90,7 +90,9 @@
   <ItemGroup>
     <Compile Include="Processing\DepthCalc.cs" />
     <Compile Include="Processing\Depthprocessing\DepthProcessor.cs" />
+    <Compile Include="Processing\Preprocessing\Identity.cs" />
     <Compile Include="Processing\ProcessingQueue.cs" />
+    <Compile Include="Util\Enums.cs" />
     <Compile Include="Util\MatchResultContainer.cs" />
     <Compile Include="Processing\Preprocessing\DoG.cs" />
     <Compile Include="Processing\Preprocessing\GaussianBlur.cs" />

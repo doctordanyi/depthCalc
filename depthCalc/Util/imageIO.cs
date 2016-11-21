@@ -2,7 +2,7 @@
 using Emgu.CV;
 using Emgu.CV.Structure;
 
-namespace depthCalc.Util
+namespace DepthCalc.Util
 {
     class ImageIO
     {

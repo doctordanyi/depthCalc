@@ -6,17 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DepthCalc.Util;
+using System.ComponentModel;
 
-namespace depthCalc.Processing
+namespace DepthCalc.Processing
 {
     class DepthCalc
     {
         // Read/write/visualise images
-        private Util.ImageIO imageIO;
+        private ImageIO imageIO;
         private Visualiser visualiser;
 
         // Container for user defined parameters
-        private Util.ParamContainer paramContainer;
+        private ParamContainer paramContainer;
 
         // Processing Queues
         private ProcessingQueue preprocessingQueue;
@@ -32,26 +34,22 @@ namespace depthCalc.Processing
         private Mat postprocDisparity;
         private Mat visualDisparity;
 
-        public enum SupportedBuffers
-        {
-            rawData,
-            rawReference,
-            preprocessedData,
-            preprocessedReference,
-            Disparity,
-            visalisedDispartiy,
-            postprocessedDisparity
-        }
 
-        private Util.BufferStates bufferStates;
-        private Util.SourceFilePaths sourceFilePaths;
+        private BufferStates bufferStates;
+        private SourceFilePaths sourceFilePaths;
 
         // Constructor begin
         public DepthCalc()
         {
-            imageIO = new Util.ImageIO();
-            bufferStates = new Util.BufferStates();
-            sourceFilePaths = new Util.SourceFilePaths();
+            imageIO = new ImageIO();
+            bufferStates = new BufferStates();
+            sourceFilePaths = new SourceFilePaths();
+
+            // Initialize processing queues
+            preprocessingQueue = new ProcessingQueue();
+            preprocessingQueue.addStep(new Preprocessing.Identity());
+            depthprocessingQueue = new ProcessingQueue();
+            postprocessingQueue = new ProcessingQueue();
         }
         // Constructor end
 
@@ -108,7 +106,7 @@ namespace depthCalc.Processing
                         throw new Exception("Buffer not available");
                     }
                     renderedImage = rawData.ToImage<Rgb, Byte>();
-                    scale = size.Width / rawData.Width;
+                    scale = (double)size.Width / rawData.Width;
                     break;
                 case SupportedBuffers.rawReference:
                     if (!bufferStates.rawReferenceReady)
@@ -116,7 +114,7 @@ namespace depthCalc.Processing
                         throw new Exception("Buffer not available");
                     }
                     renderedImage = rawReference.ToImage<Rgb, Byte>();
-                    scale = size.Width / rawReference.Width;
+                    scale = (double)size.Width / rawReference.Width;
                     break;
                 case SupportedBuffers.preprocessedData:
                     if (!bufferStates.preprocDataReady)
@@ -124,7 +122,7 @@ namespace depthCalc.Processing
                         throw new Exception("Buffer not available");
                     }
                     renderedImage = preprocData.ToImage<Rgb, Byte>();
-                    scale = size.Width / preprocData.Width;
+                    scale = (double)size.Width / preprocData.Width;
                     break;
                 case SupportedBuffers.preprocessedReference:
                     if (!bufferStates.preprocReferenceReady)
@@ -132,7 +130,7 @@ namespace depthCalc.Processing
                         throw new Exception("Buffer not available");
                     }
                     renderedImage = preprocReference.ToImage<Rgb, Byte>();
-                    scale = size.Width / preprocReference.Width;
+                    scale = (double)size.Width / preprocReference.Width;
                     break;
                 case SupportedBuffers.Disparity:
                     if (!bufferStates.rawDisparityReady)
@@ -140,7 +138,7 @@ namespace depthCalc.Processing
                         throw new Exception("Buffer not available");
                     }
                     renderedImage = rawDisparity.ToImage<Rgb, Byte>();
-                    scale = size.Width / rawDisparity.Width;
+                    scale = (double)size.Width / rawDisparity.Width;
                     break;
                 case SupportedBuffers.visalisedDispartiy:
                     if (!bufferStates.visualDisparityReady)
@@ -148,7 +146,7 @@ namespace depthCalc.Processing
                         throw new Exception("Buffer not available");
                     }
                     renderedImage = visualDisparity.ToImage<Rgb, Byte>();
-                    scale = size.Width / visualDisparity.Width;
+                    scale = (double)size.Width / visualDisparity.Width;
                     break;
                 case SupportedBuffers.postprocessedDisparity:
                     if (!bufferStates.postprocDisparityReady)
@@ -156,18 +154,16 @@ namespace depthCalc.Processing
                         throw new Exception("Buffer not available");
                     }
                     renderedImage = postprocDisparity.ToImage<Rgb, Byte>();
-                    scale = size.Width / postprocDisparity.Width;
+                    scale = (double)size.Width / postprocDisparity.Width;
                     break;
                 default:
                     throw new Exception("Unsupported buffer type");
             }
 
-            renderedImage.Resize(scale, Emgu.CV.CvEnum.Inter.Linear);
-
-            return renderedImage.ToBitmap();
+            return renderedImage.Resize(scale, Inter.Linear).ToBitmap();
         }
 
-        public Util.BufferStates ui_state_getBufferStates()
+        public BufferStates ui_state_getBufferStates()
         {
             return bufferStates;
         }
@@ -177,22 +173,21 @@ namespace depthCalc.Processing
             return 0;
         }
 
-        public int ui_run_preProcessingQueue()
+        public void ui_run_preProcessingQueue(object o, DoWorkEventArgs args)
         {
-            return 0;
+            preprocessingQueue.run();
         }
 
-        public int ui_run_depthProcessingQueue()
+        public void ui_run_depthProcessingQueue(object o, DoWorkEventArgs args)
         {
-            return 0;
         }
 
-        public int ui_run_postProcessingQueue() {
-            return 0;
+        public void ui_run_postProcessingQueue(object o, DoWorkEventArgs args) 
+        {
         }
 
-        public int ui_run_allQueues() {
-            return 0;
+        public void ui_run_allQueues(object o, DoWorkEventArgs args) 
+        {
         }
         // UI interface functions end
 

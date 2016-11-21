@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Drawing;
 
 using System.Windows.Forms;
-using static depthCalc.Processing.DepthCalc;
+using DepthCalc.Util;
 
-namespace depthCalc.UI
+namespace DepthCalc.UI
 {
     // Handling the file menu operations on the UI
     public partial class MainWindow : Form

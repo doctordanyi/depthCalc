@@ -1,11 +1,12 @@
 ﻿using Emgu.CV;
+using DepthCalc.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace depthCalc.Processing.Preprocessing
+namespace DepthCalc.Processing.Preprocessing
 {
     class GaussianBlur : ProcessingStep
     {
@@ -25,6 +26,15 @@ namespace depthCalc.Processing.Preprocessing
             Mat destImage = new Mat();
             CvInvoke.GaussianBlur(inputImage, destImage, new System.Drawing.Size(kernelSize, kernelSize), sigma);
             return destImage;
+        }
+
+        public override string ToString()
+        {
+            string readable = base.ToString();
+            readable += ", Parameters: {";
+            readable += "'kernel size': " + kernelSize + ", ";
+            readable += "'sigma': " + sigma + "}";
+            return readable;
         }
     }
 }

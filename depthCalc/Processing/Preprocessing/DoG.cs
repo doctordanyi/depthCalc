@@ -1,11 +1,12 @@
 ﻿using Emgu.CV;
+using DepthCalc.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace depthCalc.Processing.Preprocessing
+namespace DepthCalc.Processing.Preprocessing
 {
     class DoG : ProcessingStep
     {
@@ -35,6 +36,16 @@ namespace depthCalc.Processing.Preprocessing
             CvInvoke.Normalize(result, result, 0, 255, Emgu.CV.CvEnum.NormType.MinMax);
 
             return result;
+        }
+
+        public override string ToString()
+        {
+            string readable = base.ToString();
+            readable += ", Parameters: {";
+            readable += "'kernel size 1': " + kernelSize1 + ", ";
+            readable += "'kernel size 2': " + kernelSize2 + ", ";
+            readable += "'sigma': " + sigma + "}";
+            return readable;
         }
     }
 }

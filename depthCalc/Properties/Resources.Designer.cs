@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace depthCalc.Properties {
+namespace DepthCalc.Properties {
     using System;
     
     

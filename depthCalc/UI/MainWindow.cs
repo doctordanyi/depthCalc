@@ -6,10 +6,10 @@ using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using depthCalc.Processing;
-using depthCalc.Util;
+using DepthCalc.Processing;
+using DepthCalc.Util;
 
-namespace depthCalc.UI
+namespace DepthCalc.UI
 {
     partial class MainWindow
     {
@@ -17,7 +17,7 @@ namespace depthCalc.UI
         private ParamContainer paramContainer;
 
         // Main processing block
-        private DepthCalc depthCalc;
+        private Processing.DepthCalc depthCalc;
 
         private Mat displayBuffer;
 
@@ -26,14 +26,13 @@ namespace depthCalc.UI
         {
             InitializeComponent();
 
-            depthCalc = new DepthCalc();
+            depthCalc = new Processing.DepthCalc();
             paramContainer = new ParamContainer();
             displayBuffer = new Mat();
-
         }
         
 
-        private void updateImageView(DepthCalc.SupportedBuffers buffer)
+        private void updateImageView(SupportedBuffers buffer)
         {
             dataImage.Image = depthCalc.ui_image_renderBuffer(dataImage.Size, buffer);
         }
@@ -231,6 +230,11 @@ namespace depthCalc.UI
             }
 
             depthCalc.ui_conf_setMatchMethod(TemplateMatchingType.CcoeffNormed);
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -8,20 +8,16 @@ using System.Threading.Tasks;
 
 namespace DepthCalc.Processing.Preprocessing
 {
-    class Normalize : ProcessingStep
+    class Identity : ProcessingStep
     {
-        private const int windowSize = 80;
-
-        public Normalize()
+        public Identity()
         {
-            stepType = SupportedSteps.DifferenceOfGaussians;
+            stepType = SupportedSteps.Identity;
         }
 
         public override Mat doYourJob()
         {
-            Mat result = new Mat();
-            CvInvoke.EqualizeHist(inputImage, result);
-            return result;
+            return inputImage;
         }
     }
 }
