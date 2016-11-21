@@ -13,32 +13,27 @@ namespace DepthCalc.UI
         
         private void scale2PreprocMenuItem_Click(object sender, EventArgs e)
         {
-            Scale scaleDown = new Scale(2);
-            paramContainer.preProcessorSteps.Add(scaleDown);
+            depthCalc.ui_conf_addPreprocessingStep(new Scale(2));
         }
 
         private void scale4PreprocMenuItem_Click(object sender, EventArgs e)
         {
-            Scale scaleDown = new Scale(4);
-            paramContainer.preProcessorSteps.Add(scaleDown);
+            depthCalc.ui_conf_addPreprocessingStep(new Scale(4));
         }
 
         private void scale8PreprocMenuItem_Click(object sender, EventArgs e)
         {
-            Scale scaleDown = new Scale(8);
-            paramContainer.preProcessorSteps.Add(scaleDown);
+            depthCalc.ui_conf_addPreprocessingStep(new Scale(8));
         }
 
         private void scale16PreprocMenuItem_Click(object sender, EventArgs e)
         {
-            Scale scaleDown = new Scale(16);
-            paramContainer.preProcessorSteps.Add(scaleDown);
+            depthCalc.ui_conf_addPreprocessingStep(new Scale(16));
         }
 
         private void scale32PreprocMenuItem_Click(object sender, EventArgs e)
         {
-            Scale scaleDown = new Scale(32);
-            paramContainer.preProcessorSteps.Add(scaleDown);
+            depthCalc.ui_conf_addPreprocessingStep(new Scale(32));
         }
 
         private void clearPreprocMenuItem_Click(object sender, EventArgs e)
@@ -48,20 +43,17 @@ namespace DepthCalc.UI
 
         private void defaultGaussPreprocMenuItem_Click(object sender, EventArgs e)
         {
-            GaussianBlur gaussianBlur = new GaussianBlur(5, 1.5);
-            paramContainer.preProcessorSteps.Add(gaussianBlur);
+            depthCalc.ui_conf_addPreprocessingStep(new GaussianBlur(5, 1.5));
         }
 
         private void defaultDoGPreprocMenuItem_Click(object sender, EventArgs e)
         {
-            DoG doG = new DoG(7, 3, 1.5);
-            paramContainer.preProcessorSteps.Add(doG);
+            depthCalc.ui_conf_addPreprocessingStep(new DoG(7, 3, 1.5));
         }
 
         private void normalizePreprocMenuItem_Click(object sender, EventArgs e)
         {
-            Normalize normalize = new Normalize();
-            paramContainer.preProcessorSteps.Add(normalize);
+            depthCalc.ui_conf_addPreprocessingStep(new Normalize());
         }
     }
 }

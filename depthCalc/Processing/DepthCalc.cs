@@ -174,6 +174,12 @@ namespace DepthCalc.Processing
             return 0;
         }
 
+        public int ui_conf_addPreprocessingStep(ProcessingStep newStep)
+        {
+            preprocessingQueue.addStep(newStep);
+            return 0;
+        }
+
         public void ui_run_preProcessingQueue(object o, DoWorkEventArgs args)
         {
             if(!bufferStates.rawDataReady || !bufferStates.rawReferenceReady)
