@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DepthCalc.Util;
 using System.ComponentModel;
+using System.Threading;
 
 namespace DepthCalc.Processing
 {
@@ -175,7 +176,27 @@ namespace DepthCalc.Processing
 
         public void ui_run_preProcessingQueue(object o, DoWorkEventArgs args)
         {
-            preprocessingQueue.run();
+            if(!bufferStates.rawDataReady || !bufferStates.rawReferenceReady)
+            {
+                throw new Exception("Buffer not available");
+            }
+            // Run the queue on the reference image
+            if(preprocReference != null)
+            {
+                preprocReference.Dispose();
+            }
+            preprocReference = new Mat();
+            preprocessingQueue.run(rawReference, ref preprocReference);
+            bufferStates.preprocReferenceReady = true;
+
+            // Run the queue on the data image
+            if(preprocData != null)
+            {
+                preprocData.Dispose();
+            }
+            preprocData = new Mat();
+            preprocessingQueue.run(rawData, ref preprocData);
+            bufferStates.preprocDataReady = true;
         }
 
         public void ui_run_depthProcessingQueue(object o, DoWorkEventArgs args)

@@ -17,7 +17,9 @@ namespace DepthCalc.Processing.Preprocessing
 
         public override Mat doYourJob()
         {
-            return inputImage;
+            Mat outputImage = new Mat();
+            inputImage.CopyTo(outputImage);
+            return outputImage;
         }
     }
 }

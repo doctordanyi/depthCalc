@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emgu.CV;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -30,12 +31,16 @@ namespace DepthCalc.Processing
             return stepList;
         }
 
-        public void run()
+        public void run(Mat inputImage, ref Mat outputImage)
         {
+            Mat temp = new Mat();
+            inputImage.CopyTo(temp);
             foreach (ProcessingStep step in Queue)
             {
-                step.doYourJob();
+                step.setInputImage(ref temp);
+                temp = step.doYourJob();
             }
+            temp.CopyTo(outputImage);
         }
     }
 }
