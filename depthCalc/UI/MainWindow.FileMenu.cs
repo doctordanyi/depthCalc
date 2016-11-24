@@ -15,7 +15,18 @@ namespace DepthCalc.UI
             openReferenceImageDialog.ShowDialog();
         }
 
+        private void browseReferenceButton_Click(object sender, EventArgs e)
+        {
+            openReferenceImageDialog.ShowDialog();
+        }
+
+
         private void openDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openDataImageDialog.ShowDialog();
+        }
+
+        private void browseDataButton_Click(object sender, EventArgs e)
         {
             openDataImageDialog.ShowDialog();
         }

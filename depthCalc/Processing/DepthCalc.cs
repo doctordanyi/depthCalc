@@ -16,10 +16,6 @@ namespace DepthCalc.Processing
     {
         // Read/write/visualise images
         private ImageIO imageIO;
-        private Visualiser visualiser;
-
-        // Container for user defined parameters
-        private ParamContainer paramContainer;
 
         // Processing Queues
         private ProcessingQueue preprocessingQueue;
@@ -255,6 +251,9 @@ namespace DepthCalc.Processing
 
         public void ui_run_allQueues(object o, DoWorkEventArgs args) 
         {
+            ui_run_preProcessingQueue(o, args);
+            ui_run_depthProcessingQueue(o, args);
+            ui_run_postProcessingQueue(o, args);
         }
         // UI interface functions end
 

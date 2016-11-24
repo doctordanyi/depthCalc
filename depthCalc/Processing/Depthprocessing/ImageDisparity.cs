@@ -152,8 +152,6 @@ namespace DepthCalc.Processing.Depthprocessing
 
         private Mat calculateDisparity()
         {
-            matchResultContainer = new MatchResultContainer(dataImage.Height - sampleArea.Height, dataImage.Width - sampleArea.Width);
-            matchResultContainer.BlockWidth = 16;
             int progressStep = 100 / (dataImage.Height / 20);
 
             int[] result = new int[dataImage.Width * dataImage.Height];
@@ -161,7 +159,7 @@ namespace DepthCalc.Processing.Depthprocessing
               {
                   int startRow = submat * (dataImage.Rows / threads);
                   int endRow;
-                  if( (submat + 1) * (dataImage.Rows / threads) > (dataImage.Rows - sampleArea.Height))
+                  if ((submat + 1) * (dataImage.Rows / threads) > (dataImage.Rows - sampleArea.Height))
                   {
                       endRow = dataImage.Rows - sampleArea.Height;
                   }
@@ -178,36 +176,24 @@ namespace DepthCalc.Processing.Depthprocessing
                           Rectangle window = windowSelector.getWindow(x, y);
                           using (Mat matchResult = blockMatch(x, y))
                           {
-                              if (true)
+                              Point[] minLoc = new Point[1];
+                              Point[] maxLoc = new Point[1];
+                              double[] minValue = new double[1];
+                              double[] maxValue = new double[1];
+
+                              matchResult.MinMax(out minValue, out maxValue, out minLoc, out maxLoc);
+
+                              if ((matchMethod == TemplateMatchingType.Sqdiff) || (matchMethod == TemplateMatchingType.SqdiffNormed))
                               {
-                                  Point[] minLoc = new Point[1];
-                                  Point[] maxLoc = new Point[1];
-                                  double[] minValue = new double[1];
-                                  double[] maxValue = new double[1];
-
-                                  matchResult.MinMax(out minValue, out maxValue, out minLoc, out maxLoc);
-
-                                  if ((matchMethod == TemplateMatchingType.Sqdiff) || (matchMethod == TemplateMatchingType.SqdiffNormed))
-                                  {
-                                      result[y * dataImage.Width + x] = (int)((minLoc[0].X - (x - window.Left)));
-                                  }
-                                  else
-                                  {
-                                      result[y * dataImage.Width + x] = (int)((maxLoc[0].X - (x - window.Left)));
-                                  }
+                                  result[y * dataImage.Width + x] = (minLoc[0].X - (x - window.Left));
                               }
                               else
                               {
-                                  matchResultContainer[y, x] = getStrongMaximums(matchResult);
-                                  foreach (MaxElement item in matchResultContainer[y,x])
-                                  {
-                                      item.disparity = item.location - (x - window.Left);
-                                  }
-                                  result[y * dataImage.Width + x] = matchResultContainer[y,x][0].disparity;
+                                  result[y * dataImage.Width + x] = (maxLoc[0].X - (x - window.Left));
                               }
                           }
                       }
-                      if((y % 20) == 0)
+                      if ((y % 20) == 0)
                       {
                           PercentComplete += progressStep;
                           if (bw != null)
@@ -215,14 +201,6 @@ namespace DepthCalc.Processing.Depthprocessing
                       }
                   }
               });
-            /*for(int y = 0; y < matchResultContainer.Height; y++)
-            {
-                for(int x = 0; x < matchResultContainer.Width; x += 16)
-                {
-                    int[] disp = improveMatchQuality(y, x);
-                    disp.CopyTo(result, y * dataImage.Width + x);
-                }
-            }*/
             Mat retval = new Mat(dataImage.Size, DepthType.Cv32S, 1);
             retval.SetTo<int>(result);
             return retval;
