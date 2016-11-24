@@ -10,17 +10,15 @@ namespace DepthCalc.Processing.Preprocessing
 {
     class Normalize : ProcessingStep
     {
-        private const int windowSize = 80;
-
         public Normalize()
         {
-            stepType = SupportedSteps.DifferenceOfGaussians;
+            stepType = SupportedSteps.Normalize;
         }
 
         public override Mat doYourJob()
         {
             Mat result = new Mat();
-            CvInvoke.EqualizeHist(inputImage, result);
+            CvInvoke.EqualizeHist(dataImage, result);
             return result;
         }
     }

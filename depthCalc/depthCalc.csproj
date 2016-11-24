@@ -89,7 +89,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Processing\DepthCalc.cs" />
-    <Compile Include="Processing\Depthprocessing\DepthProcessor.cs" />
+    <Compile Include="Processing\Depthprocessing\ImageDisparity.cs" />
+    <Compile Include="Processing\Postprocessing\VisualizeDisparity.cs" />
     <Compile Include="Processing\Preprocessing\Identity.cs" />
     <Compile Include="Processing\ProcessingQueue.cs" />
     <Compile Include="Util\Enums.cs" />
@@ -134,6 +135,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Processing\Postprocessing\Visualiser.cs" />
+    <Compile Include="Util\WindowSelector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

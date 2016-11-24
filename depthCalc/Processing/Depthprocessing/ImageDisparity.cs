@@ -8,48 +8,46 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using DepthCalc.Util;
 
-namespace DepthCalc
+namespace DepthCalc.Processing.Depthprocessing
 {
-    class DepthProcessor
+    class ImageDisparity: ProcessingStep 
     {
-        private Mat reference;
-        private Mat data;
         private MatchResultContainer matchResultContainer;
 
         public TemplateMatchingType matchMethod;
 
-        private const UInt16 SampleRows = 7;
-        private const UInt16 SampleCols = 7;
+        private Rectangle sampleArea;
+        private Rectangle windowArea;
         private const UInt16 linearMatchRange = 16;
         private const int threads = 8;
 
-        private const UInt16 WindowRows = SampleRows;
-        private UInt16 WindowCols = 100;
-
-
-        public DepthProcessor()
+        public ImageDisparity()
         {
+            stepType = SupportedSteps.ImageDisparity;
             matchMethod = TemplateMatchingType.CcoeffNormed;
+
+            sampleArea = new Rectangle(0, 0, 7, 7);
+            windowArea = new Rectangle(0, 0, 100, sampleArea.Height);
         }
 
         public void run(Mat data, Mat reference, out Mat disparity)
         {
-            this.data = data;
-            this.reference = reference;
+            this.dataImage = data;
+            this.referenceImage = reference;
             disparity = calculateDisparity();
         }
 
         public Mat blockMatch(int x,int y)
         {
-            int windowX, windowY;
-            Mat matchResult = new Mat(); ;
+            Mat matchResult = new Mat();
+            WindowSelector windowSelector = new WindowSelector(dataImage);
+            windowSelector.WindowArea = windowArea;
+            Rectangle window = windowSelector.getWindow(x, y);
+            windowSelector.WindowArea = sampleArea;
+            Rectangle sample = windowSelector.getWindow(x, y);
 
-            windowX = (x <= WindowCols / 2) ? 0 : x - WindowCols / 2;
-            windowX = (windowX >= (data.Cols - WindowCols)) ? data.Cols - WindowCols : windowX;
-            windowY = y;
-
-            using (Mat dataROI = new Mat(data, new Rectangle(windowX, windowY, WindowCols, WindowRows)))
-            using (Mat sampleROI = new Mat(reference, new Rectangle(x, y, SampleCols, SampleRows)))
+            using (Mat dataROI = new Mat(dataImage, window))
+            using (Mat sampleROI = new Mat(referenceImage, sample))
             {
                 CvInvoke.MatchTemplate(dataROI, sampleROI, matchResult, matchMethod);
             }
@@ -154,35 +152,33 @@ namespace DepthCalc
 
         private Mat calculateDisparity()
         {
-            matchResultContainer = new MatchResultContainer(data.Height - SampleRows, data.Width - SampleCols);
+            matchResultContainer = new MatchResultContainer(dataImage.Height - sampleArea.Height, dataImage.Width - sampleArea.Width);
             matchResultContainer.BlockWidth = 16;
+            int progressStep = 100 / (dataImage.Height / 20);
 
-            int[] result = new int[data.Width * data.Height];
+            int[] result = new int[dataImage.Width * dataImage.Height];
             Parallel.For(0, threads, submat =>
               {
-                  int windowX, windowY;
-                  int startRow = submat * (data.Rows / threads);
+                  int startRow = submat * (dataImage.Rows / threads);
                   int endRow;
-                  if( (submat + 1) * (data.Rows / threads) > (data.Rows - SampleRows))
+                  if( (submat + 1) * (dataImage.Rows / threads) > (dataImage.Rows - sampleArea.Height))
                   {
-                      endRow = data.Rows - SampleRows;
+                      endRow = dataImage.Rows - sampleArea.Height;
                   }
                   else
                   {
-                      endRow = (submat + 1) * (data.Rows / threads);
+                      endRow = (submat + 1) * (dataImage.Rows / threads);
                   }
-
+                  WindowSelector windowSelector = new WindowSelector(dataImage);
+                  windowSelector.WindowArea = windowArea;
                   for (int y = startRow; y < endRow; y++)
                   {
-                      for (int x = 0; x < (data.Cols - SampleCols); x++)
+                      for (int x = 0; x < (dataImage.Cols - sampleArea.Width); x++)
                       {
-                          windowX = (x <= WindowCols / 2) ? 0 : x - WindowCols / 2;
-                          windowX = (windowX >= (data.Cols - WindowCols)) ? data.Cols - WindowCols : windowX;
-                          windowY = y;
-
+                          Rectangle window = windowSelector.getWindow(x, y);
                           using (Mat matchResult = blockMatch(x, y))
                           {
-                              if ((matchMethod == TemplateMatchingType.Sqdiff) || (matchMethod == TemplateMatchingType.SqdiffNormed))
+                              if (true)
                               {
                                   Point[] minLoc = new Point[1];
                                   Point[] maxLoc = new Point[1];
@@ -193,7 +189,11 @@ namespace DepthCalc
 
                                   if ((matchMethod == TemplateMatchingType.Sqdiff) || (matchMethod == TemplateMatchingType.SqdiffNormed))
                                   {
-                                      result[y * data.Width + x] = (int)((minLoc[0].X - (x - windowX)));
+                                      result[y * dataImage.Width + x] = (int)((minLoc[0].X - (x - window.Left)));
+                                  }
+                                  else
+                                  {
+                                      result[y * dataImage.Width + x] = (int)((maxLoc[0].X - (x - window.Left)));
                                   }
                               }
                               else
@@ -201,25 +201,38 @@ namespace DepthCalc
                                   matchResultContainer[y, x] = getStrongMaximums(matchResult);
                                   foreach (MaxElement item in matchResultContainer[y,x])
                                   {
-                                      item.disparity = item.location - (x - windowX);
+                                      item.disparity = item.location - (x - window.Left);
                                   }
-                                  result[y * data.Width + x] = matchResultContainer[y,x][0].disparity;
+                                  result[y * dataImage.Width + x] = matchResultContainer[y,x][0].disparity;
                               }
                           }
                       }
+                      if((y % 20) == 0)
+                      {
+                          PercentComplete += progressStep;
+                          if (bw != null)
+                              bw.ReportProgress(PercentComplete);
+                      }
                   }
               });
-            for(int y = 0; y < matchResultContainer.Height; y++)
+            /*for(int y = 0; y < matchResultContainer.Height; y++)
             {
                 for(int x = 0; x < matchResultContainer.Width; x += 16)
                 {
                     int[] disp = improveMatchQuality(y, x);
-                    disp.CopyTo(result, y * data.Width + x);
+                    disp.CopyTo(result, y * dataImage.Width + x);
                 }
-            }
-            Mat retval = new Mat(data.Size, DepthType.Cv32S, 1);
+            }*/
+            Mat retval = new Mat(dataImage.Size, DepthType.Cv32S, 1);
             retval.SetTo<int>(result);
             return retval;
+        }
+
+        public override Mat doYourJob()
+        {
+            outBuffer = new Mat();
+            outBuffer = calculateDisparity();
+            return outBuffer;
         }
     }
 }

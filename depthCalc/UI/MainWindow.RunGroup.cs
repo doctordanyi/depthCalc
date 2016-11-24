@@ -17,11 +17,18 @@ namespace DepthCalc.UI
             return bw;
         }
 
-        private void button_runPreprocessor_Click(object sender, EventArgs e)
+        private void preprocRunMenuItem_Click(object sender, EventArgs e)
         {
             BackgroundWorker bw = createBackgroudWorker(depthCalc.ui_run_preProcessingQueue);
             bw.RunWorkerCompleted += PreprocessingCompleted;
+            bw.ProgressChanged += PreprocessingProgressChanged;
             bw.RunWorkerAsync();
+        }
+
+        private void PreprocessingProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            String step = e.UserState as String;
+            procStepStatusLabel.Text = step;
         }
 
         private void PreprocessingCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -29,23 +36,34 @@ namespace DepthCalc.UI
             preprocessedDataViewMenuItem.Enabled = true;
             preprocessedReferenceViewMenuItem.Enabled = true;
             updateImageView(SupportedBuffers.preprocessedData);
+            procStepStatusLabel.Text = "Idle";
         }
 
         // UI event handlers
-        private void button_runDepthprocessor_Click(object sender, EventArgs e)
+        private void dispRunStripMenuItem_Click(object sender, EventArgs e)
         {
             BackgroundWorker bw = createBackgroudWorker(depthCalc.ui_run_depthProcessingQueue);
             bw.RunWorkerCompleted += DepthprocessingCompleted;
+            bw.ProgressChanged += DepthprocessingProgressChanged;
             bw.RunWorkerAsync();
-            updateImageView(SupportedBuffers.visalisedDispartiy);
+        }
+
+        private void DepthprocessingProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            String step = e.UserState as String;
+            procStepStatusLabel.Text = step;
+            procProgressBar.Value = e.ProgressPercentage;
         }
 
         private void DepthprocessingCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            procProgressBar.Value = 0;
+            procStepStatusLabel.Text = "Idle";
+            postprocRunMenuItem.Enabled = true;
+            updateImageView(SupportedBuffers.Disparity);
         }
 
-        private void button_runPostprocessor_Click(object sender, EventArgs e)
+        private void postprocRunMenuItem_Click(object sender, EventArgs e)
         {
             BackgroundWorker bw = createBackgroudWorker(depthCalc.ui_run_postProcessingQueue);
             bw.RunWorkerCompleted += PostprocessingCompleted;
@@ -54,10 +72,10 @@ namespace DepthCalc.UI
 
         private void PostprocessingCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            updateImageView(SupportedBuffers.visalisedDispartiy);
         }
 
-        private void button_runAll_Click(object sender, EventArgs e)
+        private void allRunMenuItem_Click(object sender, EventArgs e)
         {
             BackgroundWorker bw = createBackgroudWorker(depthCalc.ui_run_allQueues);
             bw.RunWorkerCompleted += ProcessingCompleted;

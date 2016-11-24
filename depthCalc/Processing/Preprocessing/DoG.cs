@@ -29,8 +29,8 @@ namespace DepthCalc.Processing.Preprocessing
             Mat destImage2 = new Mat();
             Mat result = new Mat();
 
-            CvInvoke.GaussianBlur(inputImage, destImage1, new System.Drawing.Size(kernelSize1, kernelSize1), sigma);
-            CvInvoke.GaussianBlur(inputImage, destImage2, new System.Drawing.Size(kernelSize2, kernelSize2), sigma);
+            CvInvoke.GaussianBlur(dataImage, destImage1, new System.Drawing.Size(kernelSize1, kernelSize1), sigma);
+            CvInvoke.GaussianBlur(dataImage, destImage2, new System.Drawing.Size(kernelSize2, kernelSize2), sigma);
 
             CvInvoke.AbsDiff(destImage1, destImage2, result);
             CvInvoke.Normalize(result, result, 0, 255, Emgu.CV.CvEnum.NormType.MinMax);

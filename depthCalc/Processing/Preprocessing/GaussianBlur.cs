@@ -24,7 +24,7 @@ namespace DepthCalc.Processing.Preprocessing
         public override Mat doYourJob()
         {
             Mat destImage = new Mat();
-            CvInvoke.GaussianBlur(inputImage, destImage, new System.Drawing.Size(kernelSize, kernelSize), sigma);
+            CvInvoke.GaussianBlur(dataImage, destImage, new System.Drawing.Size(kernelSize, kernelSize), sigma);
             return destImage;
         }
 

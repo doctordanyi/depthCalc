@@ -32,7 +32,6 @@
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
             this.dataImage = new System.Windows.Forms.PictureBox();
             this.openDataImageDialog = new System.Windows.Forms.OpenFileDialog();
-            this.button_runDepthprocessor = new System.Windows.Forms.Button();
             this.group_matchResult_SQDIFF = new System.Windows.Forms.GroupBox();
             this.pictureBox60 = new System.Windows.Forms.PictureBox();
             this.pictureBox59 = new System.Windows.Forms.PictureBox();
@@ -87,6 +86,11 @@
             this.rawDataViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preprocessedDataViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resultViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preprocRunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dispRunStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.postprocRunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allRunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.group_matchResult_NormedSQDIFF = new System.Windows.Forms.GroupBox();
             this.pictureBox65 = new System.Windows.Forms.PictureBox();
             this.pictureBox64 = new System.Windows.Forms.PictureBox();
@@ -108,27 +112,26 @@
             this.picture_selectedRegion = new System.Windows.Forms.PictureBox();
             this.saveResultImage = new System.Windows.Forms.SaveFileDialog();
             this.openReferenceImageDialog = new System.Windows.Forms.OpenFileDialog();
-            this.group_Run = new System.Windows.Forms.GroupBox();
-            this.button_runAll = new System.Windows.Forms.Button();
-            this.button_runPostprocessor = new System.Windows.Forms.Button();
-            this.button_runPreprocessor = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.nubmer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button3 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.preprocListView = new System.Windows.Forms.ListView();
             this.step = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.parameters = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.procProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.procStepStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataImage)).BeginInit();
             this.group_matchResult_SQDIFF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox60)).BeginInit();
@@ -167,18 +170,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).BeginInit();
             this.group_selectedRegion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picture_selectedRegion)).BeginInit();
-            this.group_Run.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataImage
             // 
             this.dataImage.Enabled = false;
-            this.dataImage.Location = new System.Drawing.Point(18, 82);
+            this.dataImage.Location = new System.Drawing.Point(12, 29);
             this.dataImage.Name = "dataImage";
             this.dataImage.Size = new System.Drawing.Size(640, 512);
             this.dataImage.TabIndex = 0;
@@ -191,17 +194,6 @@
             this.openDataImageDialog.InitialDirectory = "D:\\onlab_kinect\\images";
             this.openDataImageDialog.Title = "Open Data Image";
             this.openDataImageDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.handle_openDataImage_FileOk);
-            // 
-            // button_runDepthprocessor
-            // 
-            this.button_runDepthprocessor.Enabled = false;
-            this.button_runDepthprocessor.Location = new System.Drawing.Point(110, 19);
-            this.button_runDepthprocessor.Name = "button_runDepthprocessor";
-            this.button_runDepthprocessor.Size = new System.Drawing.Size(109, 25);
-            this.button_runDepthprocessor.TabIndex = 2;
-            this.button_runDepthprocessor.Text = "Disparity calculator";
-            this.button_runDepthprocessor.UseVisualStyleBackColor = true;
-            this.button_runDepthprocessor.Click += new System.EventHandler(this.button_runDepthprocessor_Click);
             // 
             // group_matchResult_SQDIFF
             // 
@@ -362,7 +354,8 @@
             this.fileToolStripMenuItem,
             this.preprocessingToolStripMenuItem,
             this.matchMethodToolStripMenuItem,
-            this.viewMenuItem});
+            this.viewMenuItem,
+            this.runMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1149, 24);
@@ -663,6 +656,49 @@
             this.resultViewMenuItem.Size = new System.Drawing.Size(126, 22);
             this.resultViewMenuItem.Text = "Result";
             // 
+            // runMenuItem
+            // 
+            this.runMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.preprocRunMenuItem,
+            this.dispRunStripMenuItem,
+            this.postprocRunMenuItem,
+            this.allRunMenuItem});
+            this.runMenuItem.Name = "runMenuItem";
+            this.runMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.runMenuItem.Text = "Run";
+            // 
+            // preprocRunMenuItem
+            // 
+            this.preprocRunMenuItem.Enabled = false;
+            this.preprocRunMenuItem.Name = "preprocRunMenuItem";
+            this.preprocRunMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.preprocRunMenuItem.Text = "Preprocessor";
+            this.preprocRunMenuItem.Click += new System.EventHandler(this.preprocRunMenuItem_Click);
+            // 
+            // dispRunStripMenuItem
+            // 
+            this.dispRunStripMenuItem.Enabled = false;
+            this.dispRunStripMenuItem.Name = "dispRunStripMenuItem";
+            this.dispRunStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.dispRunStripMenuItem.Text = "Disparity calculator";
+            this.dispRunStripMenuItem.Click += new System.EventHandler(this.dispRunStripMenuItem_Click);
+            // 
+            // postprocRunMenuItem
+            // 
+            this.postprocRunMenuItem.Enabled = false;
+            this.postprocRunMenuItem.Name = "postprocRunMenuItem";
+            this.postprocRunMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.postprocRunMenuItem.Text = "Postprocessor";
+            this.postprocRunMenuItem.Click += new System.EventHandler(this.postprocRunMenuItem_Click);
+            // 
+            // allRunMenuItem
+            // 
+            this.allRunMenuItem.Enabled = false;
+            this.allRunMenuItem.Name = "allRunMenuItem";
+            this.allRunMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.allRunMenuItem.Text = "All";
+            this.allRunMenuItem.Click += new System.EventHandler(this.allRunMenuItem_Click);
+            // 
             // group_matchResult_NormedSQDIFF
             // 
             this.group_matchResult_NormedSQDIFF.Controls.Add(this.pictureBox65);
@@ -819,18 +855,18 @@
             // group_selectedRegion
             // 
             this.group_selectedRegion.Controls.Add(this.picture_selectedRegion);
-            this.group_selectedRegion.Location = new System.Drawing.Point(206, 609);
+            this.group_selectedRegion.Location = new System.Drawing.Point(8, 547);
             this.group_selectedRegion.Name = "group_selectedRegion";
-            this.group_selectedRegion.Size = new System.Drawing.Size(452, 226);
+            this.group_selectedRegion.Size = new System.Drawing.Size(652, 288);
             this.group_selectedRegion.TabIndex = 15;
             this.group_selectedRegion.TabStop = false;
             this.group_selectedRegion.Text = "Selected Region";
             // 
             // picture_selectedRegion
             // 
-            this.picture_selectedRegion.Location = new System.Drawing.Point(6, 15);
+            this.picture_selectedRegion.Location = new System.Drawing.Point(4, 15);
             this.picture_selectedRegion.Name = "picture_selectedRegion";
-            this.picture_selectedRegion.Size = new System.Drawing.Size(440, 200);
+            this.picture_selectedRegion.Size = new System.Drawing.Size(640, 269);
             this.picture_selectedRegion.TabIndex = 0;
             this.picture_selectedRegion.TabStop = false;
             // 
@@ -845,52 +881,6 @@
             this.openReferenceImageDialog.InitialDirectory = "D:\\onlab_kinect\\images";
             this.openReferenceImageDialog.Title = "Open Reference Image";
             this.openReferenceImageDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openReferenceImageDialog_FileOk);
-            // 
-            // group_Run
-            // 
-            this.group_Run.Controls.Add(this.button_runAll);
-            this.group_Run.Controls.Add(this.button_runPostprocessor);
-            this.group_Run.Controls.Add(this.button_runPreprocessor);
-            this.group_Run.Controls.Add(this.button_runDepthprocessor);
-            this.group_Run.Location = new System.Drawing.Point(12, 29);
-            this.group_Run.Name = "group_Run";
-            this.group_Run.Size = new System.Drawing.Size(362, 47);
-            this.group_Run.TabIndex = 16;
-            this.group_Run.TabStop = false;
-            this.group_Run.Text = "Run";
-            // 
-            // button_runAll
-            // 
-            this.button_runAll.Enabled = false;
-            this.button_runAll.Location = new System.Drawing.Point(321, 19);
-            this.button_runAll.Name = "button_runAll";
-            this.button_runAll.Size = new System.Drawing.Size(33, 25);
-            this.button_runAll.TabIndex = 5;
-            this.button_runAll.Text = "All";
-            this.button_runAll.UseVisualStyleBackColor = true;
-            this.button_runAll.Click += new System.EventHandler(this.button_runAll_Click);
-            // 
-            // button_runPostprocessor
-            // 
-            this.button_runPostprocessor.Enabled = false;
-            this.button_runPostprocessor.Location = new System.Drawing.Point(225, 19);
-            this.button_runPostprocessor.Name = "button_runPostprocessor";
-            this.button_runPostprocessor.Size = new System.Drawing.Size(90, 25);
-            this.button_runPostprocessor.TabIndex = 4;
-            this.button_runPostprocessor.Text = "Postprocessor";
-            this.button_runPostprocessor.UseVisualStyleBackColor = true;
-            this.button_runPostprocessor.Click += new System.EventHandler(this.button_runPostprocessor_Click);
-            // 
-            // button_runPreprocessor
-            // 
-            this.button_runPreprocessor.Enabled = false;
-            this.button_runPreprocessor.Location = new System.Drawing.Point(6, 19);
-            this.button_runPreprocessor.Name = "button_runPreprocessor";
-            this.button_runPreprocessor.Size = new System.Drawing.Size(98, 25);
-            this.button_runPreprocessor.TabIndex = 3;
-            this.button_runPreprocessor.Text = "Preprocessor";
-            this.button_runPreprocessor.UseVisualStyleBackColor = true;
-            this.button_runPreprocessor.Click += new System.EventHandler(this.button_runPreprocessor_Click);
             // 
             // tabControl1
             // 
@@ -939,7 +929,9 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.listView1);
+            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.preprocListView);
             this.groupBox2.Location = new System.Drawing.Point(6, 95);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(436, 267);
@@ -947,33 +939,44 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Preprocessing";
             // 
-            // listView1
+            // button3
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.nubmer,
-            this.step,
-            this.parameters});
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            this.button3.Location = new System.Drawing.Point(6, 236);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(57, 25);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Clear";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 103);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(107, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Preprocessing queue";
+            // 
+            // preprocListView
+            // 
+            this.preprocListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.step});
+            this.preprocListView.FullRowSelect = true;
+            this.preprocListView.GridLines = true;
+            this.preprocListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem2});
-            this.listView1.Location = new System.Drawing.Point(0, 119);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(435, 147);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.List;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            // 
-            // nubmer
-            // 
-            this.nubmer.Text = "#";
+            this.preprocListView.Location = new System.Drawing.Point(6, 119);
+            this.preprocListView.Name = "preprocListView";
+            this.preprocListView.Size = new System.Drawing.Size(424, 111);
+            this.preprocListView.TabIndex = 0;
+            this.preprocListView.TabStop = false;
+            this.preprocListView.UseCompatibleStateImageBehavior = false;
+            this.preprocListView.View = System.Windows.Forms.View.List;
+            this.preprocListView.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // step
             // 
             this.step.Text = "step";
-            // 
-            // parameters
-            // 
-            this.parameters.Text = "args";
             // 
             // groupBox1
             // 
@@ -989,6 +992,24 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "File";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 28);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Reference";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Data";
             // 
             // button2
             // 
@@ -1036,31 +1057,35 @@
             this.tabPage2.Text = "Match visaulization";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // statusStrip1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 54);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Data";
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.procProgressBar,
+            this.procStepStatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 837);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1149, 22);
+            this.statusStrip1.TabIndex = 19;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // label2
+            // procProgressBar
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 28);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Reference";
+            this.procProgressBar.Name = "procProgressBar";
+            this.procProgressBar.Size = new System.Drawing.Size(100, 16);
+            // 
+            // procStepStatusLabel
+            // 
+            this.procStepStatusLabel.Name = "procStepStatusLabel";
+            this.procStepStatusLabel.Size = new System.Drawing.Size(26, 17);
+            this.procStepStatusLabel.Text = "Idle";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1149, 859);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.group_Run);
             this.Controls.Add(this.group_selectedRegion);
             this.Controls.Add(this.dataImage);
             this.Controls.Add(this.menuStrip1);
@@ -1106,13 +1131,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).EndInit();
             this.group_selectedRegion.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picture_selectedRegion)).EndInit();
-            this.group_Run.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1122,7 +1149,6 @@
 
         private System.Windows.Forms.PictureBox dataImage;
         private System.Windows.Forms.OpenFileDialog openDataImageDialog;
-        private System.Windows.Forms.Button button_runDepthprocessor;
         private System.Windows.Forms.GroupBox group_matchResult_SQDIFF;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -1185,10 +1211,6 @@
         private System.Windows.Forms.ToolStripMenuItem preprocessedDataViewMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resultViewMenuItem;
         private System.Windows.Forms.OpenFileDialog openReferenceImageDialog;
-        private System.Windows.Forms.GroupBox group_Run;
-        private System.Windows.Forms.Button button_runPreprocessor;
-        private System.Windows.Forms.Button button_runPostprocessor;
-        private System.Windows.Forms.Button button_runAll;
         private System.Windows.Forms.ToolStripMenuItem scale2PreprocMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scale4PreprocMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scale8PreprocMenuItem;
@@ -1208,16 +1230,24 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView preprocListView;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ColumnHeader nubmer;
         private System.Windows.Forms.ColumnHeader step;
-        private System.Windows.Forms.ColumnHeader parameters;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripMenuItem runMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem preprocRunMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dispRunStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem postprocRunMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allRunMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripProgressBar procProgressBar;
+        private System.Windows.Forms.ToolStripStatusLabel procStepStatusLabel;
     }
 }

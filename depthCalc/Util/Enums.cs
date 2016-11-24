@@ -17,6 +17,17 @@
         Scale,
         GaussianBlur,
         DifferenceOfGaussians,
-        Normalize
+        Normalize,
+        ImageDisparity,
+        VisualizeDisparity
+    }
+
+    public enum WindowPinType
+    {
+        Center,
+        UpperLeft,
+        UpperRight,
+        LowerLeft,
+        LowerRight
     }
 }

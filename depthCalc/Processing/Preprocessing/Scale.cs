@@ -21,7 +21,7 @@ namespace DepthCalc.Processing.Preprocessing
         public override Mat doYourJob()
         {
             Mat destImage = new Mat();
-            CvInvoke.Resize(inputImage, destImage, new System.Drawing.Size(0,0) ,(1 / (double)scaleDownFactor), (1 / (double)scaleDownFactor));
+            CvInvoke.Resize(dataImage, destImage, new System.Drawing.Size(0,0) ,(1 / (double)scaleDownFactor), (1 / (double)scaleDownFactor));
             return destImage;
         }
 

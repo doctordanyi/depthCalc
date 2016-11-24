@@ -10,6 +10,14 @@ namespace DepthCalc.Processing
     class ProcessingQueue
     {
         private List<ProcessingStep> Queue;
+        private BackgroundWorker bw;
+        public BackgroundWorker Bw
+        {
+            set
+            {
+                bw = value;
+            }
+        }
 
         public ProcessingQueue()
         {
@@ -19,6 +27,11 @@ namespace DepthCalc.Processing
         public void addStep(ProcessingStep step)
         {
             Queue.Add(step);
+        }
+
+        public void clear()
+        {
+            Queue.Clear();
         }
 
         public List<String> stepsToStringList()
@@ -37,7 +50,24 @@ namespace DepthCalc.Processing
             inputImage.CopyTo(temp);
             foreach (ProcessingStep step in Queue)
             {
-                step.setInputImage(ref temp);
+                step.Bw = bw;
+                bw.ReportProgress(0, step.stepType.ToString());
+                step.setDataImage(ref temp);
+                temp = step.doYourJob();
+            }
+            temp.CopyTo(outputImage);
+        }
+
+        public void run(Mat dataImage, Mat referenceImage, ref Mat outputImage)
+        {
+            Mat temp = new Mat();
+            foreach (ProcessingStep step in Queue)
+            {
+                step.Bw = bw;
+                bw.ReportProgress(0, step.stepType.ToString());
+                step.setDataImage(ref dataImage);
+                step.setReferenceImage(ref referenceImage);
+                step.setOutBuffer(temp);
                 temp = step.doYourJob();
             }
             temp.CopyTo(outputImage);

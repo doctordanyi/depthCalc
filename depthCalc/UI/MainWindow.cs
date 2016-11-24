@@ -24,11 +24,11 @@ namespace DepthCalc.UI
 
         public MainWindow()
         {
-            InitializeComponent();
-
             depthCalc = new Processing.DepthCalc();
             paramContainer = new ParamContainer();
             displayBuffer = new Mat();
+            InitializeComponent();
+            updatePreprocessingStepsListView();
         }
         
 
@@ -141,8 +141,6 @@ namespace DepthCalc.UI
 
                 picture_selectedRegion.Image = dataROI.ToImage<Rgb, byte>().Resize(picture_selectedRegion.Width,picture_selectedRegion.Height, Inter.Nearest).ToBitmap();
             }
-            
-
         }
 
         private void handle_dataImage_Click(object sender, EventArgs e)
@@ -236,5 +234,6 @@ namespace DepthCalc.UI
         {
 
         }
+
     }
 }

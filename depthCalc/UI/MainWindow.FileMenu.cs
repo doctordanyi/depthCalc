@@ -32,9 +32,9 @@ namespace DepthCalc.UI
             // Both source images are loaded
             if (depthCalc.ui_state_getBufferStates().rawReferenceReady)
             {
-                button_runPreprocessor.Enabled = true;
-                button_runDepthprocessor.Enabled = true;
-                button_runAll.Enabled = true;
+                preprocRunMenuItem.Enabled = true;
+                dispRunStripMenuItem.Enabled = true;
+                allRunMenuItem.Enabled = true;
 
                 dataImage.Enabled = true;
             }
@@ -51,9 +51,9 @@ namespace DepthCalc.UI
             // Both source images are loaded
             if (depthCalc.ui_state_getBufferStates().rawDataReady)
             {
-                button_runPreprocessor.Enabled = true;
-                button_runDepthprocessor.Enabled = true;
-                button_runAll.Enabled = true;
+                preprocRunMenuItem.Enabled = true;
+                dispRunStripMenuItem.Enabled = true;
+                allRunMenuItem.Enabled = true;
 
                 dataImage.Enabled = true;
             }

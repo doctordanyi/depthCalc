@@ -49,8 +49,11 @@ namespace DepthCalc.Processing
             // Initialize processing queues
             preprocessingQueue = new ProcessingQueue();
             preprocessingQueue.addStep(new Preprocessing.Identity());
+            preprocessingQueue.addStep(new Preprocessing.Normalize());
             depthprocessingQueue = new ProcessingQueue();
+            depthprocessingQueue.addStep(new Depthprocessing.ImageDisparity());
             postprocessingQueue = new ProcessingQueue();
+            postprocessingQueue.addStep(new Postprocessing.VisualizeDisparity());
         }
         // Constructor end
 
@@ -169,6 +172,11 @@ namespace DepthCalc.Processing
             return bufferStates;
         }
 
+        public List<String> ui_state_getPreprocessorSteps()
+        {
+            return preprocessingQueue.stepsToStringList();
+        }
+
         public int ui_conf_setMatchMethod(TemplateMatchingType matchMethod)
         {
             return 0;
@@ -180,8 +188,16 @@ namespace DepthCalc.Processing
             return 0;
         }
 
+        public int ui_conf_clearPreprocessingSteps()
+        {
+            preprocessingQueue.clear();
+            preprocessingQueue.addStep(new Preprocessing.Identity());
+            return 0;
+        }
+
         public void ui_run_preProcessingQueue(object o, DoWorkEventArgs args)
         {
+            preprocessingQueue.Bw = o as BackgroundWorker;
             if(!bufferStates.rawDataReady || !bufferStates.rawReferenceReady)
             {
                 throw new Exception("Buffer not available");
@@ -207,10 +223,34 @@ namespace DepthCalc.Processing
 
         public void ui_run_depthProcessingQueue(object o, DoWorkEventArgs args)
         {
+            depthprocessingQueue.Bw = o as BackgroundWorker;
+            if(!bufferStates.preprocDataReady || !bufferStates.preprocReferenceReady)
+            {
+                throw new Exception("Buffer not available");
+            }
+            if(rawDisparity != null)
+            {
+                rawDisparity.Dispose();
+            }
+            rawDisparity = new Mat();
+            depthprocessingQueue.run(preprocData, preprocReference, ref rawDisparity);
+            bufferStates.rawDisparityReady = true;
         }
 
         public void ui_run_postProcessingQueue(object o, DoWorkEventArgs args) 
         {
+            postprocessingQueue.Bw = o as BackgroundWorker;
+            if(!bufferStates.rawDisparityReady)
+            {
+                throw new Exception("Buffer not available");
+            }
+            if(visualDisparity != null)
+            {
+                visualDisparity.Dispose();
+            }
+            visualDisparity = new Mat();
+            postprocessingQueue.run(rawDisparity, ref visualDisparity);
+            bufferStates.visualDisparityReady = true;
         }
 
         public void ui_run_allQueues(object o, DoWorkEventArgs args) 
