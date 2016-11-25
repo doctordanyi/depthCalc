@@ -30,13 +30,15 @@ namespace DepthCalc.Processing.Depthprocessing
             windowArea = new Rectangle(0, 0, 100, sampleArea.Height);
         }
 
-        public void run(Mat data, Mat reference, out Mat disparity)
+        public ImageDisparity(DepthprocessingConfig config)
         {
-            this.dataImage = data;
-            this.referenceImage = reference;
-            disparity = calculateDisparity();
-        }
+            stepType = SupportedSteps.ImageDisparity;
+            matchMethod = config.MatchMethod;
 
+            sampleArea = config.SampleArea;
+            windowArea = config.WindowArea;
+        }
+        
         public Mat blockMatch(int x,int y)
         {
             Mat matchResult = new Mat();
@@ -185,20 +187,20 @@ namespace DepthCalc.Processing.Depthprocessing
 
                               if ((matchMethod == TemplateMatchingType.Sqdiff) || (matchMethod == TemplateMatchingType.SqdiffNormed))
                               {
-                                  result[y * dataImage.Width + x] = (minLoc[0].X - (x - window.Left));
+                                  result[y * dataImage.Width + x] = (int)((minLoc[0].X - (x - window.Left)));
                               }
                               else
                               {
-                                  result[y * dataImage.Width + x] = (maxLoc[0].X - (x - window.Left));
+                                  result[y * dataImage.Width + x] = (int)((maxLoc[0].X - (x - window.Left)));
                               }
                           }
                       }
-                      if ((y % 20) == 0)
+                      /*if ((y % 20) == 0)
                       {
                           PercentComplete += progressStep;
                           if (bw != null)
                               bw.ReportProgress(PercentComplete);
-                      }
+                      }*/
                   }
               });
             Mat retval = new Mat(dataImage.Size, DepthType.Cv32S, 1);
@@ -211,6 +213,16 @@ namespace DepthCalc.Processing.Depthprocessing
             outBuffer = new Mat();
             outBuffer = calculateDisparity();
             return outBuffer;
+        }
+
+        public override string ToString()
+        {
+            string readable = base.ToString();
+            readable += ", Parameters: {";
+            readable += "'match method': " + matchMethod.ToString() + ", ";
+            readable += "'window size': " + windowArea.Width + "x" + windowArea.Height + ", ";
+            readable += "'sample size': " + sampleArea.Width + "x" + sampleArea.Height + "}";
+            return readable;
         }
     }
 }

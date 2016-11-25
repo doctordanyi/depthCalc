@@ -93,6 +93,9 @@
     <Compile Include="Processing\Postprocessing\VisualizeDisparity.cs" />
     <Compile Include="Processing\Preprocessing\Identity.cs" />
     <Compile Include="Processing\ProcessingQueue.cs" />
+    <Compile Include="UI\MainWindow.Depthprocessing.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Util\Enums.cs" />
     <Compile Include="Util\MatchResultContainer.cs" />
     <Compile Include="Processing\Preprocessing\DoG.cs" />

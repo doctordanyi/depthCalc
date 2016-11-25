@@ -40,6 +40,7 @@ namespace DepthCalc.UI
             updateImageView(SupportedBuffers.rawData);
             dataViewMenuItem.Enabled = true;
             rawDataViewMenuItem.Enabled = true;
+            dataPathTextBox.Text = openDataImageDialog.FileName;
             // Both source images are loaded
             if (depthCalc.ui_state_getBufferStates().rawReferenceReady)
             {
@@ -59,6 +60,7 @@ namespace DepthCalc.UI
             updateImageView(SupportedBuffers.rawReference);
             referenceViewMenuItem.Enabled = true;
             rawReferenceViewMenuItem.Enabled = true;
+            referencePathTextBox.Text = openReferenceImageDialog.FileName;
             // Both source images are loaded
             if (depthCalc.ui_state_getBufferStates().rawDataReady)
             {

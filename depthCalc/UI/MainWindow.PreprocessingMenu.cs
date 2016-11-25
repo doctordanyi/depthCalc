@@ -74,5 +74,10 @@ namespace DepthCalc.UI
                 preprocListView.Items.Add(lvItem);
             }
         }
+
+        private void PreprocListView_Resize(object sender, EventArgs e)
+        {
+            preprocListView.Columns[0].Width = preprocListView.Width;
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Emgu.CV.CvEnum;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace DepthCalc.Util
 {
@@ -42,6 +43,59 @@ namespace DepthCalc.Util
     {
         public string reference;
         public string data;
+    }
+
+    class DepthprocessingConfig
+    {
+        TemplateMatchingType matchMethod;
+        Rectangle sampleArea;
+        Rectangle windowArea;
+
+        public DepthprocessingConfig()
+        {
+            MatchMethod = TemplateMatchingType.CcoeffNormed;
+            SampleArea = new Rectangle(0, 0, 7, 7);
+            WindowArea = new Rectangle(0, 0, 100, SampleArea.Height);
+        }
+
+        public TemplateMatchingType MatchMethod
+        {
+            get
+            {
+                return matchMethod;
+            }
+
+            set
+            {
+                matchMethod = value;
+            }
+        }
+
+        public Rectangle SampleArea
+        {
+            get
+            {
+                return sampleArea;
+            }
+
+            set
+            {
+                sampleArea = value;
+            }
+        }
+
+        public Rectangle WindowArea
+        {
+            get
+            {
+                return windowArea;
+            }
+
+            set
+            {
+                windowArea = value;
+            }
+        }
     }
 }
 

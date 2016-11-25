@@ -28,9 +28,22 @@ namespace DepthCalc.UI
             paramContainer = new ParamContainer();
             displayBuffer = new Mat();
             InitializeComponent();
+            depthprocListView.Resize += DepthprocListView_Resize;
+            preprocListView.Resize += PreprocListView_Resize;
+
+            matchMethodSelector.DataSource = Enum.GetValues(typeof(TemplateMatchingType));
+            matchMethodSelector.SelectedItem = TemplateMatchingType.CcoeffNormed;
+
+            matchVisualizationSelectorLeft.DataSource = Enum.GetValues(typeof(TemplateMatchingType));
+            matchVisualizationSelectorLeft.SelectedItem = TemplateMatchingType.Sqdiff;
+            matchVisualizationSelectorRight.DataSource = Enum.GetValues(typeof(TemplateMatchingType));
+            matchVisualizationSelectorRight.SelectedItem = TemplateMatchingType.CcoeffNormed;
+
             updatePreprocessingStepsListView();
+            updateDepthprocessingStepsListView();
         }
-        
+
+
 
         private void updateImageView(SupportedBuffers buffer)
         {
@@ -234,7 +247,6 @@ namespace DepthCalc.UI
         {
 
         }
-
 
     }
 }

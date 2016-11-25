@@ -79,13 +79,14 @@ namespace DepthCalc.UI
         {
             BackgroundWorker bw = createBackgroudWorker(depthCalc.ui_run_allQueues);
             bw.RunWorkerCompleted += ProcessingCompleted;
-            preprocessedDataViewMenuItem.Enabled = true;
-            preprocessedReferenceViewMenuItem.Enabled = true;
+            bw.RunWorkerAsync();
         }
 
         private void ProcessingCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            preprocessedDataViewMenuItem.Enabled = true;
+            preprocessedReferenceViewMenuItem.Enabled = true;
+            updateImageView(SupportedBuffers.visalisedDispartiy);
         }
     }
 }

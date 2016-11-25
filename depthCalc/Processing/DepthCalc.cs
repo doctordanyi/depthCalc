@@ -173,6 +173,16 @@ namespace DepthCalc.Processing
             return preprocessingQueue.stepsToStringList();
         }
 
+        public List<String> ui_state_getDepthprocessorSteps()
+        {
+            return depthprocessingQueue.stepsToStringList();
+        }
+
+        public List<String> ui_state_getPostprocessorSteps()
+        {
+            return postprocessingQueue.stepsToStringList();
+        }
+
         public int ui_conf_setMatchMethod(TemplateMatchingType matchMethod)
         {
             return 0;
@@ -188,6 +198,18 @@ namespace DepthCalc.Processing
         {
             preprocessingQueue.clear();
             preprocessingQueue.addStep(new Preprocessing.Identity());
+            return 0;
+        }
+
+        public int ui_conf_addDepthprocessingStep(ProcessingStep newStep)
+        {
+            depthprocessingQueue.addStep(newStep);
+            return 0;
+        }
+
+        public int ui_conf_clearDepthprocessingSteps()
+        {
+            depthprocessingQueue.clear();
             return 0;
         }
 

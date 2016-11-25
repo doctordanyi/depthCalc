@@ -54,15 +54,15 @@ namespace DepthCalc.Processing.Postprocessing
 
         private Mat drawOutputImage()
         {
-            Image<Bgr, byte> outImage = new Image<Bgr, byte>(dataImage.Width, dataImage.Height);
-            Image<Bgr, byte> source = dataImage.ToImage<Bgr, byte>();
+            Image<Rgb, byte> outImage = new Image<Rgb, byte>(dataImage.Width, dataImage.Height);
+            Image<Gray, int> source = dataImage.ToImage<Gray, int>();
             
             UInt32 RGB;
             for (int x = 0; x < dataImage.Width; x++)
             {
                 for(int y = 0; y < dataImage.Height; y++)
                 {
-                    RGB = RGBFromValue(source.Data[y, x, 0],-40, 40);
+                    RGB = RGBFromValue(source.Data[y, x, 0],-50, 50);
                     outImage.Data[y, x, 0] = (Byte)RGB;
                     outImage.Data[y, x, 1] = (Byte)(RGB >> 8);
                     outImage.Data[y, x, 2] = (Byte)(RGB >> 16);
