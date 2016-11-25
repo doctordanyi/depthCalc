@@ -15,6 +15,7 @@ namespace DepthCalc.UI
     {
         // Container for user defined parameters
         private ParamContainer paramContainer;
+        SupportedBuffers currentDisplayBuffer;
 
         // Main processing block
         private Processing.DepthCalc depthCalc;
@@ -48,6 +49,7 @@ namespace DepthCalc.UI
         private void updateImageView(SupportedBuffers buffer)
         {
             dataImage.Image = depthCalc.ui_image_renderBuffer(dataImage.Size, buffer);
+            currentDisplayBuffer = buffer;
         }
 
 
@@ -135,25 +137,12 @@ namespace DepthCalc.UI
              */
         }
 
-        private void visualizeSelectedRegion(Point coordinates, Point sampleRegionLocation)
+        private void drawSelectedRegion(Point coordinates)
         {
-            int minCols, minRows;
-            minCols = (coordinates.X <= 55) ? 0 : coordinates.X - 55;
-            minCols = (minCols >= (displayBuffer.Cols - 110)) ? displayBuffer.Cols - 110 : minCols;
-            minRows = (coordinates.Y <= 25) ? 0 : coordinates.Y - 25;
-            minRows = (minRows >= (displayBuffer.Rows - 50)) ? displayBuffer.Rows - 50 : minRows;
-
-            Rectangle region = new Rectangle(4*(sampleRegionLocation.X - minCols), 4*(sampleRegionLocation.Y - minRows), 64, 8);
-            Rectangle window = new Rectangle(minCols, minRows, 110, 50);
-
-
-            using (Mat dataROI = new Mat(displayBuffer, window))
-            {
-                CvInvoke.Rectangle(dataROI, region, new MCvScalar(0,0,0), 3);
-                CvInvoke.Rectangle(dataROI, region, new MCvScalar(255, 255, 255), 3);
-
-                picture_selectedRegion.Image = dataROI.ToImage<Rgb, byte>().Resize(picture_selectedRegion.Width,picture_selectedRegion.Height, Inter.Nearest).ToBitmap();
-            }
+            double relativeX, relativeY;
+            relativeX = (double)coordinates.X / dataImage.Width;
+            relativeY = (double)coordinates.Y / dataImage.Height;
+            picture_selectedRegion.Image = depthCalc.ui_image_renderScaledBuffer(picture_selectedRegion.Size, relativeX, relativeY, currentDisplayBuffer, 4);
         }
 
         private void handle_dataImage_Click(object sender, EventArgs e)
@@ -161,86 +150,8 @@ namespace DepthCalc.UI
             MouseEventArgs me = (MouseEventArgs)e;
             Point coordinates = me.Location;
 
-            // coordinates.X = coordinates.X * (preprocData.Width / dataImage.Width);
-            // coordinates.Y = coordinates.Y * (preprocData.Height / dataImage.Height);
-
-            // show the match result of the clicked coordinates +/- 8 px
-            int minCols;
-            minCols = (coordinates.X <= 8) ? 0 : coordinates.X - 8;
-            minCols = (minCols >= (displayBuffer.Cols - 16)) ? displayBuffer.Cols - 16 : minCols;
-
-            Point sampleRegionLocation = new Point(minCols, coordinates.Y);
-            visualizeMatchResult(sampleRegionLocation);
-
-            visualizeSelectedRegion(coordinates, sampleRegionLocation);
-
-        }
-
-
-        private void handle_sQDIFFToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem item in matchMethodToolStripMenuItem.DropDownItems)
-            {
-                if(item != sender)
-                    item.Checked = false;
-            }
-
-            depthCalc.ui_conf_setMatchMethod(TemplateMatchingType.Sqdiff);
-        }
-
-        private void handle_normedSQDIFFToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem item in matchMethodToolStripMenuItem.DropDownItems)
-            {
-                if (item != sender)
-                    item.Checked = false;
-            }
-
-            depthCalc.ui_conf_setMatchMethod(TemplateMatchingType.SqdiffNormed);
-        }
-
-        private void handle_cCORRToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem item in matchMethodToolStripMenuItem.DropDownItems)
-            {
-                if (item != sender)
-                    item.Checked = false;
-            }
-
-            depthCalc.ui_conf_setMatchMethod(TemplateMatchingType.Ccorr);
-        }
-
-        private void handle_normedCCORRToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem item in matchMethodToolStripMenuItem.DropDownItems)
-            {
-                if (item != sender)
-                    item.Checked = false;
-            }
-
-            depthCalc.ui_conf_setMatchMethod(TemplateMatchingType.CcorrNormed);
-        }
-
-        private void handle_cCOEFFToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem item in matchMethodToolStripMenuItem.DropDownItems)
-            {
-                if (item != sender)
-                    item.Checked = false;
-            }
-
-            depthCalc.ui_conf_setMatchMethod(TemplateMatchingType.Ccoeff);
-        }
-
-        private void handle_normedCCOEFFToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem item in matchMethodToolStripMenuItem.DropDownItems)
-            {
-                if (item != sender)
-                    item.Checked = false;
-            }
-
-            depthCalc.ui_conf_setMatchMethod(TemplateMatchingType.CcoeffNormed);
+            drawSelectedRegion(coordinates);
+            // visualizeMatchResult(sampleRegionLocation);
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)

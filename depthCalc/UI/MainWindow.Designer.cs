@@ -29,8 +29,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
             this.dataImage = new System.Windows.Forms.PictureBox();
             this.openDataImageDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -55,13 +55,6 @@
             this.normalizePreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.clearPreprocMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.matchMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sQDIFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.normedSQDIFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cCORRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.normedCCORRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cCOEFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.normedCCOEFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.referenceViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rawReferenceViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -229,7 +222,6 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.preprocessingToolStripMenuItem,
-            this.matchMethodToolStripMenuItem,
             this.viewMenuItem,
             this.runMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -399,69 +391,6 @@
             this.clearPreprocMenuItem.Size = new System.Drawing.Size(145, 22);
             this.clearPreprocMenuItem.Text = "Clear";
             this.clearPreprocMenuItem.Click += new System.EventHandler(this.clearPreprocMenuItem_Click);
-            // 
-            // matchMethodToolStripMenuItem
-            // 
-            this.matchMethodToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sQDIFFToolStripMenuItem,
-            this.normedSQDIFFToolStripMenuItem,
-            this.cCORRToolStripMenuItem,
-            this.normedCCORRToolStripMenuItem,
-            this.cCOEFFToolStripMenuItem,
-            this.normedCCOEFFToolStripMenuItem});
-            this.matchMethodToolStripMenuItem.Name = "matchMethodToolStripMenuItem";
-            this.matchMethodToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
-            this.matchMethodToolStripMenuItem.Text = "Match Method";
-            // 
-            // sQDIFFToolStripMenuItem
-            // 
-            this.sQDIFFToolStripMenuItem.CheckOnClick = true;
-            this.sQDIFFToolStripMenuItem.Name = "sQDIFFToolStripMenuItem";
-            this.sQDIFFToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.sQDIFFToolStripMenuItem.Text = "SQDIFF";
-            this.sQDIFFToolStripMenuItem.Click += new System.EventHandler(this.handle_sQDIFFToolStripMenuItem_Click);
-            // 
-            // normedSQDIFFToolStripMenuItem
-            // 
-            this.normedSQDIFFToolStripMenuItem.CheckOnClick = true;
-            this.normedSQDIFFToolStripMenuItem.Name = "normedSQDIFFToolStripMenuItem";
-            this.normedSQDIFFToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.normedSQDIFFToolStripMenuItem.Text = "SQDIFF_NORMED";
-            this.normedSQDIFFToolStripMenuItem.Click += new System.EventHandler(this.handle_normedSQDIFFToolStripMenuItem_Click);
-            // 
-            // cCORRToolStripMenuItem
-            // 
-            this.cCORRToolStripMenuItem.CheckOnClick = true;
-            this.cCORRToolStripMenuItem.Name = "cCORRToolStripMenuItem";
-            this.cCORRToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.cCORRToolStripMenuItem.Text = "CCORR";
-            this.cCORRToolStripMenuItem.Click += new System.EventHandler(this.handle_cCORRToolStripMenuItem_Click);
-            // 
-            // normedCCORRToolStripMenuItem
-            // 
-            this.normedCCORRToolStripMenuItem.CheckOnClick = true;
-            this.normedCCORRToolStripMenuItem.Name = "normedCCORRToolStripMenuItem";
-            this.normedCCORRToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.normedCCORRToolStripMenuItem.Text = "CCORR_NORMED";
-            this.normedCCORRToolStripMenuItem.Click += new System.EventHandler(this.handle_normedCCORRToolStripMenuItem_Click);
-            // 
-            // cCOEFFToolStripMenuItem
-            // 
-            this.cCOEFFToolStripMenuItem.CheckOnClick = true;
-            this.cCOEFFToolStripMenuItem.Name = "cCOEFFToolStripMenuItem";
-            this.cCOEFFToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.cCOEFFToolStripMenuItem.Text = "CCOEFF";
-            this.cCOEFFToolStripMenuItem.Click += new System.EventHandler(this.handle_cCOEFFToolStripMenuItem_Click);
-            // 
-            // normedCCOEFFToolStripMenuItem
-            // 
-            this.normedCCOEFFToolStripMenuItem.Checked = true;
-            this.normedCCOEFFToolStripMenuItem.CheckOnClick = true;
-            this.normedCCOEFFToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.normedCCOEFFToolStripMenuItem.Name = "normedCCOEFFToolStripMenuItem";
-            this.normedCCOEFFToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.normedCCOEFFToolStripMenuItem.Text = "CCOEFF_NORMED";
-            this.normedCCOEFFToolStripMenuItem.Click += new System.EventHandler(this.handle_normedCCOEFFToolStripMenuItem_Click);
             // 
             // viewMenuItem
             // 
@@ -643,7 +572,7 @@
             this.depthprocListView.GridLines = true;
             this.depthprocListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.depthprocListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem3});
             this.depthprocListView.Location = new System.Drawing.Point(12, 496);
             this.depthprocListView.Name = "depthprocListView";
             this.depthprocListView.Size = new System.Drawing.Size(424, 59);
@@ -900,7 +829,7 @@
             this.preprocListView.FullRowSelect = true;
             this.preprocListView.GridLines = true;
             this.preprocListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem4});
             this.preprocListView.Location = new System.Drawing.Point(6, 119);
             this.preprocListView.Name = "preprocListView";
             this.preprocListView.Size = new System.Drawing.Size(424, 111);
@@ -1536,13 +1465,6 @@
         private System.Windows.Forms.ToolStripMenuItem scalePreprocMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gaussPreprocMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dogPreprocMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem matchMethodToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sQDIFFToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem normedSQDIFFToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cCORRToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem normedCCORRToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cCOEFFToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem normedCCOEFFToolStripMenuItem;
         private System.Windows.Forms.GroupBox group_selectedRegion;
         private System.Windows.Forms.PictureBox picture_selectedRegion;
         private System.Windows.Forms.SaveFileDialog saveResultImage;

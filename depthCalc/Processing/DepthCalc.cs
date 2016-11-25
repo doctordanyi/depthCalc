@@ -31,7 +31,6 @@ namespace DepthCalc.Processing
         private Mat postprocDisparity;
         private Mat visualDisparity;
 
-
         private BufferStates bufferStates;
         private SourceFilePaths sourceFilePaths;
 
@@ -52,6 +51,58 @@ namespace DepthCalc.Processing
             postprocessingQueue.addStep(new Postprocessing.VisualizeDisparity());
         }
         // Constructor end
+
+        // Private methods
+        private Mat getSelectedBuffer(SupportedBuffers buffer)
+        {
+            switch (buffer)
+            {
+                case SupportedBuffers.rawData:
+                    if (!bufferStates.rawDataReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    return rawData;
+                case SupportedBuffers.rawReference:
+                    if (!bufferStates.rawReferenceReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    return rawReference;
+                case SupportedBuffers.preprocessedData:
+                    if (!bufferStates.preprocDataReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    return preprocData;
+                case SupportedBuffers.preprocessedReference:
+                    if (!bufferStates.preprocReferenceReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    return preprocReference;
+                case SupportedBuffers.Disparity:
+                    if (!bufferStates.rawDisparityReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    return rawDisparity;
+                case SupportedBuffers.visalisedDispartiy:
+                    if (!bufferStates.visualDisparityReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    return visualDisparity;
+                case SupportedBuffers.postprocessedDisparity:
+                    if (!bufferStates.postprocDisparityReady)
+                    {
+                        throw new Exception("Buffer not available");
+                    }
+                    return postprocDisparity;
+                default:
+                    throw new Exception("Unsupported buffer type");
+            }
+        }
 
         // UI interface functions begin
 
@@ -97,70 +148,26 @@ namespace DepthCalc.Processing
         public System.Drawing.Bitmap ui_image_renderBuffer(System.Drawing.Size size, SupportedBuffers buffer)
         {
             Image<Rgb, Byte> renderedImage;
+            Mat selectedBuffer = getSelectedBuffer(buffer);
             double scale;
-            switch (buffer)
-            {
-                case SupportedBuffers.rawData:
-                    if (!bufferStates.rawDataReady)
-                    {
-                        throw new Exception("Buffer not available");
-                    }
-                    renderedImage = rawData.ToImage<Rgb, Byte>();
-                    scale = (double)size.Width / rawData.Width;
-                    break;
-                case SupportedBuffers.rawReference:
-                    if (!bufferStates.rawReferenceReady)
-                    {
-                        throw new Exception("Buffer not available");
-                    }
-                    renderedImage = rawReference.ToImage<Rgb, Byte>();
-                    scale = (double)size.Width / rawReference.Width;
-                    break;
-                case SupportedBuffers.preprocessedData:
-                    if (!bufferStates.preprocDataReady)
-                    {
-                        throw new Exception("Buffer not available");
-                    }
-                    renderedImage = preprocData.ToImage<Rgb, Byte>();
-                    scale = (double)size.Width / preprocData.Width;
-                    break;
-                case SupportedBuffers.preprocessedReference:
-                    if (!bufferStates.preprocReferenceReady)
-                    {
-                        throw new Exception("Buffer not available");
-                    }
-                    renderedImage = preprocReference.ToImage<Rgb, Byte>();
-                    scale = (double)size.Width / preprocReference.Width;
-                    break;
-                case SupportedBuffers.Disparity:
-                    if (!bufferStates.rawDisparityReady)
-                    {
-                        throw new Exception("Buffer not available");
-                    }
-                    renderedImage = rawDisparity.ToImage<Rgb, Byte>();
-                    scale = (double)size.Width / rawDisparity.Width;
-                    break;
-                case SupportedBuffers.visalisedDispartiy:
-                    if (!bufferStates.visualDisparityReady)
-                    {
-                        throw new Exception("Buffer not available");
-                    }
-                    renderedImage = visualDisparity.ToImage<Rgb, Byte>();
-                    scale = (double)size.Width / visualDisparity.Width;
-                    break;
-                case SupportedBuffers.postprocessedDisparity:
-                    if (!bufferStates.postprocDisparityReady)
-                    {
-                        throw new Exception("Buffer not available");
-                    }
-                    renderedImage = postprocDisparity.ToImage<Rgb, Byte>();
-                    scale = (double)size.Width / postprocDisparity.Width;
-                    break;
-                default:
-                    throw new Exception("Unsupported buffer type");
-            }
-
+            renderedImage = selectedBuffer.ToImage<Rgb, Byte>();
+            scale = (double)size.Width / selectedBuffer.Width;
             return renderedImage.Resize(scale, Inter.Linear).ToBitmap();
+        }
+
+        public System.Drawing.Bitmap ui_image_renderScaledBuffer(
+            System.Drawing.Size canvasSize,
+            double x, double y,
+            SupportedBuffers buffer,
+            double scale)
+        {
+            Image<Rgb, Byte> renderedImage;
+            Mat selectedBuffer = getSelectedBuffer(buffer);
+            WindowSelector windowSelector = new WindowSelector(selectedBuffer);
+            windowSelector.WindowArea = new System.Drawing.Rectangle(0, 0, (int)(canvasSize.Width / scale), (int)(canvasSize.Height / scale));
+            Mat selectedRegion = new Mat(selectedBuffer, windowSelector.getWindow((int)(selectedBuffer.Width*x), (int)(selectedBuffer.Height * y)));
+            renderedImage = selectedRegion.ToImage<Rgb, Byte>();
+            return renderedImage.Resize(scale, Inter.Nearest).ToBitmap();
         }
 
         public BufferStates ui_state_getBufferStates()
