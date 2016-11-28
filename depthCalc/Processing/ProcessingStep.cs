@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace DepthCalc.Processing
 {
-    abstract class ProcessingStep
+    abstract class ProcessingStep: IDisposable
     {
         public SupportedSteps stepType;
         protected Mat dataImage;
@@ -39,7 +39,7 @@ namespace DepthCalc.Processing
             }
         }
 
-        public int setDataImage(ref Mat inputImage)
+        public int setDataImage(Mat inputImage)
         {
             if (inputImage != null)
             {
@@ -49,7 +49,7 @@ namespace DepthCalc.Processing
             throw new Exception("Empty input image");
         }
 
-        public int setReferenceImage(ref Mat inputImage)
+        public int setReferenceImage(Mat inputImage)
         {
             // Can be null in case of single operand steps
             this.referenceImage = inputImage;
@@ -71,5 +71,15 @@ namespace DepthCalc.Processing
         }
 
         abstract public Mat doYourJob();
+
+        public void Dispose()
+        {
+            /*if (dataImage != null)
+                dataImage.Dispose();
+            if (referenceImage != null)
+                referenceImage.Dispose();
+            if (outBuffer != null)
+                outBuffer.Dispose();*/
+        }
     };
 }

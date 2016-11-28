@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using DepthCalc.Util;
 using System.ComponentModel;
 using System.Threading;
+using System.Drawing;
 
 namespace DepthCalc.Processing
 {
@@ -33,6 +34,7 @@ namespace DepthCalc.Processing
 
         private BufferStates bufferStates;
         private SourceFilePaths sourceFilePaths;
+        private DepthprocessingConfig depthprocessingConfig;
 
         // Constructor begin
         public DepthCalc()
@@ -40,13 +42,17 @@ namespace DepthCalc.Processing
             imageIO = new ImageIO();
             bufferStates = new BufferStates();
             sourceFilePaths = new SourceFilePaths();
+            depthprocessingConfig = new DepthprocessingConfig();
+            depthprocessingConfig.MatchMethod = TemplateMatchingType.CcoeffNormed;
+            depthprocessingConfig.SampleArea = new Rectangle(0, 0, 7, 7);
+            depthprocessingConfig.WindowArea = new Rectangle(0, 0, 100, 7);
 
             // Initialize processing queues
             preprocessingQueue = new ProcessingQueue();
             preprocessingQueue.addStep(new Preprocessing.Identity());
             preprocessingQueue.addStep(new Preprocessing.Normalize());
             depthprocessingQueue = new ProcessingQueue();
-            depthprocessingQueue.addStep(new Depthprocessing.ImageDisparity());
+            depthprocessingQueue.addStep(new Depthprocessing.ImageDisparity(depthprocessingConfig));
             postprocessingQueue = new ProcessingQueue();
             postprocessingQueue.addStep(new Postprocessing.VisualizeDisparity());
         }
@@ -145,7 +151,7 @@ namespace DepthCalc.Processing
             return 0;
         }
 
-        public System.Drawing.Bitmap ui_image_renderBuffer(System.Drawing.Size size, SupportedBuffers buffer)
+        public Bitmap ui_image_renderBuffer(Size size, SupportedBuffers buffer)
         {
             Image<Rgb, Byte> renderedImage;
             Mat selectedBuffer = getSelectedBuffer(buffer);
@@ -155,8 +161,8 @@ namespace DepthCalc.Processing
             return renderedImage.Resize(scale, Inter.Linear).ToBitmap();
         }
 
-        public System.Drawing.Bitmap ui_image_renderScaledBuffer(
-            System.Drawing.Size canvasSize,
+        public Bitmap ui_image_renderScaledBuffer(
+            Size canvasSize,
             double x, double y,
             SupportedBuffers buffer,
             double scale)
@@ -168,6 +174,42 @@ namespace DepthCalc.Processing
             Mat selectedRegion = new Mat(selectedBuffer, windowSelector.getWindow((int)(selectedBuffer.Width*x), (int)(selectedBuffer.Height * y)));
             renderedImage = selectedRegion.ToImage<Rgb, Byte>();
             return renderedImage.Resize(scale, Inter.Nearest).ToBitmap();
+        }
+
+        public List<Bitmap> ui_image_getVisualizedMatchResult(double x, double y, int width, Size canvasSize, TemplateMatchingType matchMethod)
+        {
+            if(!bufferStates.preprocDataReady || !bufferStates.preprocReferenceReady)
+            {
+                throw new Exception("Required buffer unavailable");
+            }
+            
+            List<Bitmap> matchMapList = new List<Bitmap>();
+            WindowSelector windowSelector = new WindowSelector(preprocData);
+            windowSelector.WindowArea = new Rectangle(0, 0, width, 1);
+            Rectangle ROI = windowSelector.getWindow((int)(x * preprocData.Width), (int)(y * preprocData.Height));
+            bool markMin = false;
+            if (matchMethod == TemplateMatchingType.Sqdiff || matchMethod == TemplateMatchingType.SqdiffNormed)
+            {
+                markMin = true;
+            }
+
+            using (Depthprocessing.ImageDisparity imageDisparity = new Depthprocessing.ImageDisparity(depthprocessingConfig))
+            using (Postprocessing.DrawMatchMap drawMatchMap = new Postprocessing.DrawMatchMap())
+            {
+                imageDisparity.setDataImage(preprocData);
+                imageDisparity.setReferenceImage(preprocReference);
+                imageDisparity.matchMethod = matchMethod;
+                drawMatchMap.CanvasSize = canvasSize;
+                Mat matchMap = new Mat();
+                for (int X = ROI.Left; X < ROI.Right; X++)
+                {
+                    matchMap = imageDisparity.blockMatch(X, ROI.Y);
+                    drawMatchMap.setDataImage(matchMap);
+                    matchMapList.Add(drawMatchMap.visualiseMatchMap(markMin).ToBitmap());
+                }
+
+            }
+            return matchMapList;
         }
 
         public BufferStates ui_state_getBufferStates()
@@ -190,9 +232,9 @@ namespace DepthCalc.Processing
             return postprocessingQueue.stepsToStringList();
         }
 
-        public int ui_conf_setMatchMethod(TemplateMatchingType matchMethod)
+        public DepthprocessingConfig ui_state_getDepthprocessingConfig()
         {
-            return 0;
+            return depthprocessingConfig;
         }
 
         public int ui_conf_addPreprocessingStep(ProcessingStep newStep)
@@ -217,6 +259,12 @@ namespace DepthCalc.Processing
         public int ui_conf_clearDepthprocessingSteps()
         {
             depthprocessingQueue.clear();
+            return 0;
+        }
+
+        public int ui_conf_setDepthprocessingConfig(DepthprocessingConfig config)
+        {
+            depthprocessingConfig = config;
             return 0;
         }
 

@@ -13,13 +13,13 @@ namespace DepthCalc.UI
     {
         private void addDepthprocStepButton_Click(object sender, EventArgs e)
         {
-            Util.DepthprocessingConfig config = new Util.DepthprocessingConfig();
             TemplateMatchingType matchMethod;
             Enum.TryParse<TemplateMatchingType>(matchMethodSelector.SelectedValue.ToString(), out matchMethod);
             config.MatchMethod = matchMethod;
             config.SampleArea = new Rectangle(0, 0, (int)sampleWidthUpDown.Value, (int)sampleHeightUpDown.Value);
             config.WindowArea = new Rectangle(0, 0, (int)windowWidthUpDown.Value, (int)windowHeightUpDown.Value);
             depthCalc.ui_conf_addDepthprocessingStep(new Processing.Depthprocessing.ImageDisparity(config));
+            depthCalc.ui_conf_setDepthprocessingConfig(config);
             updateDepthprocessingStepsListView();
         }
 

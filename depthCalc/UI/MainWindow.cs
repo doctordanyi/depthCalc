@@ -16,6 +16,10 @@ namespace DepthCalc.UI
         // Container for user defined parameters
         private ParamContainer paramContainer;
         SupportedBuffers currentDisplayBuffer;
+        private double onClickZoomScale = 4;
+        TemplateMatchingType visualizedMatchResultTypeLeft;
+        TemplateMatchingType visualizedMatchResultTypeRight;
+        DepthprocessingConfig config = new Util.DepthprocessingConfig();
 
         // Main processing block
         private Processing.DepthCalc depthCalc;
@@ -37,8 +41,10 @@ namespace DepthCalc.UI
 
             matchVisualizationSelectorLeft.DataSource = Enum.GetValues(typeof(TemplateMatchingType));
             matchVisualizationSelectorLeft.SelectedItem = TemplateMatchingType.Sqdiff;
+            visualizedMatchResultTypeLeft = TemplateMatchingType.Sqdiff;
             matchVisualizationSelectorRight.DataSource = Enum.GetValues(typeof(TemplateMatchingType));
             matchVisualizationSelectorRight.SelectedItem = TemplateMatchingType.CcoeffNormed;
+            visualizedMatchResultTypeRight = TemplateMatchingType.CcoeffNormed;
 
             updatePreprocessingStepsListView();
             updateDepthprocessingStepsListView();
@@ -55,86 +61,23 @@ namespace DepthCalc.UI
 
         private void visualizeMatchResult(Point coordinates)
         {
- /*           TemplateMatchingType matchMethod = depthProcessor.matchMethod;
-
-            // SQDIFF
-            int x = coordinates.X, y = coordinates.Y;
-            depthProcessor.matchMethod = TemplateMatchingType.Sqdiff;
-            foreach (PictureBox res in group_matchResult_SQDIFF.Controls)
+            double x, y;
+            x = (double)coordinates.X / dataImage.Width;
+            y = (double)coordinates.Y / dataImage.Height;
+            List<Bitmap> matchMapsLeft  = depthCalc.ui_image_getVisualizedMatchResult(x, y, 16, pictureBox1.Size, visualizedMatchResultTypeLeft);
+            List<Bitmap> matchMapsRight = depthCalc.ui_image_getVisualizedMatchResult(x, y, 16, pictureBox1.Size, visualizedMatchResultTypeRight);
+            int i = 0;
+            foreach (PictureBox item in panel1.Controls)
             {
-                using (Mat matchResul = depthProcessor.blockMatch(x, y))
-                {
-                    List<MaxElement> maxLocs = depthProcessor.getStrongMaximums(matchResul);
-                    res.Image = visualiser.visualiseMatchMap(matchResul, maxLocs, true).ToBitmap();
-                }
-                x++;
+                item.Image = matchMapsLeft[i];
+                i++;
             }
-            // Normed SQDIFF
-            x = coordinates.X;
-            y = coordinates.Y;
-            depthProcessor.matchMethod = TemplateMatchingType.SqdiffNormed;
-            foreach (PictureBox res in group_matchResult_NormedSQDIFF.Controls)
+            i = 0;
+            foreach (PictureBox item in panel2.Controls)
             {
-                using (Mat matchResul = depthProcessor.blockMatch(x, y))
-                {
-                    List<MaxElement> maxLocs = depthProcessor.getStrongMaximums(matchResul);
-                    res.Image = visualiser.visualiseMatchMap(matchResul, maxLocs, true).ToBitmap();
-                }
-                x++;
+                item.Image = matchMapsRight[i];
+                i++;
             }
-            // Normed CCORR
-            x = coordinates.X;
-            y = coordinates.Y;
-            depthProcessor.matchMethod = TemplateMatchingType.CcorrNormed;
-            foreach (PictureBox res in group_matchResult_NormedCCORR.Controls)
-            {
-                using (Mat matchResul = depthProcessor.blockMatch(x, y))
-                {
-                    List<MaxElement> maxLocs = depthProcessor.getStrongMaximums(matchResul);
-                    res.Image = visualiser.visualiseMatchMap(matchResul, maxLocs, false).ToBitmap();
-                }
-                x++;
-            }
-            // CCOEFF
-            x = coordinates.X;
-            y = coordinates.Y;
-            depthProcessor.matchMethod = TemplateMatchingType.Ccoeff;
-            foreach (PictureBox res in group_matchResult_CCOEFF.Controls)
-            {
-                using (Mat matchResul = depthProcessor.blockMatch(x, y))
-                {
-                    List<MaxElement> maxLocs = depthProcessor.getStrongMaximums(matchResul);
-                    res.Image = visualiser.visualiseMatchMap(matchResul, maxLocs, false).ToBitmap();
-                }
-                x++;
-            }
-            // Normed CCOEFF
-            x = coordinates.X;
-            y = coordinates.Y;
-            depthProcessor.matchMethod = TemplateMatchingType.CcoeffNormed;
-            int[] disp = depthProcessor.improveMatchQuality(y, x);
-            Mat asd = new Mat();
-            foreach (PictureBox res in group_matchResult_NormedCCOEFF.Controls)
-            {
-                using (Mat matchResul = depthProcessor.blockMatch(x, y))
-                {
-                    List<MaxElement> maxLocs = depthProcessor.getStrongMaximums(matchResul);
-                    maxLocs.Add(new MaxElement(disp[x-coordinates.X], 0));
-                    res.Image = visualiser.visualiseMatchMap(matchResul, maxLocs, false).ToBitmap();
-                }
-                x++;
-            }
-
-            for (x = 0; x < (preprocData.Width - 7); x++)
-            {
-               using (Mat matchResult = depthProcessor.blockMatch(x, y))
-                 {
-                     asd.PushBack(matchResult);
-                 }
-             }
-             depthProcessor.matchMethod = matchMethod;
-             asd.ToImage<Gray, float>().ToBitmap().Save("asd.png");
-             */
         }
 
         private void drawSelectedRegion(Point coordinates)
@@ -142,7 +85,11 @@ namespace DepthCalc.UI
             double relativeX, relativeY;
             relativeX = (double)coordinates.X / dataImage.Width;
             relativeY = (double)coordinates.Y / dataImage.Height;
-            picture_selectedRegion.Image = depthCalc.ui_image_renderScaledBuffer(picture_selectedRegion.Size, relativeX, relativeY, currentDisplayBuffer, 4);
+            picture_selectedRegion.Image = depthCalc.ui_image_renderScaledBuffer(
+                picture_selectedRegion.Size, 
+                relativeX, relativeY, 
+                currentDisplayBuffer, 
+                onClickZoomScale);
         }
 
         private void handle_dataImage_Click(object sender, EventArgs e)
@@ -151,7 +98,7 @@ namespace DepthCalc.UI
             Point coordinates = me.Location;
 
             drawSelectedRegion(coordinates);
-            // visualizeMatchResult(sampleRegionLocation);
+            visualizeMatchResult(coordinates);
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -159,5 +106,13 @@ namespace DepthCalc.UI
 
         }
 
+        private void matchVisualizationSelectorLeft_SelectedIndexChanged(object sender, EventArgs e) {
+            Enum.TryParse<TemplateMatchingType>(matchVisualizationSelectorLeft.SelectedValue.ToString(), out visualizedMatchResultTypeLeft);
+        }
+
+        private void matchVisualizationSelectorRight_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Enum.TryParse<TemplateMatchingType>(matchVisualizationSelectorRight.SelectedValue.ToString(), out visualizedMatchResultTypeRight);
+        }
     }
 }

@@ -10,7 +10,7 @@ using DepthCalc.Util;
 
 namespace DepthCalc.Processing.Depthprocessing
 {
-    class ImageDisparity: ProcessingStep 
+    class ImageDisparity: ProcessingStep, IDisposable
     {
         private MatchResultContainer matchResultContainer;
 

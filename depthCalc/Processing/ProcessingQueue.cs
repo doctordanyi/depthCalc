@@ -52,7 +52,7 @@ namespace DepthCalc.Processing
             {
                 step.Bw = bw;
                 bw.ReportProgress(0, step.stepType.ToString());
-                step.setDataImage(ref temp);
+                step.setDataImage(temp);
                 temp = step.doYourJob();
             }
             temp.CopyTo(outputImage);
@@ -65,8 +65,8 @@ namespace DepthCalc.Processing
             {
                 step.Bw = bw;
                 bw.ReportProgress(0, step.stepType.ToString());
-                step.setDataImage(ref dataImage);
-                step.setReferenceImage(ref referenceImage);
+                step.setDataImage(dataImage);
+                step.setReferenceImage(referenceImage);
                 step.setOutBuffer(temp);
                 temp = step.doYourJob();
             }
