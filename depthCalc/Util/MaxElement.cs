@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DepthCalc.Util
 {
-    class MaxElement
+    class MaxElement: IComparable
     {
         public int location;
         public int disparity;
@@ -26,6 +26,12 @@ namespace DepthCalc.Util
             if (a.value < b.value)
                 return 1;
             return 0;
+        }
+
+        public int CompareTo(object obj)
+        {
+            MaxElement b = obj as MaxElement;
+            return -value.CompareTo(b.value);
         }
     }
 }

@@ -10,6 +10,7 @@ using DepthCalc.Util;
 using System.ComponentModel;
 using System.Threading;
 using System.Drawing;
+using Emgu.CV.Util;
 
 namespace DepthCalc.Processing
 {
@@ -52,7 +53,8 @@ namespace DepthCalc.Processing
             preprocessingQueue.addStep(new Preprocessing.Identity());
             preprocessingQueue.addStep(new Preprocessing.Normalize());
             depthprocessingQueue = new ProcessingQueue();
-            depthprocessingQueue.addStep(new Depthprocessing.ImageDisparity(depthprocessingConfig));
+            // depthprocessingQueue.addStep(new Depthprocessing.ImageDisparity(depthprocessingConfig));
+            depthprocessingQueue.addStep(new Depthprocessing.MaximaFind(depthprocessingConfig));
             postprocessingQueue = new ProcessingQueue();
             postprocessingQueue.addStep(new Postprocessing.VisualizeDisparity());
         }
@@ -193,7 +195,7 @@ namespace DepthCalc.Processing
                 markMin = true;
             }
 
-            using (Depthprocessing.ImageDisparity imageDisparity = new Depthprocessing.ImageDisparity(depthprocessingConfig))
+            using (Depthprocessing.MaximaFind imageDisparity = new Depthprocessing.MaximaFind(depthprocessingConfig))
             using (Postprocessing.DrawMatchMap drawMatchMap = new Postprocessing.DrawMatchMap())
             {
                 imageDisparity.setDataImage(preprocData);
@@ -201,11 +203,13 @@ namespace DepthCalc.Processing
                 imageDisparity.matchMethod = matchMethod;
                 drawMatchMap.CanvasSize = canvasSize;
                 Mat matchMap = new Mat();
+                int[] peaks;
                 for (int X = ROI.Left; X < ROI.Right; X++)
                 {
                     matchMap = imageDisparity.blockMatch(X, ROI.Y);
+                    peaks = imageDisparity.getDominantPeaks(matchMap);
                     drawMatchMap.setDataImage(matchMap);
-                    matchMapList.Add(drawMatchMap.visualiseMatchMap(markMin).ToBitmap());
+                    matchMapList.Add(drawMatchMap.visualiseMatchMap(peaks, markMin).ToBitmap());
                 }
 
             }

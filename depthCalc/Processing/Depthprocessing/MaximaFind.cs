@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Emgu.CV;
@@ -63,9 +62,54 @@ namespace DepthCalc.Processing.Depthprocessing
             return maxima;
         }
 
-        public VectorOfPoint getPeaks(Mat matchMat)
+        private MaxElement[] findDominantPeaks(Mat _src)
         {
-            return findPeaks(matchMat, new Size(5, 1));
+            VectorOfPoint allPeaks = findPeaks(_src, new Size(5, 1));
+            MaxElement[] peaks = new MaxElement[allPeaks.Size];
+            float[] matchValues = new float[_src.Width];
+            _src.CopyTo(matchValues);
+
+            for (int i = 0; i < allPeaks.Size; i++)
+            {
+                peaks[i] = new MaxElement(allPeaks[i].X, matchValues[allPeaks[i].X]);
+            }
+            Array.Sort(peaks);
+
+            if (peaks.Length > maxCount)
+            {
+                Array.Resize(ref peaks, maxCount);
+            }
+            else if (peaks.Length < maxCount)
+            {
+                Array.Resize(ref peaks, maxCount);
+                for (int i = allPeaks.Size; i < maxCount; i++)
+                {
+                    peaks[i] = new MaxElement(peaks[0].location, peaks[0].value);
+                }
+            }
+            return peaks;
+        }
+
+        public int[] getPeaks(Mat matchMat)
+        {
+            VectorOfPoint peaks = findPeaks(matchMat, new Size(5, 1));
+            int[] intPeaks = new int[peaks.Size];
+            for (int i = 0; i < intPeaks.Length; i++)
+            {
+                intPeaks[i] = peaks[i].X;
+            }
+            return intPeaks;
+        }
+
+        public int[] getDominantPeaks(Mat matchMat)
+        {
+            MaxElement[] peaks = findDominantPeaks(matchMat);
+            int[] intPeaks = new int[peaks.Length];
+            for (int i = 0; i < intPeaks.Length; i++)
+            {
+                intPeaks[i] = peaks[i].location;
+            }
+            return intPeaks;
         }
 
         public Mat blockMatch(int x,int y)
@@ -89,13 +133,22 @@ namespace DepthCalc.Processing.Depthprocessing
         {
             outBuffer = new Mat(dataImage.Size, DepthType.Cv32S, maxCount);
             int[] result = new int[dataImage.Width * dataImage.Height * maxCount];
-            for (int y = 0; y < dataImage.Height; y++)
+            int[] peaks;
+            WindowSelector windowSelector = new WindowSelector(dataImage);
+            windowSelector.WindowArea = windowArea;
+            for (int y = 0; y < (dataImage.Height - sampleArea.Height); y++)
             {
-                for (int x = 0; x < dataImage.Width; x++)
+                for (int x = 0; x < (dataImage.Width - sampleArea.Width); x++)
                 {
+                    Rectangle window = windowSelector.getWindow(x, y);
                     using (Mat matchResult = blockMatch(x, y))
                     {
-                        findPeaks(matchResult, new Size(5, 1));
+                        peaks = getDominantPeaks(matchResult);
+                        for (int i = 0; i < maxCount; i++)
+                        {
+                            peaks[i] = peaks[i] - (x - window.Left);
+                        }
+                        peaks.CopyTo(result, (y * dataImage.Width + x) * maxCount);
                     }
                 }
             }
