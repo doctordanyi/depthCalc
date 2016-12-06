@@ -94,63 +94,6 @@ namespace DepthCalc.Processing.Depthprocessing
             return disparities;
         }
 
-        public List<MaxElement> getStrongMaximums(Mat matchResult, int count = 0) {
-            List<MaxElement> maxLocs = new List<MaxElement>();
-
-            using (Mat binary = new Mat())
-            {
-                matchResult.CopyTo(binary);
-                Point[] minLoc = new Point[1];
-                Point[] maxLocc = new Point[1];
-                double[] minValue = new double[1];
-                double[] maxValuee = new double[1];
-
-                matchResult.MinMax(out minValue, out maxValuee, out minLoc, out maxLocc);
-
-                CvInvoke.Threshold(matchResult, binary, 0.7 * maxValuee[0], 1, ThresholdType.ToZero);
-                float[] binaryData = new float[binary.Width];
-
-                binary.CopyTo(binaryData);
-                float maxValue = 0;
-                int maxLoc = 0;
-                bool inReagion = false;
-                for (int i = 0; i < binary.Width; i++)
-                {
-                    if (inReagion)
-                    {
-                        if (binaryData[i] > 0)
-                        {
-                            if (binaryData[i] > maxValue)
-                            {
-                                maxValue = binaryData[i];
-                                binaryData[maxLoc] = 0;
-                                maxLoc = i;
-                            }
-                            else
-                            {
-                                binaryData[i] = 0;
-                            }
-                        }
-                        else
-                        {
-                            inReagion = false;
-                            maxLocs.Add(new MaxElement(maxLoc, maxValue));
-                        }
-                    }
-                    else if (binaryData[i] > 0)
-                    {
-                        maxLoc = i;
-                        maxValue = binaryData[i];
-                        inReagion = true;
-                    }
-                }
-                if (maxLocs.Count == 0)
-                    maxLocs.Add(new MaxElement(maxLoc, maxValue));
-            }
-
-            maxLocs.Sort(MaxElement.sortByValue);
-            return maxLocs;
-        }
 
         private Mat calculateDisparity()
         {

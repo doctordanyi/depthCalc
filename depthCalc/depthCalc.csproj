@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Processing\DepthCalc.cs" />
     <Compile Include="Processing\Depthprocessing\ImageDisparity.cs" />
+    <Compile Include="Processing\Depthprocessing\MaximaFind.cs" />
     <Compile Include="Processing\Postprocessing\DrawMatchMap.cs" />
     <Compile Include="Processing\Postprocessing\VisualizeDisparity.cs" />
     <Compile Include="Processing\Preprocessing\Identity.cs" />

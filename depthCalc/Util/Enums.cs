@@ -19,7 +19,8 @@
         DifferenceOfGaussians,
         Normalize,
         ImageDisparity,
-        VisualizeDisparity
+        VisualizeDisparity,
+        FindFirstKMax
     }
 
     public enum WindowPinType
