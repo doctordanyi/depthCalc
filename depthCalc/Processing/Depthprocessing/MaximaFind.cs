@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Emgu.CV;
+using Emgu.CV.Util;
 using Emgu.CV.CvEnum;
 using System.Drawing;
 using DepthCalc.Util;
@@ -29,7 +30,7 @@ namespace DepthCalc.Processing.Depthprocessing
             windowArea = config.WindowArea;
         }
 
-        void nonMaximaSuppression(Mat src, ref Mat mask, bool remove_plateaus)
+        private void nonMaximaSuppression(Mat src, ref Mat mask, bool remove_plateaus)
         {
             // find pixels that are equal to the local neighborhood not maximum (including 'plateaus')
             Mat element = CvInvoke.GetStructuringElement(ElementShape.Rectangle, new Size(3, 1), new Point(-1, -1));
@@ -45,6 +46,27 @@ namespace DepthCalc.Processing.Depthprocessing
             }
         }
 
+        private VectorOfPoint findPeaks(Mat _src, Size ksize, float scale = 0.2f, bool remove_plateus = true)
+        {
+            // find the min and max values of the hist image
+            double minVal = 0, maxVal = 0;
+            Point minLoc = new Point(), maxLoc = new Point();
+            CvInvoke.MinMaxLoc(_src, ref minVal, ref maxVal, ref minLoc, ref maxLoc);
+
+            Mat mask = new Mat();
+            CvInvoke.GaussianBlur(_src, _src, ksize, 0);
+            nonMaximaSuppression(_src, ref mask, remove_plateus);
+
+            VectorOfPoint maxima = new VectorOfPoint();   // output, locations of non-zero pixels
+            CvInvoke.FindNonZero(mask, maxima);
+
+            return maxima;
+        }
+
+        public VectorOfPoint getPeaks(Mat matchMat)
+        {
+            return findPeaks(matchMat, new Size(5, 1));
+        }
 
         public Mat blockMatch(int x,int y)
         {
@@ -66,17 +88,18 @@ namespace DepthCalc.Processing.Depthprocessing
         public override Mat doYourJob()
         {
             outBuffer = new Mat(dataImage.Size, DepthType.Cv32S, maxCount);
+            int[] result = new int[dataImage.Width * dataImage.Height * maxCount];
             for (int y = 0; y < dataImage.Height; y++)
             {
                 for (int x = 0; x < dataImage.Width; x++)
                 {
                     using (Mat matchResult = blockMatch(x, y))
                     {
-                        Mat mask = new Mat();
-                        nonMaximaSuppression(matchResult, ref mask, true);
+                        findPeaks(matchResult, new Size(5, 1));
                     }
                 }
             }
+            outBuffer.SetTo<int>(result);
             return outBuffer;
         }
     }
