@@ -12,10 +12,7 @@ namespace DepthCalc.Processing.Depthprocessing
 {
     class ImageDisparity: ProcessingStep, IDisposable
     {
-        private MatchResultContainer matchResultContainer;
-
         public TemplateMatchingType matchMethod;
-
         private Rectangle sampleArea;
         private Rectangle windowArea;
         private const UInt16 linearMatchRange = 16;
@@ -55,45 +52,6 @@ namespace DepthCalc.Processing.Depthprocessing
             }
             return matchResult;
         }
-
-        public int[] improveMatchQuality(int y, int x, Util.MatchResultContainer.BlockPinType blockPinType = Util.MatchResultContainer.BlockPinType.PinToLeftEdge)
-        {
-            int[] disparities = new int[matchResultContainer.BlockWidth];
-            int blockBase = matchResultContainer.getBlockBaseIndex(x, blockPinType);
-            for (int i = 0; i < matchResultContainer.BlockWidth; i++)
-                disparities[i] = matchResultContainer[y, blockBase + i][0].disparity;
-            double avg = disparities.Average();
-
-            double[] error = new double[matchResultContainer.BlockWidth];
-            for (int i = 0; i < matchResultContainer.BlockWidth; i++)
-                error[i] = (disparities[i]-avg) * (disparities[i]-avg);
-
-            for(int iterations = 3; iterations > 0; iterations--)
-            {
-                double maxError = error.Max();
-                double avgError = error.Average();
-                for (int i = 0; i < matchResultContainer.BlockWidth; i++)
-                {
-                    if( (maxError > avgError*2) && (error[i] == maxError))
-                    {
-                        foreach (MaxElement item in matchResultContainer[y, blockBase+i])
-                        {
-                            if( ((item.disparity-avg) * (item.disparity-avg)) < error[i])
-                            {
-                                error[i] = ((item.disparity - avg) * (item.disparity - avg));
-                                disparities[i] = item.disparity;
-                                avg = disparities.Average();
-                            }
-                        }
-                    }
-                }
-                for (int j = 0; j < matchResultContainer.BlockWidth; j++)
-                    error[j] = (disparities[j] - avg) * (disparities[j] - avg);
-            }
-
-            return disparities;
-        }
-
 
         private Mat calculateDisparity()
         {

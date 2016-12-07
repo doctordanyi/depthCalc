@@ -16,7 +16,6 @@ namespace DepthCalc.Processing.Depthprocessing
 
         private Rectangle sampleArea;
         private Rectangle windowArea;
-        private const UInt16 linearMatchRange = 16;
         private const int threads = 8;
         private int maxCount = 5;
 
