@@ -20,7 +20,8 @@
         Normalize,
         ImageDisparity,
         VisualizeDisparity,
-        FindFirstKMax
+        FindFirstKMax,
+        Ransac
     }
 
     public enum WindowPinType
