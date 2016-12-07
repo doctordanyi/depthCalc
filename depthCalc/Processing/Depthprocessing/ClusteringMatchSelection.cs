@@ -12,7 +12,7 @@ namespace DepthCalc.Processing.Depthprocessing
     {
         //Lets try RANSAC
         private Rectangle windowArea;
-        private const int ransacIterations = 10;
+        private const int ransacIterations = 100;
 
         public ClusteringMatchSelection()
         {
@@ -27,6 +27,71 @@ namespace DepthCalc.Processing.Depthprocessing
             public int edgePosition;
         }
 
+        int[] chooseInliersBasedOnModel(Model model, Mat roi)
+        {
+            int[] data = new int[roi.Cols * roi.Rows * roi.NumberOfChannels]; // for accessible data
+            roi.CopyTo(data);
+            int[] inliers = new int[roi.Width];
+            for (int i = 0; i < model.edgePosition; i++)
+            {
+                int err = Math.Abs(model.beginDisparity - data[i * roi.NumberOfChannels]);
+                for (int j = 1; j < roi.NumberOfChannels; j++)
+                {
+                    int newErr = Math.Abs(model.beginDisparity - data[i * roi.NumberOfChannels + j]);
+                    inliers[i] = data[i * roi.NumberOfChannels];
+                    if(newErr < err)
+                    {
+                        err = newErr;
+                        inliers[i] = data[i * roi.NumberOfChannels + j];
+                    }
+                }
+            }
+            for (int i = model.edgePosition; i < roi.Width; i++)
+            {
+                int err = Math.Abs(model.endDisparity - data[i * roi.NumberOfChannels]);
+                for (int j = 1; j < roi.NumberOfChannels; j++)
+                {
+                    int newErr = Math.Abs(model.endDisparity - data[i * roi.NumberOfChannels + j]);
+                    inliers[i] = data[i * roi.NumberOfChannels];
+                    if(newErr < err)
+                    {
+                        err = newErr;
+                        inliers[i] = data[i * roi.NumberOfChannels + j];
+                    }
+                }
+            }
+            return inliers;
+        }
+
+        int getModelError(Model model, int[] inliers)
+        {
+            int error = 0;
+            for (int i = 0; i < model.edgePosition; i++)
+            {
+                error += Math.Abs(model.beginDisparity - inliers[i]);
+            }
+            for (int i = model.edgePosition; i < inliers.Length; i++)
+            {
+                error += Math.Abs(model.endDisparity - inliers[i]);
+            }
+            return error;
+        }
+
+        bool fitModelToInliers(int[] inliers, out Model model)
+        {
+            Model betterModel = new Model();
+            int[] dInliers = new int[inliers.Length]; // derivative
+            for (int i = 0; i < (inliers.Length - 1); i++)
+            {
+                dInliers[i] = inliers[i] - inliers[i + 1];
+            }
+            dInliers[inliers.Length - 1] = 0;
+
+            model = betterModel;
+            return true;
+        }
+
+
         int[] selectMostLikelyMatch(Mat matchWindow)
         {
             // Resources
@@ -35,17 +100,21 @@ namespace DepthCalc.Processing.Depthprocessing
             matchWindow.CopyTo(data);
 
             // RANSAC variables
-            Model bestModel, maybeModel = new Model();
-            double bestError = double.MaxValue;
-            // indeces
+            Model bestModel = new Model(), maybeModel = new Model();
+            bestModel.beginDisparity = data[0];
+            bestModel.edgePosition = matchWindow.Width / 2;
+            bestModel.endDisparity = data[(matchWindow.Width - 1) * matchWindow.NumberOfChannels];
+            int[] bestInliers = chooseInliersBasedOnModel(bestModel, matchWindow);
+            int bestError = getModelError(bestModel, bestInliers);
+            // indices
             int i_edge, i_bCol, i_eCol, i_bChoice, i_eChoice;
             // RANSAC iteration
             for (int i = 0; i < ransacIterations; i++)
             {
                 // Generate random paramters
                 i_edge = rndGen.Next(3, matchWindow.Width - 2);
-                i_bCol = rndGen.Next(0, maybeModel.edgePosition);
-                i_eCol = rndGen.Next(maybeModel.edgePosition, matchWindow.Width);
+                i_bCol = rndGen.Next(0, i_edge);
+                i_eCol = rndGen.Next(i_edge, matchWindow.Width);
                 i_bChoice = rndGen.Next(matchWindow.NumberOfChannels);
                 i_eChoice = rndGen.Next(matchWindow.NumberOfChannels);
 
@@ -53,9 +122,21 @@ namespace DepthCalc.Processing.Depthprocessing
                 maybeModel.edgePosition = i_edge;
                 maybeModel.beginDisparity = data[i_bCol * matchWindow.NumberOfChannels + i_bChoice];
                 maybeModel.endDisparity = data[i_eCol * matchWindow.NumberOfChannels + i_eChoice];
+
+                // Get inliers  &error of the model
+                int[] inliers = chooseInliersBasedOnModel(maybeModel, matchWindow);
+                int error = getModelError(maybeModel, inliers);
+                fitModelToInliers(inliers);
+
+                if (error < bestError)
+                {
+                    bestError = error;
+                    bestInliers = inliers;
+                    bestModel = maybeModel;
+                }
             }
 
-            return new int[3];
+            return bestInliers;
         }
         
         // bestfit = nul
