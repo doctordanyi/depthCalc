@@ -132,25 +132,38 @@ namespace DepthCalc.Processing.Depthprocessing
         {
             outBuffer = new Mat(dataImage.Size, DepthType.Cv32S, maxCount);
             int[] result = new int[dataImage.Width * dataImage.Height * maxCount];
-            int[] peaks;
-            WindowSelector windowSelector = new WindowSelector(dataImage);
-            windowSelector.WindowArea = windowArea;
-            for (int y = 0; y < (dataImage.Height - sampleArea.Height); y++)
-            {
-                for (int x = 0; x < (dataImage.Width - sampleArea.Width); x++)
-                {
-                    Rectangle window = windowSelector.getWindow(x, y);
-                    using (Mat matchResult = blockMatch(x, y))
-                    {
-                        peaks = getDominantPeaks(matchResult);
-                        for (int i = 0; i < maxCount; i++)
-                        {
-                            peaks[i] = peaks[i] - (x - window.Left);
-                        }
-                        peaks.CopyTo(result, (y * dataImage.Width + x) * maxCount);
-                    }
-                }
-            }
+            Parallel.For(0, threads, submat =>
+              {
+                  int startRow = submat * (dataImage.Rows / threads);
+                  int endRow;
+                  if ((submat + 1) * (dataImage.Rows / threads) > (dataImage.Rows - sampleArea.Height))
+                  {
+                      endRow = dataImage.Rows - sampleArea.Height;
+                  }
+                  else
+                  {
+                      endRow = (submat + 1) * (dataImage.Rows / threads);
+                  }
+                  int[] peaks;
+                  WindowSelector windowSelector = new WindowSelector(dataImage);
+                  windowSelector.WindowArea = windowArea;
+                  for (int y = startRow; y < endRow; y++)
+                  {
+                      for (int x = 0; x < (dataImage.Width - sampleArea.Width); x++)
+                      {
+                          Rectangle window = windowSelector.getWindow(x, y);
+                          using (Mat matchResult = blockMatch(x, y))
+                          {
+                              peaks = getDominantPeaks(matchResult);
+                              for (int i = 0; i < maxCount; i++)
+                              {
+                                  peaks[i] = peaks[i] - (x - window.Left);
+                              }
+                              peaks.CopyTo(result, (y * dataImage.Width + x) * maxCount);
+                          }
+                      }
+                  }
+              });
             outBuffer.SetTo<int>(result);
             return outBuffer;
         }
