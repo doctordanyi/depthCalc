@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Emgu.CV;
 using System.Drawing;
 using DepthCalc.Util;
+using Emgu.CV.Structure;
 
 namespace DepthCalc.Processing.Depthprocessing
 {
@@ -20,75 +21,194 @@ namespace DepthCalc.Processing.Depthprocessing
             windowArea = new Rectangle(0, 0, 16, 1);
         }
 
+        // 2 parameter model
+        // 2 constant disparity values
         private class Model
         {
-            public int beginDisparity;
-            public int endDisparity;
-            public int edgePosition;
+            double disparityBegin;
+            double disparityEnd;
+            bool isOneParModel = false;
+
+            public Model()
+            {
+                disparityBegin = 0;
+                disparityEnd = 0;
+            }
+
+            public Model(double disparityBegin, double disparityEnd)
+            {
+                this.disparityBegin = disparityBegin;
+                this.disparityEnd = disparityEnd;
+                if (Math.Abs(disparityEnd - disparityEnd) < 1)
+                    isOneParModel = true;
+            }
+
+            public Model(int[] inliers)
+            {
+                // Try fitting with one parameter
+                double avg = 0;
+                double oneParError = 0; 
+                isOneParModel = true;
+                for (int i = 0; i < inliers.Length; i++)
+                {
+                    avg += inliers[i];
+                }
+                avg /= inliers.Length;
+                disparityBegin = avg;
+                oneParError = getModelError(inliers);
+                // Try fitting with 2 parameters, but only if neccessary
+                if (oneParError > 1)
+                {
+                    double twoParError = 0;
+                    int edgeIndex = getDominantEdgePosition(inliers);
+                    double avgDisp1 = 0, avgDisp2 = 0;
+                    for (int i = 0; i < edgeIndex; i++)
+                    {
+                        avgDisp1 += inliers[i];
+                    }
+                    for (int i = edgeIndex; i < inliers.Length; i++)
+                    {
+                        avgDisp2 += inliers[i];
+                    }
+                    avgDisp1 /= edgeIndex;
+                    avgDisp2 /= inliers.Length - edgeIndex;
+                    isOneParModel = false;
+                    disparityBegin = avgDisp1;
+                    disparityEnd = avgDisp2;
+                    twoParError = getModelError(inliers);
+                    // Check which model fits better
+                    if (oneParError < twoParError)
+                    {
+                        isOneParModel = true;
+                        disparityBegin = avg;
+                    }
+                }
+            }
+
+            public double DisparityBegin
+            {
+                get
+                {
+                    return disparityBegin;
+                }
+
+                set
+                {
+                    disparityBegin = value;
+                }
+            }
+
+            public double DisparityEnd
+            {
+                get
+                {
+                    return disparityEnd;
+                }
+
+                set
+                {
+                    disparityEnd = value;
+                }
+            }
+
+            public bool IsOneParModel
+            {
+                get
+                {
+                    return isOneParModel;
+                }
+            }
+
+            public static int getDominantEdgePosition(int[] inliers)
+            {
+                int max = 0, maxIndex = 0, act = 0;
+                for (int i = 1; i < inliers.Length; i++)
+                {
+                    act = Math.Abs(inliers[i] - inliers[i - 1]);
+                    if (act > max)
+                    {
+                        max = act;
+                        maxIndex = i;
+                    }
+                }
+                return maxIndex;
+            }
+
+            public double getModelError(int[] inliers)
+            {
+                double error = 0;
+                if (isOneParModel)
+                {
+                    for (int i = 0; i < inliers.Length; i++)
+                    {
+                        error += Math.Abs(disparityBegin - inliers[i]);
+                    }
+                }
+                else
+                {
+                    int edgePosition = getDominantEdgePosition(inliers);
+                    for (int i = 0; i < edgePosition; i++)
+                    {
+                        error += Math.Abs(disparityBegin - inliers[i]);
+                    }
+                    for (int i = edgePosition; i < inliers.Length; i++)
+                    {
+                        error += Math.Abs(disparityEnd - inliers[i]);
+                    }
+                }
+                error /= inliers.Length;
+                return error;
+            }
         }
 
         int[] chooseInliersBasedOnModel(Model model, Mat roi)
         {
             int[] data = new int[roi.Cols * roi.Rows * roi.NumberOfChannels]; // for accessible data
             roi.CopyTo(data);
+
             int[] inliers = new int[roi.Width];
-            for (int i = 0; i < model.edgePosition; i++)
+            // Search for inliears to the first model parameter
+            for (int i = 0; i < roi.Width; i++)
             {
-                int err = Math.Abs(model.beginDisparity - data[i * roi.NumberOfChannels]);
+                double err = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels]);
                 for (int j = 1; j < roi.NumberOfChannels; j++)
                 {
-                    int newErr = Math.Abs(model.beginDisparity - data[i * roi.NumberOfChannels + j]);
+                    double newErr = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels + j]);
                     inliers[i] = data[i * roi.NumberOfChannels];
-                    if(newErr < err)
+                    if (newErr < err)
                     {
                         err = newErr;
                         inliers[i] = data[i * roi.NumberOfChannels + j];
                     }
                 }
             }
-            for (int i = model.edgePosition; i < roi.Width; i++)
+            if(!model.IsOneParModel)
             {
-                int err = Math.Abs(model.endDisparity - data[i * roi.NumberOfChannels]);
-                for (int j = 1; j < roi.NumberOfChannels; j++)
+                int[] inliers2 = new int[roi.Width];
+                for (int i = 0; i < roi.Width; i++)
                 {
-                    int newErr = Math.Abs(model.endDisparity - data[i * roi.NumberOfChannels + j]);
+                    double errBegin = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels]);
+                    double errEnd = Math.Abs(model.DisparityEnd - data[i * roi.NumberOfChannels]);
                     inliers[i] = data[i * roi.NumberOfChannels];
-                    if(newErr < err)
+                    inliers2[i] = data[i * roi.NumberOfChannels];
+                    for (int j = 1; j < roi.NumberOfChannels; j++)
                     {
-                        err = newErr;
-                        inliers[i] = data[i * roi.NumberOfChannels + j];
+                        double newErrBegin = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels + j]);
+                        double newErrEnd = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels + j]);
+                        if (newErrBegin < errBegin)
+                        {
+                            errBegin = newErrBegin;
+                            inliers[i] = data[i * roi.NumberOfChannels + j];
+                        }
+                        if (newErrEnd < errEnd)
+                        {
+                            errEnd = newErrEnd;
+                            inliers2[i] = data[i * roi.NumberOfChannels + j];
+                        }
                     }
                 }
             }
             return inliers;
-        }
-
-        int getModelError(Model model, int[] inliers)
-        {
-            int error = 0;
-            for (int i = 0; i < model.edgePosition; i++)
-            {
-                error += Math.Abs(model.beginDisparity - inliers[i]);
-            }
-            for (int i = model.edgePosition; i < inliers.Length; i++)
-            {
-                error += Math.Abs(model.endDisparity - inliers[i]);
-            }
-            return error;
-        }
-
-        bool fitModelToInliers(int[] inliers, out Model model)
-        {
-            Model betterModel = new Model();
-            int[] dInliers = new int[inliers.Length]; // derivative
-            for (int i = 0; i < (inliers.Length - 1); i++)
-            {
-                dInliers[i] = inliers[i] - inliers[i + 1];
-            }
-            dInliers[inliers.Length - 1] = 0;
-
-            model = betterModel;
-            return true;
         }
 
 
@@ -99,13 +219,19 @@ namespace DepthCalc.Processing.Depthprocessing
             int[] data = new int[matchWindow.Cols * matchWindow.Rows * matchWindow.NumberOfChannels]; // for accessible data
             matchWindow.CopyTo(data);
 
+            int[] bestInliers = new int[matchWindow.Width];
+            Mat bestMatch = new Mat();
+            CvInvoke.ExtractChannel(matchWindow, bestMatch, 0);
+            bestMatch.CopyTo(bestInliers);
+
             // RANSAC variables
-            Model bestModel = new Model(), maybeModel = new Model();
-            bestModel.beginDisparity = data[0];
-            bestModel.edgePosition = matchWindow.Width / 2;
-            bestModel.endDisparity = data[(matchWindow.Width - 1) * matchWindow.NumberOfChannels];
-            int[] bestInliers = chooseInliersBasedOnModel(bestModel, matchWindow);
-            int bestError = getModelError(bestModel, bestInliers);
+            Model bestModel = new Model(bestInliers);
+            Model maybeModel = new Model();
+            Model betterModel;
+
+            chooseInliersBasedOnModel(bestModel, matchWindow);
+
+            double bestError = bestModel.getModelError(bestInliers);
             // indices
             int i_edge, i_bCol, i_eCol, i_bChoice, i_eChoice;
             // RANSAC iteration
@@ -119,21 +245,21 @@ namespace DepthCalc.Processing.Depthprocessing
                 i_eChoice = rndGen.Next(matchWindow.NumberOfChannels);
 
                 // Populate model
-                maybeModel.edgePosition = i_edge;
-                maybeModel.beginDisparity = data[i_bCol * matchWindow.NumberOfChannels + i_bChoice];
-                maybeModel.endDisparity = data[i_eCol * matchWindow.NumberOfChannels + i_eChoice];
+                // maybeModel.edgePosition = i_edge;
+                // maybeModel.disparityBegin = data[i_bCol * matchWindow.NumberOfChannels + i_bChoice];
+                // maybeModel.disparityEnd = data[i_eCol * matchWindow.NumberOfChannels + i_eChoice];
 
                 // Get inliers  &error of the model
-                int[] inliers = chooseInliersBasedOnModel(maybeModel, matchWindow);
-                int error = getModelError(maybeModel, inliers);
-                fitModelToInliers(inliers);
+                // int[] inliers = chooseInliersBasedOnModel(maybeModel, matchWindow);
+                // int error = getModelError(maybeModel, inliers);
+                // fitModelToInliers(inliers, out betterModel);
 
-                if (error < bestError)
-                {
-                    bestError = error;
-                    bestInliers = inliers;
-                    bestModel = maybeModel;
-                }
+                // if (error < bestError)
+                // {
+                    // bestError = error;
+                    // bestInliers = inliers;
+                    // bestModel = maybeModel;
+                // }
             }
 
             return bestInliers;
@@ -168,7 +294,7 @@ namespace DepthCalc.Processing.Depthprocessing
             outBuffer.CopyTo(dataImage);
             WindowSelector windowSelector = new WindowSelector(dataImage);
             windowSelector.WindowArea = windowArea;
-            Mat roi = new Mat(dataImage, windowSelector.getWindow(500, 500));
+            Mat roi = new Mat(dataImage, windowSelector.getWindow(300, 500));
             while (true)
             {
                 selectMostLikelyMatch(roi);
