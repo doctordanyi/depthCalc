@@ -9,13 +9,14 @@ using Emgu.CV.Structure;
 
 namespace DepthCalc.Processing.Depthprocessing
 {
-    class ClusteringMatchSelection : ProcessingStep
+    class RansacMatchSelection : ProcessingStep
     {
         //Lets try RANSAC
         private Rectangle windowArea;
-        private const int ransacIterations = 100;
+        private const int ransacIterations = 1000;
+        private const int threads = 8;
 
-        public ClusteringMatchSelection()
+        public RansacMatchSelection()
         {
             stepType = SupportedSteps.Ransac;
             windowArea = new Rectangle(0, 0, 16, 1);
@@ -171,10 +172,10 @@ namespace DepthCalc.Processing.Depthprocessing
             for (int i = 0; i < roi.Width; i++)
             {
                 double err = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels]);
+                inliers[i] = data[i * roi.NumberOfChannels];
                 for (int j = 1; j < roi.NumberOfChannels; j++)
                 {
                     double newErr = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels + j]);
-                    inliers[i] = data[i * roi.NumberOfChannels];
                     if (newErr < err)
                     {
                         err = newErr;
@@ -184,54 +185,106 @@ namespace DepthCalc.Processing.Depthprocessing
             }
             if(!model.IsOneParModel)
             {
-                int[] inliers2 = new int[roi.Width];
+                int[] inliersEnd = new int[roi.Width];
+                // Search for inliears to the second model parameter
                 for (int i = 0; i < roi.Width; i++)
                 {
-                    double errBegin = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels]);
-                    double errEnd = Math.Abs(model.DisparityEnd - data[i * roi.NumberOfChannels]);
-                    inliers[i] = data[i * roi.NumberOfChannels];
-                    inliers2[i] = data[i * roi.NumberOfChannels];
+                    double err = Math.Abs(model.DisparityEnd - data[i * roi.NumberOfChannels]);
+                    inliersEnd[i] = data[i * roi.NumberOfChannels];
                     for (int j = 1; j < roi.NumberOfChannels; j++)
                     {
-                        double newErrBegin = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels + j]);
-                        double newErrEnd = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels + j]);
-                        if (newErrBegin < errBegin)
+                        double newErr = Math.Abs(model.DisparityEnd - data[i * roi.NumberOfChannels + j]);
+                        if (newErr < err)
                         {
-                            errBegin = newErrBegin;
-                            inliers[i] = data[i * roi.NumberOfChannels + j];
-                        }
-                        if (newErrEnd < errEnd)
-                        {
-                            errEnd = newErrEnd;
-                            inliers2[i] = data[i * roi.NumberOfChannels + j];
+                            err = newErr;
+                            inliersEnd[i] = data[i * roi.NumberOfChannels + j];
                         }
                     }
+                }
+                // Try to find the optimal cut
+                double cutError = double.MaxValue;
+                double actError = 0;
+                for (int i = 1; i < roi.Width; i++)
+                {
+                    actError = model.getModelError(inliers);
+                    if (cutError < actError)
+                    {
+                        break;
+                    }
+                    cutError = actError;
+                    inliers[roi.Width - i] = inliersEnd[roi.Width - i];
                 }
             }
             return inliers;
         }
 
+        List<int> getInliersOfModel(Model model, Mat roi)
+        {
+            int[] data = new int[roi.Cols * roi.Rows * roi.NumberOfChannels]; // for accessible data
+            roi.CopyTo(data);
+
+            List<int> inliers = new List<int>();
+            // Search for inliears to the first model parameter
+            for (int i = 0; i < roi.Width; i++)
+            {
+                double err = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels]);
+                int j_max = 0;
+                for (int j = 1; j < roi.NumberOfChannels; j++)
+                {
+                    double newErr = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels + j]);
+                    if (newErr < err)
+                    {
+                        err = newErr;
+                        j_max = j;
+                    }
+                }
+                if (err < 4)
+                    inliers.Add(data[i * roi.NumberOfChannels + j_max]);
+            }
+            if (!model.IsOneParModel)
+            {
+                for (int i = 0; i < roi.Width; i++)
+                {
+                    double err = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels]);
+                    int j_max = 0;
+                    for (int j = 1; j < roi.NumberOfChannels; j++)
+                    {
+                        double newErr = Math.Abs(model.DisparityBegin - data[i * roi.NumberOfChannels + j]);
+                        if (newErr < err)
+                        {
+                            err = newErr;
+                            j_max = j;
+                        }
+                    }
+                    if (err < 4)
+                        inliers.Add(data[i * roi.NumberOfChannels + j_max]);
+                }
+            }
+            return inliers;
+        }
 
         int[] selectMostLikelyMatch(Mat matchWindow)
         {
-            // Resources
-            Random rndGen = new Random(); // for random selection
-            int[] data = new int[matchWindow.Cols * matchWindow.Rows * matchWindow.NumberOfChannels]; // for accessible data
-            matchWindow.CopyTo(data);
-
+            // Check how good the first maximums match
             int[] bestInliers = new int[matchWindow.Width];
             Mat bestMatch = new Mat();
             CvInvoke.ExtractChannel(matchWindow, bestMatch, 0);
             bestMatch.CopyTo(bestInliers);
 
-            // RANSAC variables
             Model bestModel = new Model(bestInliers);
-            Model maybeModel = new Model();
-            Model betterModel;
-
-            chooseInliersBasedOnModel(bestModel, matchWindow);
-
             double bestError = bestModel.getModelError(bestInliers);
+
+            // If the error is low, no need for RANSAC
+            if (bestError < 1)
+                return bestInliers;
+
+            // Resources
+            Random rndGen = new Random(); // for random selection
+            int[] data = new int[matchWindow.Cols * matchWindow.Rows * matchWindow.NumberOfChannels]; // for accessible data
+            matchWindow.CopyTo(data);
+
+            // RANSAC variables
+
             // indices
             int i_edge, i_bCol, i_eCol, i_bChoice, i_eChoice;
             // RANSAC iteration
@@ -245,26 +298,27 @@ namespace DepthCalc.Processing.Depthprocessing
                 i_eChoice = rndGen.Next(matchWindow.NumberOfChannels);
 
                 // Populate model
-                // maybeModel.edgePosition = i_edge;
-                // maybeModel.disparityBegin = data[i_bCol * matchWindow.NumberOfChannels + i_bChoice];
-                // maybeModel.disparityEnd = data[i_eCol * matchWindow.NumberOfChannels + i_eChoice];
+                int begintDisp = data[i_bCol * matchWindow.NumberOfChannels + i_bChoice];
+                int endDisp = data[i_eCol * matchWindow.NumberOfChannels + i_eChoice];
+                Model maybeModel = new Model(begintDisp, endDisp);
 
-                // Get inliers  &error of the model
-                // int[] inliers = chooseInliersBasedOnModel(maybeModel, matchWindow);
-                // int error = getModelError(maybeModel, inliers);
-                // fitModelToInliers(inliers, out betterModel);
-
-                // if (error < bestError)
-                // {
-                    // bestError = error;
-                    // bestInliers = inliers;
-                    // bestModel = maybeModel;
-                // }
+                List<int> alsoInliers = getInliersOfModel(maybeModel, matchWindow);
+                if(alsoInliers.Count > 14)
+                {
+                    Model betterModel = new Model(alsoInliers.ToArray());
+                    double thisError = betterModel.getModelError(alsoInliers.ToArray());
+                    if (thisError < bestError)
+                    {
+                        bestModel = betterModel;
+                        bestError = thisError;
+                    }
+                }
             }
 
+            bestInliers = chooseInliersBasedOnModel(bestModel, matchWindow);
             return bestInliers;
         }
-        
+
         // bestfit = nul
         // besterr = something really large
         // while iterations<k {
@@ -291,15 +345,41 @@ namespace DepthCalc.Processing.Depthprocessing
 
         public override Mat doYourJob()
         {
+            dataImage = new Mat();
+            referenceImage = new Mat();
             outBuffer.CopyTo(dataImage);
-            WindowSelector windowSelector = new WindowSelector(dataImage);
-            windowSelector.WindowArea = windowArea;
-            Mat roi = new Mat(dataImage, windowSelector.getWindow(300, 500));
-            while (true)
-            {
-                selectMostLikelyMatch(roi);
-            }
-            return new Mat();
+            outBuffer = new Mat(dataImage.Size, Emgu.CV.CvEnum.DepthType.Cv32S, 1);
+            int[] result = new int[dataImage.Width * dataImage.Height];
+            Parallel.For(0, threads, submat =>
+              {
+                  int startRow = submat * (dataImage.Rows / threads);
+                  int endRow;
+                  if ((submat + 1) * (dataImage.Rows / threads) > dataImage.Rows)
+                  {
+                      endRow = dataImage.Rows;
+                  }
+                  else
+                  {
+                      endRow = (submat + 1) * (dataImage.Rows / threads);
+                  }
+                  WindowSelector windowSelector = new WindowSelector(dataImage);
+                  windowSelector.WindowArea = windowArea;
+                  int[] selectedMax;
+                  for (int y = startRow; y < endRow; y++)
+                  {
+                      for (int x = 0; x < dataImage.Width; x++)
+                      {
+                          Rectangle window = windowSelector.getWindow(x, y);
+                          using (Mat matchWindow = new Mat(dataImage, window))
+                          {
+                              selectedMax = selectMostLikelyMatch(matchWindow);
+                              selectedMax.CopyTo(result, (y * dataImage.Width + window.X));
+                          }
+                      }
+                  }
+              });
+            outBuffer.SetTo<int>(result);
+            return outBuffer;
         }
     }
 }

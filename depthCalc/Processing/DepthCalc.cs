@@ -55,6 +55,7 @@ namespace DepthCalc.Processing
             depthprocessingQueue = new ProcessingQueue();
             // depthprocessingQueue.addStep(new Depthprocessing.ImageDisparity(depthprocessingConfig));
             depthprocessingQueue.addStep(new Depthprocessing.MaximaFind(depthprocessingConfig));
+            depthprocessingQueue.addStep(new Depthprocessing.RansacMatchSelection());
             postprocessingQueue = new ProcessingQueue();
             postprocessingQueue.addStep(new Postprocessing.VisualizeDisparity());
         }
@@ -211,7 +212,6 @@ namespace DepthCalc.Processing
                     drawMatchMap.setDataImage(matchMap);
                     matchMapList.Add(drawMatchMap.visualiseMatchMap(peaks, markMin).ToBitmap());
                 }
-
             }
             return matchMapList;
         }
