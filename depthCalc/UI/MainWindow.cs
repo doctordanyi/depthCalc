@@ -64,8 +64,8 @@ namespace DepthCalc.UI
             double x, y;
             x = (double)coordinates.X / dataImage.Width;
             y = (double)coordinates.Y / dataImage.Height;
-            List<Bitmap> matchMapsLeft  = depthCalc.ui_image_getVisualizedMatchResult(x, y, 16, pictureBox1.Size, visualizedMatchResultTypeLeft);
-            List<Bitmap> matchMapsRight = depthCalc.ui_image_getVisualizedMatchResult(x, y, 16, pictureBox1.Size, visualizedMatchResultTypeRight);
+            List<Bitmap> matchMapsLeft  = depthCalc.ui_image_getVisualizedMatchResult(x, y, 16, matchVisaulised15.Size, visualizedMatchResultTypeLeft);
+            List<Bitmap> matchMapsRight = depthCalc.ui_image_getVisualizedMatchResult(x, y, 16, matchVisaulised15.Size, visualizedMatchResultTypeRight);
             int i = 0;
             foreach (PictureBox item in panel1.Controls)
             {

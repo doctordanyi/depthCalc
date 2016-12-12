@@ -53,9 +53,9 @@ namespace DepthCalc.Processing
             preprocessingQueue.addStep(new Preprocessing.Identity());
             preprocessingQueue.addStep(new Preprocessing.Normalize());
             depthprocessingQueue = new ProcessingQueue();
-            // depthprocessingQueue.addStep(new Depthprocessing.ImageDisparity(depthprocessingConfig));
-            depthprocessingQueue.addStep(new Depthprocessing.MaximaFind(depthprocessingConfig));
-            depthprocessingQueue.addStep(new Depthprocessing.RansacMatchSelection());
+            depthprocessingQueue.addStep(new Depthprocessing.ImageDisparity(depthprocessingConfig));
+            // depthprocessingQueue.addStep(new Depthprocessing.CumulateClustering(depthprocessingConfig));
+            // depthprocessingQueue.addStep(new Depthprocessing.RansacMatchSelection());
             postprocessingQueue = new ProcessingQueue();
             postprocessingQueue.addStep(new Postprocessing.VisualizeDisparity());
         }
@@ -197,21 +197,28 @@ namespace DepthCalc.Processing
             }
 
             using (Depthprocessing.MaximaFind imageDisparity = new Depthprocessing.MaximaFind(depthprocessingConfig))
+            using (Depthprocessing.CumulateClustering cumulative = new Depthprocessing.CumulateClustering(depthprocessingConfig))
             using (Postprocessing.DrawMatchMap drawMatchMap = new Postprocessing.DrawMatchMap())
             {
                 imageDisparity.setDataImage(preprocData);
                 imageDisparity.setReferenceImage(preprocReference);
+                cumulative.setDataImage(preprocData);
+                cumulative.setReferenceImage(preprocReference);
                 imageDisparity.matchMethod = matchMethod;
                 drawMatchMap.CanvasSize = canvasSize;
                 Mat matchMap = new Mat();
                 int[] peaks;
-                for (int X = ROI.Left; X < ROI.Right; X++)
+                for (int X = ROI.Left; X < (ROI.Right - 1); X++)
                 {
                     matchMap = imageDisparity.blockMatch(X, ROI.Y);
                     peaks = imageDisparity.getDominantPeaks(matchMap);
                     drawMatchMap.setDataImage(matchMap);
                     matchMapList.Add(drawMatchMap.visualiseMatchMap(peaks, markMin).ToBitmap());
                 }
+                    matchMap = cumulative.getCumulativeMatch(ROI);
+                    peaks = imageDisparity.getDominantPeaks(matchMap);
+                    drawMatchMap.setDataImage(matchMap);
+                    matchMapList.Add(drawMatchMap.visualiseMatchMap(peaks, markMin).Flip(FlipType.Vertical).ToBitmap());
             }
             return matchMapList;
         }

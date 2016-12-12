@@ -111,40 +111,40 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox22 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox15 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox14 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised0 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised1 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised2 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised3 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised4 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised5 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised6 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised7 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised8 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised9 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised10 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised11 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised12 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised13 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised14 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised15 = new System.Windows.Forms.PictureBox();
             this.matchVisualizationSelectorLeft = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox16 = new System.Windows.Forms.PictureBox();
-            this.pictureBox17 = new System.Windows.Forms.PictureBox();
-            this.pictureBox18 = new System.Windows.Forms.PictureBox();
-            this.pictureBox19 = new System.Windows.Forms.PictureBox();
-            this.pictureBox20 = new System.Windows.Forms.PictureBox();
-            this.pictureBox21 = new System.Windows.Forms.PictureBox();
-            this.pictureBox23 = new System.Windows.Forms.PictureBox();
-            this.pictureBox24 = new System.Windows.Forms.PictureBox();
-            this.pictureBox25 = new System.Windows.Forms.PictureBox();
-            this.pictureBox26 = new System.Windows.Forms.PictureBox();
-            this.pictureBox27 = new System.Windows.Forms.PictureBox();
-            this.pictureBox28 = new System.Windows.Forms.PictureBox();
-            this.pictureBox29 = new System.Windows.Forms.PictureBox();
-            this.pictureBox30 = new System.Windows.Forms.PictureBox();
-            this.pictureBox31 = new System.Windows.Forms.PictureBox();
-            this.pictureBox32 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised16 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised17 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised18 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised19 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised20 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised21 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised22 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised23 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised24 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised25 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised26 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised27 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised28 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised29 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised30 = new System.Windows.Forms.PictureBox();
+            this.matchVisaulised31 = new System.Windows.Forms.PictureBox();
             this.matchVisualizationSelectorRight = new System.Windows.Forms.ComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.procProgressBar = new System.Windows.Forms.ToolStripProgressBar();
@@ -168,39 +168,39 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised15)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox23)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox25)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox29)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox30)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox31)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox32)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised19)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised21)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised22)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised23)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised24)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised25)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised26)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised27)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised28)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised29)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised30)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised31)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -553,7 +553,6 @@
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
-            this.tabPage1.Controls.Add(this.depthprocListView);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.groupBox2);
@@ -577,7 +576,7 @@
             this.depthprocListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.depthprocListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
-            this.depthprocListView.Location = new System.Drawing.Point(12, 496);
+            this.depthprocListView.Location = new System.Drawing.Point(6, 128);
             this.depthprocListView.Name = "depthprocListView";
             this.depthprocListView.Size = new System.Drawing.Size(441, 59);
             this.depthprocListView.TabIndex = 3;
@@ -593,7 +592,7 @@
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Location = new System.Drawing.Point(6, 599);
+            this.groupBox4.Location = new System.Drawing.Point(6, 513);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(453, 175);
             this.groupBox4.TabIndex = 3;
@@ -604,6 +603,7 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.depthprocListView);
             this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Controls.Add(this.addDepthprocStepButton);
             this.groupBox3.Controls.Add(this.clearDepthprocQueueButton);
@@ -622,7 +622,7 @@
             this.groupBox3.Controls.Add(this.sampleHeightUpDown);
             this.groupBox3.Controls.Add(this.sampleWidthUpDown);
             this.groupBox3.Controls.Add(this.matchMethodSelector);
-            this.groupBox3.Location = new System.Drawing.Point(6, 368);
+            this.groupBox3.Location = new System.Drawing.Point(6, 282);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(453, 225);
             this.groupBox3.TabIndex = 2;
@@ -801,14 +801,14 @@
             this.groupBox2.Controls.Add(this.preprocListView);
             this.groupBox2.Location = new System.Drawing.Point(6, 95);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(453, 267);
+            this.groupBox2.Size = new System.Drawing.Size(453, 181);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Preprocessing";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(6, 236);
+            this.button3.Location = new System.Drawing.Point(9, 149);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(57, 25);
             this.button3.TabIndex = 2;
@@ -818,7 +818,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 103);
+            this.label3.Location = new System.Drawing.Point(6, 16);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 13);
             this.label3.TabIndex = 1;
@@ -834,7 +834,7 @@
             this.preprocListView.GridLines = true;
             this.preprocListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem2});
-            this.preprocListView.Location = new System.Drawing.Point(6, 119);
+            this.preprocListView.Location = new System.Drawing.Point(0, 32);
             this.preprocListView.Name = "preprocListView";
             this.preprocListView.Size = new System.Drawing.Size(424, 111);
             this.preprocListView.TabIndex = 0;
@@ -960,202 +960,202 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.pictureBox7);
-            this.panel1.Controls.Add(this.pictureBox2);
-            this.panel1.Controls.Add(this.pictureBox22);
-            this.panel1.Controls.Add(this.pictureBox3);
-            this.panel1.Controls.Add(this.pictureBox15);
-            this.panel1.Controls.Add(this.pictureBox4);
-            this.panel1.Controls.Add(this.pictureBox14);
-            this.panel1.Controls.Add(this.pictureBox5);
-            this.panel1.Controls.Add(this.pictureBox13);
-            this.panel1.Controls.Add(this.pictureBox6);
-            this.panel1.Controls.Add(this.pictureBox12);
-            this.panel1.Controls.Add(this.pictureBox11);
-            this.panel1.Controls.Add(this.pictureBox8);
-            this.panel1.Controls.Add(this.pictureBox10);
-            this.panel1.Controls.Add(this.pictureBox9);
+            this.panel1.Controls.Add(this.matchVisaulised0);
+            this.panel1.Controls.Add(this.matchVisaulised1);
+            this.panel1.Controls.Add(this.matchVisaulised2);
+            this.panel1.Controls.Add(this.matchVisaulised3);
+            this.panel1.Controls.Add(this.matchVisaulised4);
+            this.panel1.Controls.Add(this.matchVisaulised5);
+            this.panel1.Controls.Add(this.matchVisaulised6);
+            this.panel1.Controls.Add(this.matchVisaulised7);
+            this.panel1.Controls.Add(this.matchVisaulised8);
+            this.panel1.Controls.Add(this.matchVisaulised9);
+            this.panel1.Controls.Add(this.matchVisaulised10);
+            this.panel1.Controls.Add(this.matchVisaulised11);
+            this.panel1.Controls.Add(this.matchVisaulised12);
+            this.panel1.Controls.Add(this.matchVisaulised13);
+            this.panel1.Controls.Add(this.matchVisaulised14);
+            this.panel1.Controls.Add(this.matchVisaulised15);
             this.panel1.Location = new System.Drawing.Point(3, 30);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(224, 730);
             this.panel1.TabIndex = 20;
             // 
-            // pictureBox1
+            // matchVisaulised0
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised0.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 690);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox1.TabIndex = 66;
-            this.pictureBox1.TabStop = false;
+            this.matchVisaulised0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised0.Location = new System.Drawing.Point(0, 3);
+            this.matchVisaulised0.Name = "matchVisaulised0";
+            this.matchVisaulised0.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised0.TabIndex = 51;
+            this.matchVisaulised0.TabStop = false;
             // 
-            // pictureBox7
+            // matchVisaulised1
             // 
-            this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox7.Location = new System.Drawing.Point(0, 92);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox7.TabIndex = 53;
-            this.pictureBox7.TabStop = false;
+            this.matchVisaulised1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised1.Location = new System.Drawing.Point(0, 49);
+            this.matchVisaulised1.Name = "matchVisaulised1";
+            this.matchVisaulised1.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised1.TabIndex = 52;
+            this.matchVisaulised1.TabStop = false;
             // 
-            // pictureBox2
+            // matchVisaulised2
             // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 644);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox2.TabIndex = 65;
-            this.pictureBox2.TabStop = false;
+            this.matchVisaulised2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised2.Location = new System.Drawing.Point(0, 95);
+            this.matchVisaulised2.Name = "matchVisaulised2";
+            this.matchVisaulised2.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised2.TabIndex = 53;
+            this.matchVisaulised2.TabStop = false;
             // 
-            // pictureBox22
+            // matchVisaulised3
             // 
-            this.pictureBox22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox22.Location = new System.Drawing.Point(0, 322);
-            this.pictureBox22.Name = "pictureBox22";
-            this.pictureBox22.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox22.TabIndex = 58;
-            this.pictureBox22.TabStop = false;
+            this.matchVisaulised3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised3.Location = new System.Drawing.Point(0, 141);
+            this.matchVisaulised3.Name = "matchVisaulised3";
+            this.matchVisaulised3.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised3.TabIndex = 54;
+            this.matchVisaulised3.TabStop = false;
             // 
-            // pictureBox3
+            // matchVisaulised4
             // 
-            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox3.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox3.TabIndex = 51;
-            this.pictureBox3.TabStop = false;
+            this.matchVisaulised4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised4.Location = new System.Drawing.Point(0, 187);
+            this.matchVisaulised4.Name = "matchVisaulised4";
+            this.matchVisaulised4.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised4.TabIndex = 55;
+            this.matchVisaulised4.TabStop = false;
             // 
-            // pictureBox15
+            // matchVisaulised5
             // 
-            this.pictureBox15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox15.Location = new System.Drawing.Point(0, 276);
-            this.pictureBox15.Name = "pictureBox15";
-            this.pictureBox15.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox15.TabIndex = 57;
-            this.pictureBox15.TabStop = false;
+            this.matchVisaulised5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised5.Location = new System.Drawing.Point(0, 230);
+            this.matchVisaulised5.Name = "matchVisaulised5";
+            this.matchVisaulised5.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised5.TabIndex = 56;
+            this.matchVisaulised5.TabStop = false;
             // 
-            // pictureBox4
+            // matchVisaulised6
             // 
-            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox4.Location = new System.Drawing.Point(0, 598);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox4.TabIndex = 64;
-            this.pictureBox4.TabStop = false;
+            this.matchVisaulised6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised6.Location = new System.Drawing.Point(0, 276);
+            this.matchVisaulised6.Name = "matchVisaulised6";
+            this.matchVisaulised6.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised6.TabIndex = 57;
+            this.matchVisaulised6.TabStop = false;
             // 
-            // pictureBox14
+            // matchVisaulised7
             // 
-            this.pictureBox14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox14.Location = new System.Drawing.Point(0, 368);
-            this.pictureBox14.Name = "pictureBox14";
-            this.pictureBox14.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox14.TabIndex = 59;
-            this.pictureBox14.TabStop = false;
+            this.matchVisaulised7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised7.Location = new System.Drawing.Point(0, 322);
+            this.matchVisaulised7.Name = "matchVisaulised7";
+            this.matchVisaulised7.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised7.TabIndex = 58;
+            this.matchVisaulised7.TabStop = false;
             // 
-            // pictureBox5
+            // matchVisaulised8
             // 
-            this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox5.Location = new System.Drawing.Point(0, 46);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox5.TabIndex = 52;
-            this.pictureBox5.TabStop = false;
+            this.matchVisaulised8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised8.Location = new System.Drawing.Point(0, 368);
+            this.matchVisaulised8.Name = "matchVisaulised8";
+            this.matchVisaulised8.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised8.TabIndex = 59;
+            this.matchVisaulised8.TabStop = false;
             // 
-            // pictureBox13
+            // matchVisaulised9
             // 
-            this.pictureBox13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox13.Location = new System.Drawing.Point(0, 230);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox13.TabIndex = 56;
-            this.pictureBox13.TabStop = false;
+            this.matchVisaulised9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised9.Location = new System.Drawing.Point(0, 414);
+            this.matchVisaulised9.Name = "matchVisaulised9";
+            this.matchVisaulised9.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised9.TabIndex = 60;
+            this.matchVisaulised9.TabStop = false;
             // 
-            // pictureBox6
+            // matchVisaulised10
             // 
-            this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox6.Location = new System.Drawing.Point(0, 552);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox6.TabIndex = 63;
-            this.pictureBox6.TabStop = false;
+            this.matchVisaulised10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised10.Location = new System.Drawing.Point(0, 460);
+            this.matchVisaulised10.Name = "matchVisaulised10";
+            this.matchVisaulised10.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised10.TabIndex = 61;
+            this.matchVisaulised10.TabStop = false;
             // 
-            // pictureBox12
+            // matchVisaulised11
             // 
-            this.pictureBox12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox12.Location = new System.Drawing.Point(0, 414);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox12.TabIndex = 60;
-            this.pictureBox12.TabStop = false;
+            this.matchVisaulised11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised11.Location = new System.Drawing.Point(0, 506);
+            this.matchVisaulised11.Name = "matchVisaulised11";
+            this.matchVisaulised11.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised11.TabIndex = 62;
+            this.matchVisaulised11.TabStop = false;
             // 
-            // pictureBox11
+            // matchVisaulised12
             // 
-            this.pictureBox11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox11.Location = new System.Drawing.Point(0, 184);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox11.TabIndex = 55;
-            this.pictureBox11.TabStop = false;
+            this.matchVisaulised12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised12.Location = new System.Drawing.Point(0, 552);
+            this.matchVisaulised12.Name = "matchVisaulised12";
+            this.matchVisaulised12.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised12.TabIndex = 63;
+            this.matchVisaulised12.TabStop = false;
             // 
-            // pictureBox8
+            // matchVisaulised13
             // 
-            this.pictureBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox8.Location = new System.Drawing.Point(0, 506);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox8.TabIndex = 62;
-            this.pictureBox8.TabStop = false;
+            this.matchVisaulised13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised13.Location = new System.Drawing.Point(0, 598);
+            this.matchVisaulised13.Name = "matchVisaulised13";
+            this.matchVisaulised13.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised13.TabIndex = 64;
+            this.matchVisaulised13.TabStop = false;
             // 
-            // pictureBox10
+            // matchVisaulised14
             // 
-            this.pictureBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox10.Location = new System.Drawing.Point(0, 460);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox10.TabIndex = 61;
-            this.pictureBox10.TabStop = false;
+            this.matchVisaulised14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised14.Location = new System.Drawing.Point(0, 644);
+            this.matchVisaulised14.Name = "matchVisaulised14";
+            this.matchVisaulised14.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised14.TabIndex = 65;
+            this.matchVisaulised14.TabStop = false;
             // 
-            // pictureBox9
+            // matchVisaulised15
             // 
-            this.pictureBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox9.Location = new System.Drawing.Point(0, 138);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox9.TabIndex = 54;
-            this.pictureBox9.TabStop = false;
+            this.matchVisaulised15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised15.Location = new System.Drawing.Point(0, 690);
+            this.matchVisaulised15.Name = "matchVisaulised15";
+            this.matchVisaulised15.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised15.TabIndex = 66;
+            this.matchVisaulised15.TabStop = false;
             // 
             // matchVisualizationSelectorLeft
             // 
@@ -1174,202 +1174,202 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.pictureBox16);
-            this.panel2.Controls.Add(this.pictureBox17);
-            this.panel2.Controls.Add(this.pictureBox18);
-            this.panel2.Controls.Add(this.pictureBox19);
-            this.panel2.Controls.Add(this.pictureBox20);
-            this.panel2.Controls.Add(this.pictureBox21);
-            this.panel2.Controls.Add(this.pictureBox23);
-            this.panel2.Controls.Add(this.pictureBox24);
-            this.panel2.Controls.Add(this.pictureBox25);
-            this.panel2.Controls.Add(this.pictureBox26);
-            this.panel2.Controls.Add(this.pictureBox27);
-            this.panel2.Controls.Add(this.pictureBox28);
-            this.panel2.Controls.Add(this.pictureBox29);
-            this.panel2.Controls.Add(this.pictureBox30);
-            this.panel2.Controls.Add(this.pictureBox31);
-            this.panel2.Controls.Add(this.pictureBox32);
+            this.panel2.Controls.Add(this.matchVisaulised16);
+            this.panel2.Controls.Add(this.matchVisaulised17);
+            this.panel2.Controls.Add(this.matchVisaulised18);
+            this.panel2.Controls.Add(this.matchVisaulised19);
+            this.panel2.Controls.Add(this.matchVisaulised20);
+            this.panel2.Controls.Add(this.matchVisaulised21);
+            this.panel2.Controls.Add(this.matchVisaulised22);
+            this.panel2.Controls.Add(this.matchVisaulised23);
+            this.panel2.Controls.Add(this.matchVisaulised24);
+            this.panel2.Controls.Add(this.matchVisaulised25);
+            this.panel2.Controls.Add(this.matchVisaulised26);
+            this.panel2.Controls.Add(this.matchVisaulised27);
+            this.panel2.Controls.Add(this.matchVisaulised28);
+            this.panel2.Controls.Add(this.matchVisaulised29);
+            this.panel2.Controls.Add(this.matchVisaulised30);
+            this.panel2.Controls.Add(this.matchVisaulised31);
             this.panel2.Location = new System.Drawing.Point(3, 30);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(224, 730);
             this.panel2.TabIndex = 67;
             // 
-            // pictureBox16
+            // matchVisaulised16
             // 
-            this.pictureBox16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox16.Location = new System.Drawing.Point(0, 690);
-            this.pictureBox16.Name = "pictureBox16";
-            this.pictureBox16.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox16.TabIndex = 66;
-            this.pictureBox16.TabStop = false;
+            this.matchVisaulised16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised16.Location = new System.Drawing.Point(0, 3);
+            this.matchVisaulised16.Name = "matchVisaulised16";
+            this.matchVisaulised16.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised16.TabIndex = 51;
+            this.matchVisaulised16.TabStop = false;
             // 
-            // pictureBox17
+            // matchVisaulised17
             // 
-            this.pictureBox17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox17.Location = new System.Drawing.Point(0, 92);
-            this.pictureBox17.Name = "pictureBox17";
-            this.pictureBox17.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox17.TabIndex = 53;
-            this.pictureBox17.TabStop = false;
+            this.matchVisaulised17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised17.Location = new System.Drawing.Point(0, 49);
+            this.matchVisaulised17.Name = "matchVisaulised17";
+            this.matchVisaulised17.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised17.TabIndex = 52;
+            this.matchVisaulised17.TabStop = false;
             // 
-            // pictureBox18
+            // matchVisaulised18
             // 
-            this.pictureBox18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox18.Location = new System.Drawing.Point(0, 644);
-            this.pictureBox18.Name = "pictureBox18";
-            this.pictureBox18.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox18.TabIndex = 65;
-            this.pictureBox18.TabStop = false;
+            this.matchVisaulised18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised18.Location = new System.Drawing.Point(0, 95);
+            this.matchVisaulised18.Name = "matchVisaulised18";
+            this.matchVisaulised18.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised18.TabIndex = 53;
+            this.matchVisaulised18.TabStop = false;
             // 
-            // pictureBox19
+            // matchVisaulised19
             // 
-            this.pictureBox19.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised19.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox19.Location = new System.Drawing.Point(0, 322);
-            this.pictureBox19.Name = "pictureBox19";
-            this.pictureBox19.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox19.TabIndex = 58;
-            this.pictureBox19.TabStop = false;
+            this.matchVisaulised19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised19.Location = new System.Drawing.Point(0, 141);
+            this.matchVisaulised19.Name = "matchVisaulised19";
+            this.matchVisaulised19.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised19.TabIndex = 54;
+            this.matchVisaulised19.TabStop = false;
             // 
-            // pictureBox20
+            // matchVisaulised20
             // 
-            this.pictureBox20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox20.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox20.Name = "pictureBox20";
-            this.pictureBox20.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox20.TabIndex = 51;
-            this.pictureBox20.TabStop = false;
+            this.matchVisaulised20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised20.Location = new System.Drawing.Point(0, 187);
+            this.matchVisaulised20.Name = "matchVisaulised20";
+            this.matchVisaulised20.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised20.TabIndex = 55;
+            this.matchVisaulised20.TabStop = false;
             // 
-            // pictureBox21
+            // matchVisaulised21
             // 
-            this.pictureBox21.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised21.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox21.Location = new System.Drawing.Point(0, 276);
-            this.pictureBox21.Name = "pictureBox21";
-            this.pictureBox21.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox21.TabIndex = 57;
-            this.pictureBox21.TabStop = false;
+            this.matchVisaulised21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised21.Location = new System.Drawing.Point(0, 233);
+            this.matchVisaulised21.Name = "matchVisaulised21";
+            this.matchVisaulised21.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised21.TabIndex = 56;
+            this.matchVisaulised21.TabStop = false;
             // 
-            // pictureBox23
+            // matchVisaulised22
             // 
-            this.pictureBox23.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox23.Location = new System.Drawing.Point(0, 598);
-            this.pictureBox23.Name = "pictureBox23";
-            this.pictureBox23.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox23.TabIndex = 64;
-            this.pictureBox23.TabStop = false;
+            this.matchVisaulised22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised22.Location = new System.Drawing.Point(0, 276);
+            this.matchVisaulised22.Name = "matchVisaulised22";
+            this.matchVisaulised22.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised22.TabIndex = 57;
+            this.matchVisaulised22.TabStop = false;
             // 
-            // pictureBox24
+            // matchVisaulised23
             // 
-            this.pictureBox24.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised23.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox24.Location = new System.Drawing.Point(0, 368);
-            this.pictureBox24.Name = "pictureBox24";
-            this.pictureBox24.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox24.TabIndex = 59;
-            this.pictureBox24.TabStop = false;
+            this.matchVisaulised23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised23.Location = new System.Drawing.Point(0, 322);
+            this.matchVisaulised23.Name = "matchVisaulised23";
+            this.matchVisaulised23.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised23.TabIndex = 58;
+            this.matchVisaulised23.TabStop = false;
             // 
-            // pictureBox25
+            // matchVisaulised24
             // 
-            this.pictureBox25.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised24.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox25.Location = new System.Drawing.Point(0, 46);
-            this.pictureBox25.Name = "pictureBox25";
-            this.pictureBox25.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox25.TabIndex = 52;
-            this.pictureBox25.TabStop = false;
+            this.matchVisaulised24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised24.Location = new System.Drawing.Point(0, 368);
+            this.matchVisaulised24.Name = "matchVisaulised24";
+            this.matchVisaulised24.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised24.TabIndex = 59;
+            this.matchVisaulised24.TabStop = false;
             // 
-            // pictureBox26
+            // matchVisaulised25
             // 
-            this.pictureBox26.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised25.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox26.Location = new System.Drawing.Point(0, 230);
-            this.pictureBox26.Name = "pictureBox26";
-            this.pictureBox26.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox26.TabIndex = 56;
-            this.pictureBox26.TabStop = false;
+            this.matchVisaulised25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised25.Location = new System.Drawing.Point(0, 417);
+            this.matchVisaulised25.Name = "matchVisaulised25";
+            this.matchVisaulised25.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised25.TabIndex = 60;
+            this.matchVisaulised25.TabStop = false;
             // 
-            // pictureBox27
+            // matchVisaulised26
             // 
-            this.pictureBox27.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised26.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox27.Location = new System.Drawing.Point(0, 552);
-            this.pictureBox27.Name = "pictureBox27";
-            this.pictureBox27.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox27.TabIndex = 63;
-            this.pictureBox27.TabStop = false;
+            this.matchVisaulised26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised26.Location = new System.Drawing.Point(0, 460);
+            this.matchVisaulised26.Name = "matchVisaulised26";
+            this.matchVisaulised26.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised26.TabIndex = 61;
+            this.matchVisaulised26.TabStop = false;
             // 
-            // pictureBox28
+            // matchVisaulised27
             // 
-            this.pictureBox28.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised27.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox28.Location = new System.Drawing.Point(0, 414);
-            this.pictureBox28.Name = "pictureBox28";
-            this.pictureBox28.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox28.TabIndex = 60;
-            this.pictureBox28.TabStop = false;
+            this.matchVisaulised27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised27.Location = new System.Drawing.Point(0, 506);
+            this.matchVisaulised27.Name = "matchVisaulised27";
+            this.matchVisaulised27.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised27.TabIndex = 62;
+            this.matchVisaulised27.TabStop = false;
             // 
-            // pictureBox29
+            // matchVisaulised28
             // 
-            this.pictureBox29.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised28.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox29.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox29.Location = new System.Drawing.Point(0, 184);
-            this.pictureBox29.Name = "pictureBox29";
-            this.pictureBox29.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox29.TabIndex = 55;
-            this.pictureBox29.TabStop = false;
+            this.matchVisaulised28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised28.Location = new System.Drawing.Point(0, 552);
+            this.matchVisaulised28.Name = "matchVisaulised28";
+            this.matchVisaulised28.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised28.TabIndex = 63;
+            this.matchVisaulised28.TabStop = false;
             // 
-            // pictureBox30
+            // matchVisaulised29
             // 
-            this.pictureBox30.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised29.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox30.Location = new System.Drawing.Point(0, 506);
-            this.pictureBox30.Name = "pictureBox30";
-            this.pictureBox30.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox30.TabIndex = 62;
-            this.pictureBox30.TabStop = false;
+            this.matchVisaulised29.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised29.Location = new System.Drawing.Point(0, 598);
+            this.matchVisaulised29.Name = "matchVisaulised29";
+            this.matchVisaulised29.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised29.TabIndex = 64;
+            this.matchVisaulised29.TabStop = false;
             // 
-            // pictureBox31
+            // matchVisaulised30
             // 
-            this.pictureBox31.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised30.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox31.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox31.Location = new System.Drawing.Point(0, 460);
-            this.pictureBox31.Name = "pictureBox31";
-            this.pictureBox31.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox31.TabIndex = 61;
-            this.pictureBox31.TabStop = false;
+            this.matchVisaulised30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised30.Location = new System.Drawing.Point(0, 644);
+            this.matchVisaulised30.Name = "matchVisaulised30";
+            this.matchVisaulised30.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised30.TabIndex = 65;
+            this.matchVisaulised30.TabStop = false;
             // 
-            // pictureBox32
+            // matchVisaulised31
             // 
-            this.pictureBox32.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.matchVisaulised31.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox32.Location = new System.Drawing.Point(0, 138);
-            this.pictureBox32.Name = "pictureBox32";
-            this.pictureBox32.Size = new System.Drawing.Size(224, 40);
-            this.pictureBox32.TabIndex = 54;
-            this.pictureBox32.TabStop = false;
+            this.matchVisaulised31.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.matchVisaulised31.Location = new System.Drawing.Point(0, 690);
+            this.matchVisaulised31.Name = "matchVisaulised31";
+            this.matchVisaulised31.Size = new System.Drawing.Size(224, 40);
+            this.matchVisaulised31.TabIndex = 66;
+            this.matchVisaulised31.TabStop = false;
             // 
             // matchVisualizationSelectorRight
             // 
@@ -1442,39 +1442,39 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised15)).EndInit();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox23)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox25)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox29)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox30)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox31)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox32)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised18)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised19)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised21)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised22)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised23)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised24)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised25)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised26)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised27)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised28)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised29)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised30)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchVisaulised31)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -1569,38 +1569,38 @@
         private System.Windows.Forms.ComboBox matchVisualizationSelectorLeft;
         private System.Windows.Forms.ComboBox matchVisualizationSelectorRight;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox22;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox15;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox14;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox13;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.PictureBox pictureBox12;
-        private System.Windows.Forms.PictureBox pictureBox11;
-        private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.PictureBox matchVisaulised15;
+        private System.Windows.Forms.PictureBox matchVisaulised2;
+        private System.Windows.Forms.PictureBox matchVisaulised14;
+        private System.Windows.Forms.PictureBox matchVisaulised7;
+        private System.Windows.Forms.PictureBox matchVisaulised0;
+        private System.Windows.Forms.PictureBox matchVisaulised6;
+        private System.Windows.Forms.PictureBox matchVisaulised13;
+        private System.Windows.Forms.PictureBox matchVisaulised8;
+        private System.Windows.Forms.PictureBox matchVisaulised1;
+        private System.Windows.Forms.PictureBox matchVisaulised5;
+        private System.Windows.Forms.PictureBox matchVisaulised12;
+        private System.Windows.Forms.PictureBox matchVisaulised9;
+        private System.Windows.Forms.PictureBox matchVisaulised4;
+        private System.Windows.Forms.PictureBox matchVisaulised11;
+        private System.Windows.Forms.PictureBox matchVisaulised10;
+        private System.Windows.Forms.PictureBox matchVisaulised3;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.PictureBox pictureBox16;
-        private System.Windows.Forms.PictureBox pictureBox17;
-        private System.Windows.Forms.PictureBox pictureBox18;
-        private System.Windows.Forms.PictureBox pictureBox19;
-        private System.Windows.Forms.PictureBox pictureBox20;
-        private System.Windows.Forms.PictureBox pictureBox21;
-        private System.Windows.Forms.PictureBox pictureBox23;
-        private System.Windows.Forms.PictureBox pictureBox24;
-        private System.Windows.Forms.PictureBox pictureBox25;
-        private System.Windows.Forms.PictureBox pictureBox26;
-        private System.Windows.Forms.PictureBox pictureBox27;
-        private System.Windows.Forms.PictureBox pictureBox28;
-        private System.Windows.Forms.PictureBox pictureBox29;
-        private System.Windows.Forms.PictureBox pictureBox30;
-        private System.Windows.Forms.PictureBox pictureBox31;
-        private System.Windows.Forms.PictureBox pictureBox32;
+        private System.Windows.Forms.PictureBox matchVisaulised31;
+        private System.Windows.Forms.PictureBox matchVisaulised18;
+        private System.Windows.Forms.PictureBox matchVisaulised30;
+        private System.Windows.Forms.PictureBox matchVisaulised23;
+        private System.Windows.Forms.PictureBox matchVisaulised16;
+        private System.Windows.Forms.PictureBox matchVisaulised22;
+        private System.Windows.Forms.PictureBox matchVisaulised29;
+        private System.Windows.Forms.PictureBox matchVisaulised24;
+        private System.Windows.Forms.PictureBox matchVisaulised17;
+        private System.Windows.Forms.PictureBox matchVisaulised21;
+        private System.Windows.Forms.PictureBox matchVisaulised28;
+        private System.Windows.Forms.PictureBox matchVisaulised25;
+        private System.Windows.Forms.PictureBox matchVisaulised20;
+        private System.Windows.Forms.PictureBox matchVisaulised27;
+        private System.Windows.Forms.PictureBox matchVisaulised26;
+        private System.Windows.Forms.PictureBox matchVisaulised19;
     }
 }

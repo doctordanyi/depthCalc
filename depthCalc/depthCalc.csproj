@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Processing\DepthCalc.cs" />
+    <Compile Include="Processing\Depthprocessing\CumulateClustering.cs" />
     <Compile Include="Processing\Depthprocessing\ImageDisparity.cs" />
     <Compile Include="Processing\Depthprocessing\RansacMatchSelection.cs" />
     <Compile Include="Processing\Depthprocessing\MaximaFind.cs" />

@@ -21,7 +21,8 @@
         ImageDisparity,
         VisualizeDisparity,
         FindFirstKMax,
-        Ransac
+        Ransac,
+        CumulateClustering
     }
 
     public enum WindowPinType
